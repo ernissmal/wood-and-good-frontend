@@ -8,7 +8,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import EcoIcon from '@mui/icons-material/Eco';
+import NatureIcon from '@mui/icons-material/Nature';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
@@ -100,7 +100,7 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
-              <EcoIcon className="w-5 h-5" />
+              <NatureIcon className="w-5 h-5" />
               <span>Company</span>
             </h4>
             <ul className="space-y-3 text-oak-200">
