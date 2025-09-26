@@ -110,8 +110,8 @@ export default function Home() {
       </section>
 
       {/* Enhanced Featured Products Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-oak-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section section-oak-50">
+        <div className="section-container">
           <div className="text-center mb-12 lg:mb-16">
             <div className="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 text-oak-600 text-sm font-medium mb-4">
               <StarIcon className="w-4 h-4" />
@@ -152,8 +152,8 @@ export default function Home() {
       </section>
 
       {/* Enhanced About Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-earth-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section section-earth-50">
+        <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="mb-6">
