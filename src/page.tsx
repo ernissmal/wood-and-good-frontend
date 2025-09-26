@@ -220,8 +220,8 @@ export default function Home() {
       </section>
 
       {/* Featured Blog Posts Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section section-white">
+        <div className="section-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-textPrimary mb-4">
               Latest From Our Blog
