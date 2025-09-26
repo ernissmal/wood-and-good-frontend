@@ -75,27 +75,23 @@ export default function ProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-textSecondary mb-1">
-                Search
-              </label>
+              <label className="form-label">Search</label>
               <input
                 type="text"
                 value={filters.q}
                 onChange={(e) => handleFilterChange('q', e.target.value)}
                 placeholder="Search products..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-textSecondary mb-1">
-                Category
-              </label>
+              <label className="form-label">Category</label>
               <select
                 value={filters.category_id || ''}
                 onChange={(e) => handleFilterChange('category_id', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Categories</option>
                 {categories.map((category) => (
@@ -108,13 +104,11 @@ export default function ProductsPage() {
 
             {/* Shape */}
             <div>
-              <label className="block text-sm font-medium text-textSecondary mb-1">
-                Shape
-              </label>
+              <label className="form-label">Shape</label>
               <select
                 value={filters.shape}
                 onChange={(e) => handleFilterChange('shape', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Shapes</option>
                 <option value="round">Round</option>
@@ -125,13 +119,11 @@ export default function ProductsPage() {
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-textSecondary mb-1">
-                Finish
-              </label>
+              <label className="form-label">Finish</label>
               <select
                 value={filters.finish}
                 onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Finishes</option>
                 <option value="natural oil">Natural Oil</option>
@@ -142,13 +134,11 @@ export default function ProductsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-textSecondary mb-1">
-                Sort By
-              </label>
+              <label className="form-label">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="name">Name A-Z</option>
                 <option value="name_desc">Name Z-A</option>
@@ -160,15 +150,15 @@ export default function ProductsPage() {
           </div>
 
           {/* Filter Actions */}
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-textSecondary">
+          <div className="filter-actions">
+            <div className="filter-summary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} products</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-textSecondary hover:text-textPrimary text-sm font-medium"
+              className="filter-clear-btn"
             >
               Clear All Filters
             </button>
