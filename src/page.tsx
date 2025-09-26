@@ -1,7 +1,7 @@
 'use client';
 
-import { useCategories, useFeaturedProducts, useFeaturedBlogPosts, useCart } from '../hooks/api';
-import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from '../components/ui';
+import { useCategories, useFeaturedProducts, useFeaturedBlogPosts, useCart } from './hooks/api';
+import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from './components/ui';
 import Link from 'next/link';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import NatureIcon from '@mui/icons-material/Nature';
@@ -223,10 +223,10 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+            <h2 className="text-3xl font-bold text-textPrimary mb-4">
               Latest From Our Blog
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
+            <p className="text-textSecondary max-w-2xl mx-auto">
               Learn about wood care, design tips, and the stories behind our craftsmanship.
             </p>
           </div>
@@ -268,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-8">
               <Link
                 href="/blog"
-                className="text-oak-600 hover:text-oak-800 font-semibold"
+                className="text-textSecondary hover:text-textPrimary font-semibold transition-colors"
               >
                 Read All Articles →
               </Link>
