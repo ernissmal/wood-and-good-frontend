@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useProducts } from '../../../hooks/api';
 import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
 import Link from 'next/link';
+import { RadioButtonUnchecked, CropLandscape, Stop, NaturePeople } from '@mui/icons-material';
 
 export default function TabletopsPage() {
   const [filters, setFilters] = useState({
@@ -53,28 +54,28 @@ export default function TabletopsPage() {
       description: "Perfect for intimate dining and conversation. Round tables create a warm, inclusive atmosphere.",
       bestFor: "Small to medium dining rooms, breakfast nooks, bistro settings",
       seating: "4-6 people comfortably",
-      icon: "⭕"
+      icon: "round"
     },
     {
       shape: "Rectangular Tabletops", 
       description: "Classic choice for formal dining. Maximum seating capacity and traditional elegance.",
       bestFor: "Larger dining rooms, family gatherings, formal occasions",
       seating: "6-10 people comfortably",
-      icon: "📐"
+      icon: "rectangular"
     },
     {
       shape: "Square Tabletops",
       description: "Balanced and versatile. Great for both intimate meals and group conversations.",
       bestFor: "Square dining rooms, casual dining, small families",
       seating: "4 people comfortably",
-      icon: "⏹️"
+      icon: "square"
     },
     {
       shape: "Live Edge Slabs",
       description: "Unique, natural beauty with preserved bark edges. Each piece is one-of-a-kind.",
       bestFor: "Statement pieces, rustic decor, nature-inspired interiors",
       seating: "Variable, depending on size",
-      icon: "🌳"
+      icon: "natural"
     }
   ];
 
@@ -132,7 +133,7 @@ export default function TabletopsPage() {
               </button>
               <button
                 onClick={() => document.getElementById('guide')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
               >
                 Buying Guide
               </button>
@@ -288,7 +289,12 @@ export default function TabletopsPage() {
               {tabletopGuide.map((guide, index) => (
                 <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start">
-                    <div className="text-4xl mr-4 mt-1">{guide.icon}</div>
+                    <div className="text-4xl mr-4 mt-1 text-oak-600">
+                      {guide.icon === "round" && <RadioButtonUnchecked sx={{ fontSize: 48 }} />}
+                      {guide.icon === "rectangular" && <CropLandscape sx={{ fontSize: 48 }} />}
+                      {guide.icon === "square" && <Stop sx={{ fontSize: 48 }} />}
+                      {guide.icon === "natural" && <NaturePeople sx={{ fontSize: 48 }} />}
+                    </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold text-oak-800 mb-2">{guide.shape}</h4>
                       <p className="text-oak-600 mb-3">{guide.description}</p>
@@ -387,7 +393,7 @@ export default function TabletopsPage() {
             </Link>
             <Link 
               href="/categories/table-legs"
-              className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               Browse Table Legs
             </Link>
