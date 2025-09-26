@@ -332,7 +332,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             </p>
           )}
           
-          <div className="flex items-center justify-between text-sm text-text-muted pt-4 border-t border-oak-100">
+          <div className="flex items-center justify-between text-sm text-oak-600 pt-4 border-t border-oak-200">
             {post.author && (
               <div className="flex items-center space-x-2">
                 <PersonIcon className="w-4 h-4" />
