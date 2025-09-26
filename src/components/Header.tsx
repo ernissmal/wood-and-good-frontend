@@ -114,7 +114,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className="text-textPrimary hover:text-oak-600 hover:bg-oak-50 px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg flex items-center space-x-3"
+                    className="nav-link-mobile flex items-center space-x-3"
                   >
                     <IconComponent className="w-5 h-5" />
                     <span>{item.label}</span>
@@ -126,7 +126,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 onClick={closeMenu}
-                className="bg-oak-600 text-white px-4 py-3 text-base font-medium hover:bg-oak-700 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
+                className="btn-primary-mobile flex items-center space-x-3 relative"
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
