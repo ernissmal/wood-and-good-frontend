@@ -24,9 +24,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Enhanced Hero Section */}
-      <section className="hero-gradient py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      <section className="section hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 wood-texture opacity-30"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="section-container relative">
           <div className="text-center">
             <div className="mb-8">
               <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-oak-700 text-sm font-medium mb-6">
@@ -62,8 +62,8 @@ export default function Home() {
       </section>
 
       {/* Enhanced Categories Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section section-white">
+        <div className="section-container">
           <div className="text-center mb-12 lg:mb-16">
             <div className="inline-flex items-center space-x-2 bg-oak-50 rounded-full px-4 py-2 text-oak-600 text-sm font-medium mb-4">
               <HandymanIcon className="w-4 h-4" />
