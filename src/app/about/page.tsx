@@ -132,7 +132,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🌲</span>
+                <NaturePeople className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="font-semibold text-oak-800 mb-2">1. Sourcing</h3>
               <p className="text-sm text-oak-600">
@@ -142,7 +142,7 @@ export default function AboutPage() {
 
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🪚</span>
+                <Engineering className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="font-semibold text-oak-800 mb-2">2. Milling</h3>
               <p className="text-sm text-oak-600">
@@ -152,7 +152,7 @@ export default function AboutPage() {
 
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🔨</span>
+                <Handyman className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="font-semibold text-oak-800 mb-2">3. Crafting</h3>
               <p className="text-sm text-oak-600">
@@ -162,7 +162,7 @@ export default function AboutPage() {
 
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✨</span>
+                <AutoFixHigh className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="font-semibold text-oak-800 mb-2">4. Finishing</h3>
               <p className="text-sm text-oak-600">
@@ -247,7 +247,9 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Link href="/about/craftsmanship" className="group">
               <div className="bg-oak-50 rounded-lg p-8 hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🔨</div>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform text-oak-600 flex">
+                  <Carpenter sx={{ fontSize: 48 }} />
+                </div>
                 <h3 className="text-2xl font-bold text-oak-800 mb-4 group-hover:text-oak-600 transition-colors">
                   Our Craftsmanship
                 </h3>
@@ -263,7 +265,9 @@ export default function AboutPage() {
 
             <Link href="/about/sustainability" className="group">
               <div className="bg-green-50 rounded-lg p-8 hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🌱</div>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform text-green-600 flex">
+                  <LocalFlorist sx={{ fontSize: 48 }} />
+                </div>
                 <h3 className="text-2xl font-bold text-oak-800 mb-4 group-hover:text-green-700 transition-colors">
                   Our Sustainability
                 </h3>
