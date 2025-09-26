@@ -1,0 +1,222 @@
+// Enhanced Footer Component with Material Icons
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import EcoIcon from '@mui/icons-material/Eco';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-earth-800 text-white mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Company Info */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-oak-gradient rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">W</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white leading-tight">
+                  SIA The Wood and Good
+                </h3>
+                <p className="text-sm text-oak-200 leading-none">Premium Oak Furniture</p>
+              </div>
+            </div>
+            <p className="text-oak-200 mb-6 leading-relaxed">
+              Crafting premium handcrafted oak furniture for over three generations. 
+              Every piece is made from sustainably sourced solid oak, ensuring both 
+              quality and environmental responsibility.
+            </p>
+            
+            {/* Social Links */}
+            <div className="flex space-x-4">
+              <a
+                href="https://instagram.com/woodandgood"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                aria-label="Follow us on Instagram"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+              <a
+                href="https://facebook.com/woodandgood"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                aria-label="Follow us on Facebook"
+              </a>
+              <a
+                href="mailto:info@woodandgood.com"
+                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                aria-label="Send us an email"
+              >
+                <EmailIcon className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Products */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
+              <HandymanIcon className="w-5 h-5" />
+              <span>Products</span>
+            </h4>
+            <ul className="space-y-3 text-oak-200">
+              <li>
+                <Link href="/categories/tabletops" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                  <span>Table Tops</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories/table-legs" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                  <span>Table Legs</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                  <span>All Products</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                  <span>Browse Categories</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
+              <EcoIcon className="w-5 h-5" />
+              <span>Company</span>
+            </h4>
+            <ul className="space-y-3 text-oak-200">
+              <li>
+                <Link href="/about" className="hover:text-white transition-colors duration-200">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/about/craftsmanship" className="hover:text-white transition-colors duration-200">
+                  Craftsmanship
+                </Link>
+              </li>
+              <li>
+                <Link href="/about/sustainability" className="hover:text-white transition-colors duration-200">
+                  Sustainability
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors duration-200">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-white transition-colors duration-200">
+                  Blog
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact & Services */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
+              <PhoneIcon className="w-5 h-5" />
+              <span>Contact & Services</span>
+            </h4>
+            <div className="space-y-4 text-oak-200">
+              <div className="flex items-start space-x-3">
+                <LocationOnIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-white">Visit Our Workshop</p>
+                  <p className="text-sm">Riga, Latvia</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <EmailIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-white">Email Us</p>
+                  <a href="mailto:info@woodandgood.com" className="text-sm hover:text-white transition-colors">
+                    info@woodandgood.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <LocalShippingIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-white">Free Delivery</p>
+                  <p className="text-sm">Throughout Latvia</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Features Bar */}
+        <div className="border-t border-oak-700 pt-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div className="flex items-center justify-center space-x-3">
+              <EcoIcon className="w-8 h-8 text-forest-400" />
+              <div className="text-left">
+                <p className="font-semibold text-white">100% Sustainable</p>
+                <p className="text-sm text-oak-200">Responsibly sourced oak</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-3">
+              <HandymanIcon className="w-8 h-8 text-oak-400" />
+              <div className="text-left">
+                <p className="font-semibold text-white">Handcrafted Quality</p>
+                <p className="text-sm text-oak-200">Traditional techniques</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-3">
+              <LocalShippingIcon className="w-8 h-8 text-oak-400" />
+              <div className="text-left">
+                <p className="font-semibold text-white">Free Delivery</p>
+                <p className="text-sm text-oak-200">Latvia-wide shipping</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-oak-700 pt-8 text-center">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-oak-200 text-sm">
+              &copy; {currentYear} SIA The Wood and Good. All rights reserved.
+            </p>
+            <div className="flex space-x-6 text-sm text-oak-200">
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/sitemap" className="hover:text-white transition-colors">
+                Sitemap
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
