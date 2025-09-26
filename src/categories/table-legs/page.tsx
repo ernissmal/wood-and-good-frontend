@@ -1,0 +1,504 @@
+'use client';
+
+import { useState } from 'react';
+import { useProducts } from '../../../hooks/api';
+import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
+import Link from 'next/link';
+
+export default function TableLegsPage() {
+  const [filters, setFilters] = useState({
+    page: 1,
+    limit: 12,
+    category_id: 2, // Table Legs category ID
+    q: '',
+    shape: '',
+    finish: '',
+    min_price: undefined as number | undefined,
+    max_price: undefined as number | undefined,
+    sort: 'featured'
+  });
+
+  const { products, pagination, loading: productsLoading, error: productsError, refetch } = useProducts(filters);
+
+  const handleFilterChange = (key: string, value: any) => {
+    setFilters(prev => ({
+      ...prev,
+      [key]: value,
+      page: 1 // Reset to first page when filters change
+    }));
+  };
+
+  const handlePageChange = (page: number) => {
+    setFilters(prev => ({ ...prev, page }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      page: 1,
+      limit: 12,
+      category_id: 2, // Keep table legs category
+      q: '',
+      shape: '',
+      finish: '',
+      min_price: undefined,
+      max_price: undefined,
+      sort: 'featured'
+    });
+  };
+
+  const legStyles = [
+    {
+      style: "Classic Turned Legs",
+      description: "Traditional woodturning creates elegant curves and proportions. Timeless design that complements any interior.",
+      characteristics: ["Hand-turned profiles", "Elegant tapered design", "Traditional proportions", "Suitable for formal and casual settings"],
+      bestFor: "Traditional, transitional, and farmhouse styles",
+      height: "Standard 72cm dining height",
+      icon: "🏛️"
+    },
+    {
+      style: "Modern Hairpin Legs",
+      description: "Contemporary steel-reinforced oak legs with clean lines. Perfect for modern and industrial aesthetics.",
+      characteristics: ["Minimalist design", "Steel reinforcement", "Space-saving profile", "Easy to install"],
+      bestFor: "Modern, industrial, and Scandinavian styles",
+      height: "Available in multiple heights",
+      icon: "📐"
+    },
+    {
+      style: "Rustic Farmhouse Legs", 
+      description: "Chunky, substantial legs with character. Hand-distressed finish for authentic farmhouse appeal.",
+      characteristics: ["Thick, sturdy construction", "Distressed finish", "Visible wood character", "Mortise and tenon joinery"],
+      bestFor: "Farmhouse, rustic, and country styles",
+      height: "Standard 75cm for farmhouse tables",
+      icon: "🏚️"
+    },
+    {
+      style: "Pedestal Bases",
+      description: "Single central support for maximum legroom. Available in traditional and contemporary designs.",
+      characteristics: ["Maximum legroom", "Single point support", "Heavy-duty construction", "Various top attachment options"],
+      bestFor: "Conference tables, round dining tables",
+      height: "Custom heights available",
+      icon: "⚱️"
+    }
+  ];
+
+  const heightGuide = [
+    {
+      use: "Standard Dining Table",
+      height: "72cm",
+      description: "Most common height for dining tables. Comfortable with standard dining chairs (45cm seat height).",
+      chairHeight: "43-48cm seat height"
+    },
+    {
+      use: "Counter Height Table",
+      height: "86cm", 
+      description: "Perfect for kitchen islands and casual dining. Use with counter-height stools.",
+      chairHeight: "58-63cm seat height"
+    },
+    {
+      use: "Bar Height Table",
+      height: "106cm",
+      description: "Ideal for bar-style seating and socializing. Requires bar-height stools.",
+      chairHeight: "73-78cm seat height"
+    },
+    {
+      use: "Coffee Table",
+      height: "40-45cm",
+      description: "Low height for living room seating. Should be same height or slightly lower than sofa seat.",
+      chairHeight: "Sofa height dependent"
+    }
+  ];
+
+  const installationTips = [
+    {
+      tip: "Measure Twice, Install Once",
+      description: "Always verify tabletop dimensions and desired final height before ordering legs.",
+      importance: "Critical"
+    },
+    {
+      tip: "Consider Weight Distribution",
+      description: "Heavier tabletops need more substantial legs. We provide weight capacity ratings for each leg style.",
+      importance: "Important"
+    },
+    {
+      tip: "Level Your Surface",
+      description: "Ensure your floor is level or use adjustable feet to prevent wobbling.",
+      importance: "Essential"
+    },
+    {
+      tip: "Choose Appropriate Hardware",
+      description: "We provide mounting hardware, but tabletop thickness affects screw length requirements.",
+      importance: "Critical"
+    }
+  ];
+
+  const legCompatibility = [
+    {
+      tabletopSize: "Up to 120cm round or 150x80cm rectangular",
+      recommendedLegs: "4 Classic Turned Legs or Modern Hairpin",
+      notes: "Standard 4-leg support provides excellent stability"
+    },
+    {
+      tabletopSize: "120-150cm round or 180x90cm rectangular", 
+      recommendedLegs: "4 Rustic Farmhouse Legs or Pedestal Base",
+      notes: "Larger tops need substantial support or central pedestal"
+    },
+    {
+      tabletopSize: "150cm+ round or 200x100cm+ rectangular",
+      recommendedLegs: "Heavy-duty Pedestal Base or 6 Legs",
+      notes: "Very large tops require maximum support for safety"
+    },
+    {
+      tabletopSize: "Live Edge Slabs (variable)",
+      recommendedLegs: "Custom consultation recommended",
+      notes: "Irregular shapes need specialized mounting solutions"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative bg-oak-800 text-white py-20">
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-5xl font-bold mb-6">
+              Oak Table Legs & Bases
+            </h1>
+            <p className="text-xl text-oak-200 max-w-3xl mx-auto mb-8">
+              Handcrafted solid oak table legs in traditional and contemporary styles. 
+              From elegant turned legs to robust farmhouse designs, find the perfect support for your tabletop.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              >
+                Shop Table Legs
+              </button>
+              <button
+                onClick={() => document.getElementById('guide')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              >
+                Selection Guide
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Filters */}
+      <section className="bg-white border-b" id="products">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Search */}
+            <div>
+              <label className="block text-sm font-medium text-oak-700 mb-1">
+                Search Table Legs
+              </label>
+              <input
+                type="text"
+                value={filters.q}
+                onChange={(e) => handleFilterChange('q', e.target.value)}
+                placeholder="Search table legs..."
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+              />
+            </div>
+
+            {/* Finish */}
+            <div>
+              <label className="block text-sm font-medium text-oak-700 mb-1">
+                Finish
+              </label>
+              <select
+                value={filters.finish}
+                onChange={(e) => handleFilterChange('finish', e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+              >
+                <option value="">All Finishes</option>
+                <option value="natural oil">Natural Oil</option>
+                <option value="matte lacquer">Matte Lacquer</option>
+                <option value="gloss lacquer">Gloss Lacquer</option>
+              </select>
+            </div>
+
+            {/* Price Range */}
+            <div>
+              <label className="block text-sm font-medium text-oak-700 mb-1">
+                Max Price (€)
+              </label>
+              <select
+                value={filters.max_price || ''}
+                onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+              >
+                <option value="">Any Price</option>
+                <option value="150">Under €150</option>
+                <option value="200">Under €200</option>
+                <option value="250">Under €250</option>
+                <option value="300">Under €300</option>
+              </select>
+            </div>
+
+            {/* Sort */}
+            <div>
+              <label className="block text-sm font-medium text-oak-700 mb-1">
+                Sort By
+              </label>
+              <select
+                value={filters.sort}
+                onChange={(e) => handleFilterChange('sort', e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+              >
+                <option value="featured">Featured First</option>
+                <option value="name">Name A-Z</option>
+                <option value="price">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <div className="text-sm text-oak-600">
+              {pagination.total > 0 && (
+                <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} table legs</>
+              )}
+            </div>
+            <button
+              onClick={clearFilters}
+              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+            >
+              Clear Filters
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ProductGrid
+            products={products}
+            loading={productsLoading}
+            error={productsError || undefined}
+            onAddToCart={(productId) => {
+              // Add to cart functionality
+              console.log('Add to cart:', productId);
+            }}
+            onRetry={refetch}
+          />
+
+          <Pagination
+            currentPage={pagination.page}
+            totalPages={pagination.totalPages}
+            onPageChange={handlePageChange}
+            loading={productsLoading}
+          />
+        </div>
+      </section>
+
+      {/* Selection Guide */}
+      <section className="py-16 bg-white" id="guide">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-oak-800 mb-4">
+              Table Leg Selection Guide
+            </h2>
+            <p className="text-lg text-oak-600 max-w-3xl mx-auto">
+              Choose the perfect legs to complement your tabletop and match your style preferences.
+            </p>
+          </div>
+
+          {/* Leg Styles */}
+          <div className="mb-16">
+            <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Leg Styles</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {legStyles.map((style, index) => (
+                <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
+                  <div className="flex items-start">
+                    <div className="text-4xl mr-4 mt-1">{style.icon}</div>
+                    <div className="flex-1">
+                      <h4 className="text-xl font-bold text-oak-800 mb-2">{style.style}</h4>
+                      <p className="text-oak-600 mb-4">{style.description}</p>
+                      
+                      <div className="mb-3">
+                        <h5 className="font-semibold text-oak-800 mb-2">Key Features:</h5>
+                        <ul className="space-y-1 text-sm text-oak-600">
+                          {style.characteristics.map((char, i) => (
+                            <li key={i} className="flex items-center">
+                              <span className="text-amber-600 mr-2">•</span>
+                              {char}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="text-sm">
+                        <div className="mb-1">
+                          <span className="font-semibold text-oak-800">Best for:</span> {style.bestFor}
+                        </div>
+                        <div>
+                          <span className="font-semibold text-oak-800">Height:</span> {style.height}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Height Guide */}
+          <div className="mb-16">
+            <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Height Selection Guide</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {heightGuide.map((guide, index) => (
+                <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="flex items-center mb-3">
+                    <div className="w-12 h-12 bg-oak-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">
+                      {guide.height.replace('cm', '')}
+                    </div>
+                    <h4 className="text-lg font-bold text-oak-800">{guide.use}</h4>
+                  </div>
+                  <p className="text-oak-600 mb-3">{guide.description}</p>
+                  <div className="text-sm">
+                    <span className="font-semibold text-oak-800">Seat Height:</span> {guide.chairHeight}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Compatibility Guide */}
+          <div className="mb-16">
+            <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Tabletop Compatibility</h3>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-oak-800 text-white">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Tabletop Size</th>
+                      <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Recommended Legs</th>
+                      <th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {legCompatibility.map((compat, index) => (
+                      <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                        <td className="px-6 py-4 text-sm text-oak-800">{compat.tabletopSize}</td>
+                        <td className="px-6 py-4 text-sm font-medium text-oak-800">{compat.recommendedLegs}</td>
+                        <td className="px-6 py-4 text-sm text-oak-600">{compat.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* Installation Tips */}
+          <div>
+            <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Installation Tips</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {installationTips.map((tip, index) => (
+                <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="flex items-start">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white mr-3 mt-1 ${
+                      tip.importance === 'Critical' ? 'bg-red-600' : 
+                      tip.importance === 'Important' ? 'bg-amber-600' : 'bg-green-600'
+                    }`}>
+                      {tip.importance === 'Critical' ? '!' : 
+                       tip.importance === 'Important' ? '△' : '✓'}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-oak-800 mb-2">{tip.tip}</h4>
+                      <p className="text-oak-600 text-sm">{tip.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 bg-oak-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-oak-800 mb-4">Complete Table Solutions</h2>
+            <p className="text-lg text-oak-600">We offer more than just table legs - complete your dining table project with our services.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                🔧
+              </div>
+              <h3 className="text-xl font-bold text-oak-800 mb-3">Professional Installation</h3>
+              <p className="text-oak-600 mb-4">
+                Our craftsmen can install your table legs professionally, ensuring perfect alignment and stability.
+              </p>
+              <Link href="/contact" className="text-oak-600 hover:text-oak-800 font-medium">
+                Request Installation →
+              </Link>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                📏
+              </div>
+              <h3 className="text-xl font-bold text-oak-800 mb-3">Custom Heights</h3>
+              <p className="text-oak-600 mb-4">
+                Need non-standard heights? We can customize any leg style to your exact specifications.
+              </p>
+              <Link href="/contact" className="text-oak-600 hover:text-oak-800 font-medium">
+                Request Custom Quote →
+              </Link>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                🛠️
+              </div>
+              <h3 className="text-xl font-bold text-oak-800 mb-3">Hardware Included</h3>
+              <p className="text-oak-600 mb-4">
+                Every set of legs includes appropriate mounting hardware and detailed installation instructions.
+              </p>
+              <Link href="/contact" className="text-oak-600 hover:text-oak-800 font-medium">
+                Installation Guide →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-oak-800 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Complete Your Table Project
+          </h2>
+          <p className="text-xl text-oak-200 mb-8 max-w-2xl mx-auto">
+            Browse our tabletops to find the perfect match for your chosen legs, 
+            or contact us for a custom table solution.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link 
+              href="/categories/tabletops"
+              className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+            >
+              Browse Tabletops
+            </Link>
+            <Link 
+              href="/contact"
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+            >
+              Custom Table Consultation
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

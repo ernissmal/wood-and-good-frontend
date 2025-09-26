@@ -1,0 +1,59 @@
+{
+  "name": "wood-and-good-frontend",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Wood & Good E-commerce Frontend - Next.js Application",
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "export": "next export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ernissmal/wood-and-good-frontend.git"
+  },
+  "keywords": [
+    "nextjs",
+    "e-commerce",
+    "furniture",
+    "oak-wood",
+    "frontend",
+    "tailwindcss",
+    "typescript"
+  ],
+  "author": "Wood & Good Team",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20250926.0",
+    "@sanity/client": "^7.11.2",
+    "@sanity/color-input": "^4.0.6",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.10.1",
+    "@types/stripe": "^8.0.416",
+    "hono": "^4.9.8",
+    "next": "^15.5.4",
+    "next-sanity": "^11.4.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "sanity": "^4.10.1",
+    "stripe": "^18.5.0",
+    "wrangler": "^4.40.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
