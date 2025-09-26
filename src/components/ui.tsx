@@ -1,11 +1,21 @@
-// Reusable UI components for Wood & Good E-commerce
+// Enhanced UI components for Wood & Good E-commerce with Material Icons
 'use client';
 
 import React from 'react';
 import Link from 'next/link';
 import { Product, Category, BlogPost } from '../types';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import StarIcon from '@mui/icons-material/Star';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import PersonIcon from '@mui/icons-material/Person';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-// Loading Spinner Component
+// Enhanced Loading Spinner Component
 export function LoadingSpinner({ size = 'medium' }: { size?: 'small' | 'medium' | 'large' }) {
   const sizeClasses = {
     small: 'w-4 h-4',
@@ -14,25 +24,29 @@ export function LoadingSpinner({ size = 'medium' }: { size?: 'small' | 'medium' 
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className={`animate-spin rounded-full border-2 border-amber-200 border-t-amber-600 ${sizeClasses[size]}`}></div>
+    <div className="flex justify-center items-center p-4">
+      <div className={`animate-spin rounded-full border-2 border-oak-200 border-t-oak-500 ${sizeClasses[size]}`}></div>
     </div>
   );
 }
 
-// Error Message Component
+// Enhanced Error Message Component
 export function ErrorMessage({ message, onRetry }: { message: string; onRetry?: () => void }) {
   return (
-    <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
-      <p className="mb-2">{message}</p>
-      {onRetry && (
-        <button
-          onClick={onRetry}
-          className="bg-red-100 hover:bg-red-200 px-3 py-1 rounded text-sm font-medium transition-colors"
-        >
-          Try Again
-        </button>
-      )}
+    <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-red-700 flex items-start space-x-3">
+      <ErrorOutlineIcon className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+      <div className="flex-1">
+        <p className="font-medium mb-2">{message}</p>
+        {onRetry && (
+          <button
+            onClick={onRetry}
+            className="bg-red-100 hover:bg-red-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center space-x-2"
+          >
+            <RefreshIcon className="w-4 h-4" />
+            <span>Try Again</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -59,9 +73,9 @@ export function ProductCard({ product, onAddToCart, addingToCart = false }: Prod
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+    <div className="furniture-card group">
       <Link href={`/products/${product.seo_slug}`}>
-        <div className="aspect-square bg-gray-100 relative overflow-hidden">
+        <div className="aspect-square bg-oak-50 relative overflow-hidden">
           {product.image_url ? (
             <img
               src={product.image_url}
@@ -69,58 +83,81 @@ export function ProductCard({ product, onAddToCart, addingToCart = false }: Prod
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-amber-50">
-              <div className="text-amber-600 text-4xl">🪵</div>
+            <div className="w-full h-full flex items-center justify-center bg-oak-100 text-oak-600">
+              <InventoryIcon sx={{ fontSize: 48 }} />
             </div>
           )}
           {product.featured && (
-            <div className="absolute top-3 left-3 bg-amber-600 text-white px-2 py-1 rounded text-sm font-medium">
-              Featured
+            <div className="absolute top-3 left-3 bg-oak-primary text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+              <StarIcon className="w-4 h-4" />
+              <span>Featured</span>
             </div>
           )}
+          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button className="w-9 h-9 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-oak-50 transition-colors">
+              <FavoriteIcon className="w-5 h-5 text-oak-600" />
+            </button>
+          </div>
         </div>
       </Link>
       
-      <div className="p-4">
+      <div className="p-6">
         <Link href={`/products/${product.seo_slug}`}>
-          <h3 className="font-semibold text-gray-900 mb-1 hover:text-amber-600 transition-colors">
+          <h3 className="font-semibold text-text-primary mb-2 hover:text-text-accent transition-colors text-lg">
             {product.name}
           </h3>
         </Link>
         
-        <p className="text-sm text-gray-600 mb-2">{product.wood_type}</p>
+        <div className="flex items-center space-x-2 mb-3">
+          <LocalOfferIcon className="w-4 h-4 text-oak-600" />
+          <p className="text-sm text-oak-600 font-medium">{product.wood_type || 'Oak Wood'}</p>
+        </div>
         
-        <p className="text-gray-700 text-sm mb-3 line-clamp-2">{product.description}</p>
+        <p className="text-text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">
+          {product.description}
+        </p>
         
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
-            <span className="text-lg font-bold text-gray-900">
+            <span className="text-2xl font-bold text-text-primary">
               {formatPrice(product.price)}
             </span>
           </div>
           
-          {onAddToCart && (
+          <div className="flex items-center space-x-2">
             <button
-              onClick={handleAddToCart}
-              disabled={addingToCart || product.stock === 0}
-              className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 
-                         disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+              className="w-10 h-10 bg-oak-100 hover:bg-oak-200 rounded-lg flex items-center justify-center transition-colors duration-200"
+              title="Quick View"
             >
-              {addingToCart ? (
-                <LoadingSpinner size="small" />
-              ) : product.stock === 0 ? (
-                'Out of Stock'
-              ) : (
-                'Add to Cart'
-              )}
+              <VisibilityIcon className="w-5 h-5 text-oak-600" />
             </button>
-          )}
+            
+            {onAddToCart && (
+              <button
+                onClick={handleAddToCart}
+                disabled={addingToCart || (product.stock || product.stock_quantity) === 0}
+                className="btn-primary text-sm px-4 py-2 flex items-center space-x-2 disabled:bg-neutral-400 disabled:cursor-not-allowed"
+              >
+                {addingToCart ? (
+                  <LoadingSpinner size="small" />
+                ) : (product.stock || product.stock_quantity) === 0 ? (
+                  <span>Out of Stock</span>
+                ) : (
+                  <>
+                    <ShoppingCartIcon className="w-4 h-4" />
+                    <span>Add to Cart</span>
+                  </>
+                )}
+              </button>
+            )}
+          </div>
         </div>
         
-        {product.stock < 10 && product.stock > 0 && (
-          <p className="text-sm text-orange-600 mt-2">
-            Only {product.stock} left in stock!
-          </p>
+        {((product.stock || product.stock_quantity) < 10 && (product.stock || product.stock_quantity) > 0) && (
+          <div className="flex items-center space-x-2 text-sm text-orange-600 bg-orange-50 px-3 py-2 rounded-lg">
+            <ErrorOutlineIcon className="w-4 h-4" />
+            <span>Only {product.stock || product.stock_quantity} left in stock!</span>
+          </div>
         )}
       </div>
     </div>
@@ -172,10 +209,14 @@ export function ProductGrid({
 
   if (products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <div className="text-6xl mb-4">🪵</div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-        <p className="text-gray-600">Try adjusting your filters or search terms.</p>
+      <div className="text-center py-16">
+        <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <InventoryIcon sx={{ fontSize: 48 }} className="text-oak-400" />
+        </div>
+        <h3 className="text-xl font-semibold text-text-primary mb-2">No products found</h3>
+        <p className="text-text-secondary max-w-md mx-auto">
+          Try adjusting your filters or search terms to find the perfect oak furniture for your home.
+        </p>
       </div>
     );
   }
@@ -202,8 +243,8 @@ interface CategoryCardProps {
 export function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link href={`/products?category=${category.id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
-        <div className="aspect-video bg-gradient-to-br from-amber-100 to-amber-200 relative overflow-hidden">
+      <div className="furniture-card group">
+        <div className="aspect-video bg-oak-gradient relative overflow-hidden">
           {category.image_url ? (
             <img
               src={category.image_url}
@@ -212,15 +253,24 @@ export function CategoryCard({ category }: CategoryCardProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <div className="text-amber-600 text-6xl">🪑</div>
+              <InventoryIcon sx={{ fontSize: 64 }} className="text-white opacity-80" />
             </div>
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-colors"></div>
-          <div className="absolute bottom-4 left-4 text-white">
-            <h3 className="font-bold text-xl mb-1">{category.name}</h3>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-colors duration-300"></div>
+          <div className="absolute bottom-6 left-6 text-white">
+            <h3 className="font-bold text-2xl mb-2 group-hover:text-oak-200 transition-colors">
+              {category.name}
+            </h3>
             {category.description && (
-              <p className="text-sm opacity-90 line-clamp-2">{category.description}</p>
+              <p className="text-sm opacity-90 line-clamp-2 leading-relaxed max-w-sm">
+                {category.description}
+              </p>
             )}
+          </div>
+          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+              <VisibilityIcon className="w-4 h-4 text-white" />
+            </div>
           </div>
         </div>
       </div>
@@ -244,8 +294,8 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
   return (
     <Link href={`/blog/${post.slug}`}>
-      <article className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow duration-300">
-        <div className="aspect-video bg-gray-100 relative overflow-hidden">
+      <article className="furniture-card group">
+        <div className="aspect-video bg-oak-50 relative overflow-hidden">
           {post.featured_image ? (
             <img
               src={post.featured_image}
@@ -253,29 +303,48 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-amber-50">
-              <div className="text-amber-600 text-4xl">📝</div>
+            <div className="w-full h-full flex items-center justify-center bg-oak-50">
+              <CalendarTodayIcon sx={{ fontSize: 48 }} className="text-oak-400" />
             </div>
           )}
           {post.category && (
-            <div className="absolute top-3 left-3 bg-amber-600 text-white px-2 py-1 rounded text-sm font-medium">
-              {post.category}
+            <div className="absolute top-3 left-3 bg-oak-primary text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+              <LocalOfferIcon className="w-3 h-3" />
+              <span>{post.category}</span>
+            </div>
+          )}
+          {post.featured && (
+            <div className="absolute top-3 right-3 bg-forest-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
+              <StarIcon className="w-3 h-3" />
+              <span>Featured</span>
             </div>
           )}
         </div>
         
         <div className="p-6">
-          <h3 className="font-bold text-xl text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+          <h3 className="font-bold text-xl text-text-primary mb-3 group-hover:text-text-accent transition-colors leading-tight">
             {post.title}
           </h3>
           
           {post.excerpt && (
-            <p className="text-gray-700 mb-4 line-clamp-3">{post.excerpt}</p>
+            <p className="text-text-secondary mb-4 line-clamp-3 leading-relaxed">
+              {post.excerpt}
+            </p>
           )}
           
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            {post.author && <span>By {post.author}</span>}
-            {post.created_at && <span>{formatDate(post.created_at)}</span>}
+          <div className="flex items-center justify-between text-sm text-text-muted pt-4 border-t border-oak-100">
+            {post.author && (
+              <div className="flex items-center space-x-2">
+                <PersonIcon className="w-4 h-4" />
+                <span>By {post.author}</span>
+              </div>
+            )}
+            {post.created_at && (
+              <div className="flex items-center space-x-2">
+                <CalendarTodayIcon className="w-4 h-4" />
+                <span>{formatDate(post.created_at)}</span>
+              </div>
+            )}
           </div>
         </div>
       </article>
