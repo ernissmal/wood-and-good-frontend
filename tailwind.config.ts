@@ -73,9 +73,9 @@ export default {
         text: {
           primary: '#1c1917',     // Primary text (very dark brown)
           secondary: '#44403c',   // Secondary text (dark gray)
-          accent: '#9e5d28',      // Accent text (dark oak)
-          muted: '#78716c',       // Muted text (medium gray)
-          inverse: '#fafaf9',     // Inverse text (off-white)
+          accent: '#8b5a2b',      // Accent text (darker oak for better contrast)
+          muted: '#6b5b54',       // Muted text (darker medium gray)
+          inverse: '#ffffff',     // Inverse text (pure white)
         }
       },
       fontFamily: {
