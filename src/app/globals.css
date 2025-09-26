@@ -181,6 +181,75 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(212, 130, 58, 0.1);
 }
 
+/* Global form utility classes for consistent styling */
+.form-label {
+  display: block;
+  font-size: 0.75rem; /* Tailwind text-xs */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  border: 1px solid var(--border-medium);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: var(--text-primary);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--oak-primary);
+  box-shadow: 0 0 0 3px rgba(195, 123, 66, 0.15);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.9;
+}
+
+.form-inline-group { /* optional wrapper if needed later */
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.filter-summary {
+  font-size: 0.8125rem; /* ~13px */
+  color: var(--text-secondary);
+}
+
+.filter-clear-btn {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.filter-clear-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(195, 123, 66, 0.08);
+}
+
 /* Enhanced accessibility */
 .sr-only {
   position: absolute;
