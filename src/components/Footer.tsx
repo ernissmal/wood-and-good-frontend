@@ -71,7 +71,7 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
+            <h4 className="footer-heading">
               <HandymanIcon className="w-5 h-5" />
               <span>Products</span>
             </h4>
