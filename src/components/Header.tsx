@@ -63,7 +63,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="text-text-secondary hover:text-text-accent px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-2 group"
+                    className="text-text-primary hover:text-oak-primary px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-2 group"
                   >
                     <IconComponent className="w-4 h-4 transition-transform group-hover:scale-110" />
                     <span>{item.label}</span>
@@ -74,7 +74,7 @@ export default function Header() {
               {/* Cart Button */}
               <Link
                 href="/cart"
-                className="bg-oak-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-oak-600 transition-all duration-200 flex items-center space-x-2 group relative"
+                className="bg-oak-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-oak-700 transition-all duration-200 flex items-center space-x-2 group relative"
               >
                 <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
@@ -114,7 +114,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className="text-text-secondary hover:text-text-accent hover:bg-oak-50 px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg flex items-center space-x-3"
+                    className="text-text-primary hover:text-oak-primary hover:bg-oak-50 px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg flex items-center space-x-3"
                   >
                     <IconComponent className="w-5 h-5" />
                     <span>{item.label}</span>
@@ -126,7 +126,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 onClick={closeMenu}
-                className="bg-oak-primary text-white px-4 py-3 text-base font-medium hover:bg-oak-600 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
+                className="bg-oak-primary text-white px-4 py-3 text-base font-medium hover:bg-oak-700 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
