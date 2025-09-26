@@ -19,7 +19,7 @@ export default {
           300: '#f4d49b',   // Light oak
           400: '#e8b86d',   // Medium oak
           500: '#d4823a',   // Primary oak
-          600: '#c17532',   // Rich oak
+          600: '#c17532',   // Rich oak (better contrast)
           700: '#9e5d28',   // Dark oak
           800: '#7c4327',   // Deep oak
           900: '#5a2f1a',   // Darkest oak
