@@ -63,7 +63,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="text-textPrimary hover:text-oak-600 px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-2 group"
+                    className="nav-link flex items-center space-x-2 group"
                   >
                     <IconComponent className="w-4 h-4 transition-transform group-hover:scale-110" />
                     <span>{item.label}</span>
@@ -74,7 +74,7 @@ export default function Header() {
               {/* Cart Button */}
               <Link
                 href="/cart"
-                className="bg-oak-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-oak-700 transition-all duration-200 flex items-center space-x-2 group relative"
+                className="btn-primary flex items-center space-x-2 group relative"
               >
                 <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
