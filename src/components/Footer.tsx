@@ -45,7 +45,7 @@ export default function Footer() {
                 href="https://instagram.com/woodandgood"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                className="social-link"
                 aria-label="Follow us on Instagram"
               >
                 <InstagramIcon className="w-5 h-5" />
@@ -54,14 +54,14 @@ export default function Footer() {
                 href="https://facebook.com/woodandgood"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                className="social-link"
                 aria-label="Follow us on Facebook"
               >
                 <FacebookIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:info@woodandgood.com"
-                className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                className="social-link"
                 aria-label="Send us an email"
               >
                 <EmailIcon className="w-5 h-5" />
