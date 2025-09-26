@@ -44,10 +44,10 @@ export default function BlogPage() {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-oak-800 mb-4">
+            <h1 className="text-4xl font-bold text-textPrimary mb-4">
               Wood & Good Blog
             </h1>
-            <p className="text-lg text-oak-600 max-w-3xl mx-auto">
+            <p className="text-lg text-textSecondary max-w-3xl mx-auto">
               Discover the art of woodworking, care tips for your furniture, design inspiration, 
               and stories from our workshop. Learn about the craft behind every piece.
             </p>
@@ -60,7 +60,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium text-oak-700">Filter by:</span>
+              <span className="text-sm font-medium text-textSecondary">Filter by:</span>
               
               {/* Category Filter */}
               <select
@@ -84,7 +84,7 @@ export default function BlogPage() {
                   onChange={(e) => handleFilterChange('featured', e.target.checked)}
                   className="mr-2 text-oak-600 focus:ring-oak-500"
                 />
-                <span className="text-sm text-oak-700">Featured only</span>
+                <span className="text-sm text-textSecondary">Featured only</span>
               </label>
             </div>
 
@@ -99,7 +99,7 @@ export default function BlogPage() {
 
           {/* Results Count */}
           {pagination.total > 0 && (
-            <div className="text-sm text-oak-600 mt-4">
+            <div className="text-sm text-textSecondary mt-4">
               Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} articles
             </div>
           )}
@@ -180,10 +180,10 @@ export default function BlogPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+            <h2 className="text-3xl font-bold text-textPrimary mb-4">
               Popular Topics
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
+            <p className="text-textSecondary max-w-2xl mx-auto">
               Explore our most popular article categories and learn about the art of working with oak.
             </p>
           </div>
