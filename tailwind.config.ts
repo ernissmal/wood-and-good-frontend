@@ -11,18 +11,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Enhanced warm oak-inspired color palette with better contrast
+        // Updated oak color palette to match your specified colors
         oak: {
-          50: '#fefbf7',    // Very light cream
-          100: '#fdf4e6',   // Light cream
-          200: '#fae7c4',   // Soft beige
-          300: '#f4d49b',   // Light oak
-          400: '#e8b86d',   // Medium oak
-          500: '#d4823a',   // Primary oak
-          600: '#c17532',   // Rich oak (better contrast)
-          700: '#9e5d28',   // Dark oak
-          800: '#7c4327',   // Deep oak
-          900: '#5a2f1a',   // Darkest oak
+          50: '#F5F1EA',    // Background
+          100: '#F5F1EA',   // Light background
+          200: '#e6d5bd',   // Soft beige
+          300: '#d4b896',   // Light oak
+          400: '#C37B42',   // Accent/contrast color
+          500: '#C37B42',   // Primary oak (your accent color)
+          600: '#C37B42',   // Rich oak
+          700: '#8A9A5B',   // Accent/contrast (green)
+          800: '#4A3621',   // Headings color
+          900: '#333333',   // Primary buttons/navigation
         },
         // Enhanced natural wood tones
         wood: {
@@ -31,30 +31,32 @@ export default {
           dark: '#8b5a2b',   // Dark wood contrast
         },
         // Warm earth tones for better visual hierarchy
+        // Updated earth colors to match your specified colors
         earth: {
-          50: '#fbf9f6',     // Light earth
-          100: '#f5f0e8',    // Cream earth
-          200: '#e8dcc8',    // Beige earth
-          300: '#d4c2a1',    // Medium earth
-          400: '#b8a082',    // Rich earth
-          500: '#9d7f63',    // Primary earth
-          600: '#826548',    // Dark earth
-          700: '#6b4f3a',    // Deep earth
-          800: '#4a3426',    // Darker earth
-          900: '#2d1f16',    // Darkest earth
+          50: '#F5F1EA',    // Background
+          100: '#f0ece1',   // Light earth
+          200: '#e6dcc8',   // Soft earth
+          300: '#d8c9af',   // Medium earth
+          400: '#C37B42',   // Accent/contrast (orange)
+          500: '#C37B42',   // Primary earth
+          600: '#b06936',   // Darker earth
+          700: '#8A9A5B',   // Accent/contrast (green)
+          800: '#4A3621',   // Headings color
+          900: '#333333',   // Primary buttons/navigation
         },
         // Enhanced sustainability green with better contrast
+        // Updated forest colors to match your specified colors
         forest: {
-          50: '#f4fbf4',     // Very light green
-          100: '#e6f4e6',    // Light green
-          200: '#c2e7c2',    // Soft green
-          300: '#94d294',    // Medium green
-          400: '#66bb6a',    // Bright green
-          500: '#4caf50',    // Primary green
-          600: '#43a047',    // Rich green
-          700: '#388e3c',    // Dark green
-          800: '#2e7d32',    // Deep green
-          900: '#1b5e20',    // Darkest green
+          50: '#F5F1EA',    // Background
+          100: '#f2eee3',   // Light background
+          200: '#e6dac7',   // Soft sage
+          300: '#d4c5ab',   // Medium sage
+          400: '#8A9A5B',   // Accent/contrast (green)
+          500: '#8A9A5B',   // Primary forest
+          600: '#7a8950',   // Darker forest
+          700: '#6a7845',   // Dark forest
+          800: '#4A3621',   // Headings color
+          900: '#333333',   // Primary buttons/navigation
         },
         // Neutral grays for text and backgrounds
         neutral: {
@@ -69,14 +71,10 @@ export default {
           800: '#292524',    // Deep gray
           900: '#1c1917',    // Darkest gray
         },
-        // High contrast text colors
-        text: {
-          primary: '#1c1917',     // Primary text (very dark brown)
-          secondary: '#44403c',   // Secondary text (dark gray)
-          accent: '#8b5a2b',      // Accent text (darker oak for better contrast)
-          muted: '#6b5b54',       // Muted text (darker medium gray)
-          inverse: '#ffffff',     // Inverse text (pure white)
-        }
+        // Text colors matching your specifications
+        textPrimary: '#4A3621',    // Headings color
+        textSecondary: '#666666',  // Body text color  
+        textMuted: '#666666',      // Body text color
       },
       fontFamily: {
         // Enhanced typography with better readability
