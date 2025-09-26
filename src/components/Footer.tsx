@@ -144,16 +144,16 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <LocationOnIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-white">Visit Our Workshop</p>
-                  <p className="text-sm">Riga, Latvia</p>
+                  <p className="footer-text-bold">Visit Our Workshop</p>
+                  <p className="footer-text text-sm">Riga, Latvia</p>
                 </div>
               </div>
               
               <div className="flex items-start space-x-3">
                 <EmailIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-white">Email Us</p>
-                  <a href="mailto:info@woodandgood.com" className="text-sm hover:text-white transition-colors">
+                  <p className="footer-text-bold">Email Us</p>
+                  <a href="mailto:info@woodandgood.com" className="footer-text text-sm hover:text-white">
                     info@woodandgood.com
                   </a>
                 </div>
