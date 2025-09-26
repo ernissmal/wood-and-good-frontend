@@ -253,7 +253,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <InventoryIcon sx={{ fontSize: 64 }} className="text-white opacity-80" />
+              <InventoryIcon sx={{ fontSize: 64 }} className="text-white" />
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-colors duration-300"></div>
