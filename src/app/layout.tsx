@@ -53,7 +53,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#d4823a" />
       </head>
-      <body className={`${inter.className} bg-wood-light text-text-primary antialiased`}>
+      <body className={`${inter.className} bg-wood-light text-textPrimary antialiased`}>
         <Header />
         <main className="min-h-screen">
           {children}
