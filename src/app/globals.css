@@ -446,9 +446,153 @@ body {
   background: #a8a29e;
 }
 
+/* Layout Components */
+.layout-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 640px) {
+  .layout-container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-container {
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Navigation Styles */
+.nav-link {
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.nav-link:hover {
+  color: var(--action-primary);
+  background-color: rgba(var(--oak-primary), 0.08);
+}
+
+.nav-link.active {
+  color: var(--action-primary);
+  font-weight: 600;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--surface-tertiary);
+  color: var(--text-inverse);
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-xl);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--spacing-xl);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.footer-heading {
+  color: var(--text-inverse);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link {
+  color: var(--text-inverse);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+  display: inline-block;
+  padding: var(--spacing-xs) 0;
+}
+
+.footer-link:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.footer-social-link {
+  color: var(--text-inverse);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.footer-social-link:hover {
+  opacity: 1;
+}
+
+/* Enhanced Link Styles */
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--oak-primary);
+}
+
 /* Enhanced print styles */
 @media print {
   .no-print {
     display: none !important;
   }
+}
+
+/* Enhanced List Styles */
+.list-none {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-disc {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+}
+
+.list-decimal {
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+}
+
+/* Section Spacing */
+.section {
+  padding: var(--spacing-xl) 0;
+}
+
+.section-sm {
+  padding: var(--spacing-lg) 0;
+}
+
+.section-lg {
+  padding: calc(var(--spacing-xl) * 2) 0;
 }
