@@ -31,6 +31,10 @@
   "license": "MIT",
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250926.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
     "@sanity/client": "^7.11.2",
     "@sanity/color-input": "^4.0.6",
     "@sanity/image-url": "^1.2.0",
