@@ -1,5 +1,7 @@
 'use client';
 
+import { TableBar } from '@mui/icons-material';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '../../hooks/api';
@@ -155,7 +157,7 @@ export default function CartPage() {
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center text-oak-400 text-2xl">
-                                🪵
+                                <TableBar sx={{ fontSize: 32 }} />
                               </div>
                             )}
                           </div>
