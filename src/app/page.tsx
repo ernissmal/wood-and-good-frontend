@@ -34,12 +34,12 @@ export default function Home() {
                 <span>Sustainably Crafted Since 1970</span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#4A3621] mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-textPrimary mb-6 leading-tight">
                 Handcrafted
                 <span className="block text-oak-600">Oak Furniture</span>
               </h1>
               
-              <p className="text-lg sm:text-xl text-[#666666] mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-textSecondary mb-8 max-w-3xl mx-auto leading-relaxed">
                 Premium quality solid oak furniture, sustainably sourced and expertly crafted 
                 in Latvia. Each piece tells a story of timeless craftsmanship and three generations 
                 of woodworking excellence.
@@ -70,10 +70,10 @@ export default function Home() {
               <span>Explore Our Collections</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A3621] mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
               Shop by Category
             </h2>
-            <p className="text-lg text-[#666666] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-textSecondary max-w-3xl mx-auto leading-relaxed">
               From elegant dining tables to comfortable seating, discover furniture that combines 
               traditional Latvian craftsmanship with modern functionality and timeless design.
             </p>
@@ -118,10 +118,10 @@ export default function Home() {
               <span>Handpicked by Our Masters</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A3621] mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
               Featured Collection
             </h2>
-            <p className="text-lg text-[#666666] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-textSecondary max-w-3xl mx-auto leading-relaxed">
               Handpicked pieces that showcase the beauty and durability of solid oak wood. 
               Perfect for creating spaces that last generations and tell your family's story.
             </p>
@@ -162,10 +162,10 @@ export default function Home() {
                   <span>Three Generations of Excellence</span>
                 </div>
                 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A3621] mb-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
                   Sustainable Craftsmanship
                 </h2>
-                <p className="text-lg text-[#666666] mb-8 leading-relaxed">
+                <p className="text-lg text-textSecondary mb-8 leading-relaxed">
                   For over three generations, SIA The Wood and Good has been crafting premium oak 
                   furniture using traditional techniques passed down through our family. Every piece 
                   is made from sustainably sourced solid oak from Latvian forests, ensuring both 
