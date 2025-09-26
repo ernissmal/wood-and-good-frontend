@@ -303,8 +303,8 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-oak-50">
-              <CalendarTodayIcon sx={{ fontSize: 48 }} className="text-oak-400" />
+            <div className="w-full h-full flex items-center justify-center bg-oak-100">
+              <CalendarTodayIcon sx={{ fontSize: 48 }} className="text-oak-600" />
             </div>
           )}
           {post.category && (
