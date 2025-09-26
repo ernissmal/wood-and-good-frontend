@@ -56,6 +56,8 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-oak-700 hover:bg-oak-600 rounded-lg flex items-center justify-center transition-colors duration-200"
                 aria-label="Follow us on Facebook"
+              >
+                <FacebookIcon className="w-5 h-5" />
               </a>
               <a
                 href="mailto:info@woodandgood.com"
