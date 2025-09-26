@@ -1,5 +1,7 @@
 'use client';
 
+import { CleaningServices, Palette, Build, LocalFlorist, Home, MenuBook } from '@mui/icons-material';
+
 import { useState } from 'react';
 import { useBlogPosts } from '../../hooks/api';
 import { BlogPostCard, LoadingSpinner, ErrorMessage, Pagination } from '../../components/ui';
@@ -193,13 +195,13 @@ export default function BlogPage() {
                 onClick={() => handleFilterChange('category', category)}
                 className="bg-oak-50 hover:bg-oak-100 p-4 rounded-lg text-center transition-colors group"
               >
-                <div className="text-2xl mb-2">
-                  {category === 'Wood Care' && '🧼'}
-                  {category === 'Design Tips' && '🎨'}
-                  {category === 'Craftsmanship' && '🔨'}
-                  {category === 'Sustainability' && '🌱'}
-                  {category === 'Home Decor' && '🏠'}
-                  {category === 'Furniture History' && '📚'}
+                <div className="text-2xl mb-2 text-oak-600 flex justify-center">
+                  {category === 'Wood Care' && <CleaningServices sx={{ fontSize: 24 }} />}
+                  {category === 'Design Tips' && <Palette sx={{ fontSize: 24 }} />}
+                  {category === 'Craftsmanship' && <Build sx={{ fontSize: 24 }} />}
+                  {category === 'Sustainability' && <LocalFlorist sx={{ fontSize: 24 }} />}
+                  {category === 'Home Decor' && <Home sx={{ fontSize: 24 }} />}
+                  {category === 'Furniture History' && <MenuBook sx={{ fontSize: 24 }} />}
                 </div>
                 <h3 className="font-semibold text-oak-800 group-hover:text-oak-600 transition-colors">
                   {category}
