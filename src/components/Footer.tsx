@@ -202,17 +202,17 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-oak-700 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-oak-200 text-sm">
+            <p className="footer-text text-sm">
               &copy; {currentYear} SIA The Wood and Good. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-oak-200">
-              <Link href="/privacy" className="hover:text-white transition-colors">
+            <div className="flex space-x-6 text-sm">
+              <Link href="/privacy" className="footer-link">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
+              <Link href="/terms" className="footer-link">
                 Terms of Service
               </Link>
-              <Link href="/sitemap" className="hover:text-white transition-colors">
+              <Link href="/sitemap" className="footer-link">
                 Sitemap
               </Link>
             </div>
