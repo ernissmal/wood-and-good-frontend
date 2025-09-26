@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Park, Build, Favorite, NaturePeople, Carpenter, LocalFlorist, Handyman, AutoFixHigh, Engineering } from '@mui/icons-material';
 
 export default function AboutPage() {
   return (
@@ -71,7 +72,9 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-              <div className="text-5xl mb-4">🌳</div>
+              <div className="text-5xl mb-4 text-oak-600 flex justify-center">
+                <Park sx={{ fontSize: 48 }} />
+              </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-4">
                 Sustainability First
               </h3>
@@ -83,7 +86,9 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-              <div className="text-5xl mb-4">🔨</div>
+              <div className="text-5xl mb-4 text-oak-600 flex justify-center">
+                <Build sx={{ fontSize: 48 }} />
+              </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-4">
                 Master Craftsmanship
               </h3>
@@ -95,7 +100,9 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-              <div className="text-5xl mb-4">❤️</div>
+              <div className="text-5xl mb-4 text-oak-600 flex justify-center">
+                <Favorite sx={{ fontSize: 48 }} />
+              </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-4">
                 Customer Care
               </h3>
