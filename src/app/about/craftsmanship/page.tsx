@@ -331,19 +331,19 @@ export default function CraftsmanshipPage() {
                     <div className="space-y-4">
                       <div>
                         <h4 className="font-semibold text-oak-800">Māris Kalniņš</h4>
-                        <p className="text-[#666666] text-sm">Lead Craftsman • 25+ years experience</p>
+                        <p className="text-textSecondary text-sm">Lead Craftsman • 25+ years experience</p>
                       </div>
                       <div>
                         <h4 className="font-semibold text-oak-800">Ilze Bērziņa</h4>
-                        <p className="text-[#666666] text-sm">Finishing Specialist • 18+ years experience</p>
+                        <p className="text-textSecondary text-sm">Finishing Specialist • 18+ years experience</p>
                       </div>
                       <div>
                         <h4 className="font-semibold text-oak-800">Pēteris Ozols</h4>
-                        <p className="text-[#666666] text-sm">Joinery Master • 22+ years experience</p>
+                        <p className="text-textSecondary text-sm">Joinery Master • 22+ years experience</p>
                       </div>
                       <div>
                         <h4 className="font-semibold text-oak-800">Anna Liepiņa</h4>
-                        <p className="text-[#666666] text-sm">Quality Inspector • 15+ years experience</p>
+                        <p className="text-textSecondary text-sm">Quality Inspector • 15+ years experience</p>
                       </div>
                     </div>
                   </div>
