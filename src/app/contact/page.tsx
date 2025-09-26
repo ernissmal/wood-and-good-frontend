@@ -44,10 +44,10 @@ export default function ContactPage() {
       {/* Header */}
       <section className="hero-gradient py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-oak-800 mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-textPrimary mb-6">
             Contact Us
           </h1>
-          <p className="text-xl text-oak-600 max-w-3xl mx-auto">
+          <p className="text-xl text-textSecondary max-w-3xl mx-auto">
             Ready to discuss your custom oak furniture project or have questions about our products? 
             We'd love to hear from you.
           </p>
@@ -59,7 +59,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div>
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-oak-800 mb-6">Send us a Message</h2>
+              <h2 className="text-2xl font-bold text-textPrimary mb-6">Send us a Message</h2>
               
               {submitStatus === 'success' && (
                 <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
@@ -72,7 +72,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Inquiry Type */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Type of Inquiry
                   </label>
                   <select
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Full Name *
                   </label>
                   <input
@@ -107,7 +107,7 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Email Address *
                   </label>
                   <input
@@ -122,7 +122,7 @@ export default function ContactPage() {
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Phone Number
                   </label>
                   <input
@@ -136,7 +136,7 @@ export default function ContactPage() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Subject *
                   </label>
                   <input
@@ -151,7 +151,7 @@ export default function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-oak-700 mb-2">
+                  <label className="block text-sm font-medium text-textSecondary mb-2">
                     Message *
                   </label>
                   <textarea
@@ -182,7 +182,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             {/* Contact Details */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-oak-800 mb-6">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-textPrimary mb-6">Get in Touch</h2>
               
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -193,8 +193,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-oak-800 mb-1">Workshop & Showroom</h3>
-                    <p className="text-oak-600">
+                    <h3 className="font-semibold text-textPrimary mb-1">Workshop & Showroom</h3>
+                    <p className="text-textSecondary">
                       Ozolu iela 15<br />
                       Rīga, LV-1010<br />
                       Latvia
@@ -209,8 +209,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-oak-800 mb-1">Phone</h3>
-                    <p className="text-oak-600">
+                    <h3 className="font-semibold text-textPrimary mb-1">Phone</h3>
+                    <p className="text-textSecondary">
                       +371 2000 0000<br />
                       Mon-Fri: 8:00 AM - 6:00 PM<br />
                       Sat: 9:00 AM - 4:00 PM
@@ -225,8 +225,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-oak-800 mb-1">Email</h3>
-                    <p className="text-oak-600">
+                    <h3 className="font-semibold text-textPrimary mb-1">Email</h3>
+                    <p className="text-textSecondary">
                       info@woodandgood.lv<br />
                       sales@woodandgood.lv<br />
                       support@woodandgood.lv
@@ -238,24 +238,24 @@ export default function ContactPage() {
 
             {/* Business Hours */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-oak-800 mb-6">Visit Our Showroom</h2>
+              <h2 className="text-2xl font-bold text-textPrimary mb-6">Visit Our Showroom</h2>
               
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
-                  <span className="text-oak-600">Monday - Friday</span>
-                  <span className="font-semibold text-oak-800">8:00 AM - 6:00 PM</span>
+                  <span className="text-textSecondary">Monday - Friday</span>
+                  <span className="font-semibold text-textPrimary">8:00 AM - 6:00 PM</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-oak-600">Saturday</span>
-                  <span className="font-semibold text-oak-800">9:00 AM - 4:00 PM</span>
+                  <span className="text-textSecondary">Saturday</span>
+                  <span className="font-semibold text-textPrimary">9:00 AM - 4:00 PM</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-oak-600">Sunday</span>
-                  <span className="font-semibold text-oak-800">Closed</span>
+                  <span className="text-textSecondary">Sunday</span>
+                  <span className="font-semibold text-textPrimary">Closed</span>
                 </div>
               </div>
 
-              <p className="text-oak-600 text-sm">
+              <p className="text-textSecondary text-sm">
                 Visit our showroom to see and feel the quality of our oak furniture firsthand. 
                 Our team is available to discuss custom projects and answer any questions.
               </p>
@@ -263,24 +263,24 @@ export default function ContactPage() {
 
             {/* Quick Links */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold text-oak-800 mb-6">Quick Actions</h2>
+              <h2 className="text-2xl font-bold text-textPrimary mb-6">Quick Actions</h2>
               
               <div className="space-y-3">
                 <a 
                   href="/products" 
-                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-oak-800 font-semibold transition-colors"
+                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-textPrimary font-semibold transition-colors"
                 >
                   Browse Our Products
                 </a>
                 <a 
                   href="#" 
-                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-oak-800 font-semibold transition-colors"
+                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-textPrimary font-semibold transition-colors"
                 >
                   Request Custom Quote
                 </a>
                 <a 
                   href="#" 
-                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-oak-800 font-semibold transition-colors"
+                  className="block w-full bg-oak-50 hover:bg-oak-100 p-3 rounded-lg text-center text-textPrimary font-semibold transition-colors"
                 >
                   Schedule Showroom Visit
                 </a>
