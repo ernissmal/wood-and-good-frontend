@@ -502,7 +502,7 @@ body {
 
 .layout-section-lg {
   padding-top: calc(var(--spacing-xl) * 2);
-  padding-bottom: calc(var(--spacing-xl) * 2);}
+  padding-bottom: calc(var(--spacing-xl) * 2);
 }
 
 /* Header and Navigation Styles */
