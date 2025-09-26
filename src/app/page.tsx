@@ -219,15 +219,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Blog Posts Section */}
-      <section className="py-16 bg-white">
+      {/* Enhanced Featured Blog Posts Section */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center space-x-2 bg-oak-primary rounded-full px-4 py-2 text-white text-sm font-medium mb-4">
+              <InfoIcon className="w-4 h-4" />
+              <span>Stories from Our Workshop</span>
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
               Latest From Our Blog
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
-              Learn about wood care, design tips, and the stories behind our craftsmanship.
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Learn about wood care, design tips, and the stories behind our craftsmanship and traditions.
             </p>
           </div>
           
