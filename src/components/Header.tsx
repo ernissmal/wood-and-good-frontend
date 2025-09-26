@@ -36,8 +36,8 @@ export default function Header() {
   const totalItems = cart?.total_items || 0;
 
   return (
-    <header className="bg-white shadow-warm border-b border-oak-200 sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="section section-white shadow-sm sticky top-0 z-50">
+      <nav className="section-container">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -46,10 +46,10 @@ export default function Header() {
                 <span className="text-white font-bold text-xl">W</span>
               </div>
               <div>
-                                <h1 className="text-2xl font-bold text-textPrimary leading-tight">
+                <h1 className="text-2xl font-bold text-primary leading-tight">
                   Wood & Good
                 </h1>
-                <p className="text-sm text-textMuted leading-none">Premium Oak Furniture</p>
+                <p className="text-sm text-muted leading-none">Premium Oak Furniture</p>
               </div>
             </Link>
           </div>
