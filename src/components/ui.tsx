@@ -211,7 +211,7 @@ export function ProductGrid({
     return (
       <div className="text-center py-16">
         <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <InventoryIcon sx={{ fontSize: 48 }} className="text-oak-400" />
+          <InventoryIcon sx={{ fontSize: 48 }} className="text-oak-600" />
         </div>
         <h3 className="text-xl font-semibold text-text-primary mb-2">No products found</h3>
         <p className="text-text-secondary max-w-md mx-auto">
