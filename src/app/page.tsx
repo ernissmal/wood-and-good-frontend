@@ -270,12 +270,13 @@ export default function Home() {
           )}
           
           {featuredPosts.length > 0 && (
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Link
                 href="/blog"
-                className="text-oak-600 hover:text-oak-800 font-semibold"
+                className="inline-flex items-center space-x-2 text-text-accent hover:text-oak-primary font-semibold text-lg transition-colors duration-200"
               >
-                Read All Articles →
+                <span>Read All Articles</span>
+                <ArrowForwardIcon className="w-5 h-5" />
               </Link>
             </div>
           )}
