@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/* Enhanced CSS custom properties for better theming and contrast */
+:root {
+  --background: #faf6f0;
+  --foreground: #1c1917;
+  --oak-primary: #c17532;
+  --oak-secondary: #d4b896;
+  --wood-light: #faf6f0;
+  --text-primary: #1c1917;
+  --text-secondary: #44403c;
+  --text-accent: #8b5a2b;
+  --text-muted: #6b5b54;
+  --text-inverse: #ffffff;
+  --border-light: #e7e5e4;
+  --border-medium: #d6d3d1;
+  --shadow-warm: 0 4px 6px -1px rgba(193, 117, 50, 0.15), 0 2px 4px -1px rgba(193, 117, 50, 0.08);
+}
+
+/* Enhanced dark mode support (optional for admin/development) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #2d1f16;
+    --foreground: #fafaf9;
+    --text-primary: #fafaf9;
+    --text-secondary: #e7e5e4;
+    --text-accent: #f4d49b;
+    --text-muted: #a8a29e;
+    --border-light: #44403c;
+    --border-medium: #57534e;
+  }
+}
+
+/* Enhanced body styles with better typography */
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced heading styles for better hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+/* Enhanced component styles */
+.hero-gradient {
+  background: linear-gradient(135deg, #faf6f0 0%, #e6d5bd 50%, #f4d49b 100%);
+}
+
+.oak-gradient {
+  background: linear-gradient(135deg, #fdf4e6 0%, #f4d49b 50%, #d4823a 100%);
+}
+
+.earth-gradient {
+  background: linear-gradient(135deg, #fbf9f6 0%, #e8dcc8 100%);
+}
+
+.wood-texture {
+  background-image: 
+    radial-gradient(circle at 3px 3px, rgba(158, 93, 40, 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.furniture-card {
+  background-color: white;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-warm);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.furniture-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(212, 130, 58, 0.1), 0 10px 10px -5px rgba(212, 130, 58, 0.04);
+  border-color: var(--border-medium);
+}
+
+/* Enhanced button styles with better accessibility and contrast */
+.btn-primary {
+  background-color: var(--oak-primary);
+  color: var(--text-inverse);
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-warm);
+}
+
+.btn-primary:hover {
+  background-color: #9e5d28;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(193, 117, 50, 0.25), 0 4px 6px -2px rgba(193, 117, 50, 0.12);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background-color: #8b5a2b;
+}
+
+.btn-primary:focus {
+  outline: 2px solid #f4d49b;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid var(--oak-primary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--oak-primary);
+  color: var(--text-inverse);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-warm);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary:focus {
+  outline: 2px solid var(--oak-primary);
+  outline-offset: 2px;
+}
+
+/* Enhanced link styles */
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--oak-primary);
+}
+
+/* Enhanced form input styles */
+input, textarea, select {
+  border: 1px solid var(--border-medium);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: white;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--oak-primary);
+  box-shadow: 0 0 0 3px rgba(212, 130, 58, 0.1);
+}
+
+/* Enhanced accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d6d3d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e;
+}
+
+/* Enhanced print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
