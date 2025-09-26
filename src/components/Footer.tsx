@@ -172,7 +172,7 @@ export default function Footer() {
         <div className="border-t border-oak-700 pt-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex items-center justify-center space-x-3">
-              <EcoIcon className="w-8 h-8 text-forest-400" />
+              <NatureIcon className="w-8 h-8 text-forest-400" />
               <div className="text-left">
                 <p className="font-semibold text-white">100% Sustainable</p>
                 <p className="text-sm text-oak-200">Responsibly sourced oak</p>
