@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Product, Category, BlogPost } from '../types';
+import { Product, Category, BlogPost } from '@/types';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -88,7 +88,7 @@ export function ProductCard({ product, onAddToCart, addingToCart = false }: Prod
             </div>
           )}
           {product.featured && (
-            <div className="absolute top-3 left-3 bg-oak-primary text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+            <div className="absolute top-3 left-3 bg-oak-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
               <StarIcon className="w-4 h-4" />
               <span>Featured</span>
             </div>
@@ -103,7 +103,7 @@ export function ProductCard({ product, onAddToCart, addingToCart = false }: Prod
       
       <div className="p-6">
         <Link href={`/products/${product.seo_slug}`}>
-          <h3 className="font-semibold text-text-primary mb-2 hover:text-text-accent transition-colors text-lg">
+          <h3 className="font-semibold text-textPrimary mb-2 hover:text-oak-600 transition-colors text-lg">
             {product.name}
           </h3>
         </Link>
@@ -113,13 +113,13 @@ export function ProductCard({ product, onAddToCart, addingToCart = false }: Prod
           <p className="text-sm text-oak-600 font-medium">{product.wood_type || 'Oak Wood'}</p>
         </div>
         
-        <p className="text-text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-textSecondary text-sm mb-4 line-clamp-2 leading-relaxed">
           {product.description}
         </p>
         
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-text-primary">
+            <span className="text-2xl font-bold text-textPrimary">
               {formatPrice(product.price)}
             </span>
           </div>
@@ -213,8 +213,8 @@ export function ProductGrid({
         <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <InventoryIcon sx={{ fontSize: 48 }} className="text-oak-600" />
         </div>
-        <h3 className="text-xl font-semibold text-text-primary mb-2">No products found</h3>
-        <p className="text-text-secondary max-w-md mx-auto">
+        <h3 className="text-xl font-semibold text-textPrimary mb-2">No products found</h3>
+        <p className="text-textSecondary max-w-md mx-auto">
           Try adjusting your filters or search terms to find the perfect oak furniture for your home.
         </p>
       </div>
@@ -308,7 +308,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             </div>
           )}
           {post.category && (
-            <div className="absolute top-3 left-3 bg-oak-primary text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+            <div className="absolute top-3 left-3 bg-oak-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
               <LocalOfferIcon className="w-3 h-3" />
               <span>{post.category}</span>
             </div>
@@ -322,12 +322,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         </div>
         
         <div className="p-6">
-          <h3 className="font-bold text-xl text-text-primary mb-3 group-hover:text-text-accent transition-colors leading-tight">
+          <h3 className="font-bold text-xl text-textPrimary mb-3 group-hover:text-oak-600 transition-colors leading-tight">
             {post.title}
           </h3>
           
           {post.excerpt && (
-            <p className="text-text-secondary mb-4 line-clamp-3 leading-relaxed">
+            <p className="text-textSecondary mb-4 line-clamp-3 leading-relaxed">
               {post.excerpt}
             </p>
           )}
