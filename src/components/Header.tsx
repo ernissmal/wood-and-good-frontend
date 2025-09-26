@@ -46,10 +46,10 @@ export default function Header() {
                 <span className="text-white font-bold text-xl">W</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-text-primary leading-tight">
-                  SIA The Wood and Good
+                                <h1 className="text-2xl font-bold text-textPrimary leading-tight">
+                  Wood & Good
                 </h1>
-                <p className="text-sm text-text-muted leading-none">Premium Oak Furniture</p>
+                <p className="text-sm text-textMuted leading-none">Premium Oak Furniture</p>
               </div>
             </Link>
           </div>
@@ -63,7 +63,7 @@ export default function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="text-text-primary hover:text-oak-primary px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-2 group"
+                    className="text-textPrimary hover:text-oak-600 px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center space-x-2 group"
                   >
                     <IconComponent className="w-4 h-4 transition-transform group-hover:scale-110" />
                     <span>{item.label}</span>
@@ -74,7 +74,7 @@ export default function Header() {
               {/* Cart Button */}
               <Link
                 href="/cart"
-                className="bg-oak-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-oak-700 transition-all duration-200 flex items-center space-x-2 group relative"
+                className="bg-oak-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-oak-700 transition-all duration-200 flex items-center space-x-2 group relative"
               >
                 <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
@@ -91,7 +91,7 @@ export default function Header() {
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg text-text-secondary hover:text-text-accent hover:bg-oak-50 transition-colors duration-200"
+              className="p-2 rounded-lg text-textSecondary hover:text-oak-600 hover:bg-oak-50 transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
@@ -114,7 +114,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className="text-text-primary hover:text-oak-primary hover:bg-oak-50 px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg flex items-center space-x-3"
+                    className="text-textPrimary hover:text-oak-600 hover:bg-oak-50 px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg flex items-center space-x-3"
                   >
                     <IconComponent className="w-5 h-5" />
                     <span>{item.label}</span>
@@ -126,7 +126,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 onClick={closeMenu}
-                className="bg-oak-primary text-white px-4 py-3 text-base font-medium hover:bg-oak-700 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
+                className="bg-oak-600 text-white px-4 py-3 text-base font-medium hover:bg-oak-700 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
