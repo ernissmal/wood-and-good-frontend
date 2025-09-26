@@ -77,22 +77,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-oak-200">
               <li>
-                <Link href="/categories/tabletops" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                <Link href="/categories/tabletops" className="footer-link">
                   <span>Table Tops</span>
                 </Link>
               </li>
               <li>
-                <Link href="/categories/table-legs" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                <Link href="/categories/table-legs" className="footer-link">
                   <span>Table Legs</span>
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                <Link href="/products" className="footer-link">
                   <span>All Products</span>
                 </Link>
               </li>
               <li>
-                <Link href="/categories" className="hover:text-white transition-colors duration-200 flex items-center space-x-2">
+                <Link href="/categories" className="footer-link">
                   <span>Browse Categories</span>
                 </Link>
               </li>
