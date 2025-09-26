@@ -300,7 +300,7 @@ export default function Home() {
               <input 
                 type="email" 
                 placeholder="Enter your email address" 
-                className="flex-1 px-6 py-4 rounded-xl text-textPrimary bg-white border-0 focus:ring-2 focus:ring-oak-400 focus:outline-none text-lg"
+                className="form-control flex-1 !px-6 !py-4 !text-lg border-0 focus:ring-2 focus:ring-oak-400 focus:outline-none"
                 required
               />
               <button 

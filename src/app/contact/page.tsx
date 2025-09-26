@@ -72,14 +72,12 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Inquiry Type */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Type of Inquiry
-                  </label>
+                  <label className="form-label">Type of Inquiry</label>
                   <select
                     name="inquiryType"
                     value={formData.inquiryType}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                     required
                   >
                     <option value="general">General Inquiry</option>
@@ -92,74 +90,64 @@ export default function ContactPage() {
 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Full Name *
-                  </label>
+                  <label className="form-label">Full Name *</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                     required
                   />
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Email Address *
-                  </label>
+                  <label className="form-label">Email Address *</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                     required
                   />
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Phone Number
-                  </label>
+                  <label className="form-label">Phone Number</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                   />
                 </div>
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Subject *
-                  </label>
+                  <label className="form-label">Subject *</label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                     required
                   />
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-textSecondary mb-2">
-                    Message *
-                  </label>
+                  <label className="form-label">Message *</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                    className="form-control"
                     required
                     placeholder="Tell us about your project, questions, or how we can help you..."
                   />

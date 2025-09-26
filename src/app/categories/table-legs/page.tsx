@@ -194,27 +194,23 @@ export default function TableLegsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Search Table Legs
-              </label>
+              <label className="form-label">Search Table Legs</label>
               <input
                 type="text"
                 value={filters.q}
                 onChange={(e) => handleFilterChange('q', e.target.value)}
                 placeholder="Search table legs..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               />
             </div>
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Finish
-              </label>
+              <label className="form-label">Finish</label>
               <select
                 value={filters.finish}
                 onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Finishes</option>
                 <option value="natural oil">Natural Oil</option>
@@ -225,13 +221,11 @@ export default function TableLegsPage() {
 
             {/* Price Range */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Max Price (€)
-              </label>
+              <label className="form-label">Max Price (€)</label>
               <select
                 value={filters.max_price || ''}
                 onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">Any Price</option>
                 <option value="150">Under €150</option>
@@ -243,13 +237,11 @@ export default function TableLegsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Sort By
-              </label>
+              <label className="form-label">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="featured">Featured First</option>
                 <option value="name">Name A-Z</option>
@@ -259,15 +251,15 @@ export default function TableLegsPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-oak-600">
+          <div className="filter-actions">
+            <div className="filter-summary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} table legs</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+              className="filter-clear-btn"
             >
               Clear Filters
             </button>

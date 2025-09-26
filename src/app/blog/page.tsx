@@ -59,30 +59,28 @@ export default function BlogPage() {
       <section className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium text-textSecondary">Filter by:</span>
-              
-              {/* Category Filter */}
-              <select
-                value={filters.category}
-                onChange={(e) => handleFilterChange('category', e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-oak-500"
-              >
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-
-              {/* Featured Filter */}
-              <label className="flex items-center">
+            <div className="flex items-center gap-4 flex-wrap">
+              <div>
+                <span className="form-label">Category</span>
+                <select
+                  value={filters.category}
+                  onChange={(e) => handleFilterChange('category', e.target.value)}
+                  className="form-control py-2 text-sm"
+                >
+                  <option value="">All Categories</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <label className="flex items-center gap-2 mt-2">
                 <input
                   type="checkbox"
                   checked={filters.featured}
                   onChange={(e) => handleFilterChange('featured', e.target.checked)}
-                  className="mr-2 text-oak-600 focus:ring-oak-500"
+                  className="h-4 w-4 rounded border border-gray-300 text-oak-600 focus:ring-oak-500"
                 />
                 <span className="text-sm text-textSecondary">Featured only</span>
               </label>
@@ -99,7 +97,7 @@ export default function BlogPage() {
 
           {/* Results Count */}
           {pagination.total > 0 && (
-            <div className="text-sm text-textSecondary mt-4">
+            <div className="filter-summary mt-4">
               Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} articles
             </div>
           )}
