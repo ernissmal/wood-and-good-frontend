@@ -101,7 +101,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-white flex items-center space-x-2">
+            <h4 className="footer-heading">
               <NatureIcon className="w-5 h-5" />
               <span>Company</span>
             </h4>
