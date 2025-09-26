@@ -58,10 +58,10 @@ export default function ProductsPage() {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-oak-800 mb-4">
+            <h1 className="text-4xl font-bold text-textPrimary mb-4">
               Oak Furniture Collection
             </h1>
-            <p className="text-lg text-oak-600 max-w-3xl mx-auto">
+            <p className="text-lg text-textSecondary max-w-3xl mx-auto">
               Discover our complete range of handcrafted solid oak furniture. 
               Each piece is sustainably sourced and expertly crafted for lasting beauty.
             </p>
@@ -75,7 +75,7 @@ export default function ProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
+              <label className="block text-sm font-medium text-textSecondary mb-1">
                 Search
               </label>
               <input
@@ -89,7 +89,7 @@ export default function ProductsPage() {
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
+              <label className="block text-sm font-medium text-textSecondary mb-1">
                 Category
               </label>
               <select
@@ -108,7 +108,7 @@ export default function ProductsPage() {
 
             {/* Shape */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
+              <label className="block text-sm font-medium text-textSecondary mb-1">
                 Shape
               </label>
               <select
@@ -125,7 +125,7 @@ export default function ProductsPage() {
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
+              <label className="block text-sm font-medium text-textSecondary mb-1">
                 Finish
               </label>
               <select
@@ -142,7 +142,7 @@ export default function ProductsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
+              <label className="block text-sm font-medium text-textSecondary mb-1">
                 Sort By
               </label>
               <select
@@ -161,14 +161,14 @@ export default function ProductsPage() {
 
           {/* Filter Actions */}
           <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-oak-600">
+            <div className="text-sm text-textSecondary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} products</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+              className="text-textSecondary hover:text-textPrimary text-sm font-medium"
             >
               Clear All Filters
             </button>
@@ -203,10 +203,10 @@ export default function ProductsPage() {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-oak-800 mb-4">
+              <h2 className="text-3xl font-bold text-textPrimary mb-4">
                 Browse by Category
               </h2>
-              <p className="text-oak-600 max-w-2xl mx-auto">
+              <p className="text-textSecondary max-w-2xl mx-auto">
                 Explore our furniture collections organized by type and functionality.
               </p>
             </div>
