@@ -162,8 +162,8 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <LocalShippingIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-white">Free Delivery</p>
-                  <p className="text-sm">Throughout Latvia</p>
+                  <p className="footer-text-bold">Free Delivery</p>
+                  <p className="footer-text text-sm">Throughout Latvia</p>
                 </div>
               </div>
             </div>
@@ -176,24 +176,24 @@ export default function Footer() {
             <div className="flex items-center justify-center space-x-3">
               <NatureIcon className="w-8 h-8 text-forest-400" />
               <div className="text-left">
-                <p className="font-semibold text-white">100% Sustainable</p>
-                <p className="text-sm text-oak-200">Responsibly sourced oak</p>
+                <p className="footer-text-bold">100% Sustainable</p>
+                <p className="footer-text text-sm">Responsibly sourced oak</p>
               </div>
             </div>
             
             <div className="flex items-center justify-center space-x-3">
               <HandymanIcon className="w-8 h-8 text-oak-400" />
               <div className="text-left">
-                <p className="font-semibold text-white">Handcrafted Quality</p>
-                <p className="text-sm text-oak-200">Traditional techniques</p>
+                <p className="footer-text-bold">Handcrafted Quality</p>
+                <p className="footer-text text-sm">Traditional techniques</p>
               </div>
             </div>
             
             <div className="flex items-center justify-center space-x-3">
               <LocalShippingIcon className="w-8 h-8 text-oak-400" />
               <div className="text-left">
-                <p className="font-semibold text-white">Free Delivery</p>
-                <p className="text-sm text-oak-200">Latvia-wide shipping</p>
+                <p className="footer-text-bold">Free Delivery</p>
+                <p className="footer-text text-sm">Latvia-wide shipping</p>
               </div>
             </div>
           </div>
