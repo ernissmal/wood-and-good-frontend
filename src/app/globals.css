@@ -33,9 +33,61 @@
   --text-inverse: #ffffff;
   --text-success: #22c55e;
   --text-warning: #f59e0b;
-  --text-error: #ef4444;
+  --text-error: #ef4/* Navigation Styles */
+.nav-link {
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
 
-  /* Border Colors */
+.nav-link:hover {
+  color: var(--oak-600);
+}
+
+.nav-link-mobile {
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  background-color: var(--surface-primary);
+}
+
+.nav-link-mobile:hover {
+  color: var(--oak-600);
+  background-color: var(--oak-50);
+}
+
+.btn-primary-mobile {
+  color: var(--text-inverse);
+  background-color: var(--oak-600);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.btn-primary-mobile:hover {
+  background-color: var(--oak-700);
+}
+
+/* Section Text Colors */
+.section-oak-800 .text-muted {
+  color: var(--oak-200, #e7d5c4);
+}
+
+.section-earth-800 .text-muted {
+  color: var(--oak-200, #e7d5c4);
+}
+
+.section-forest-800 .text-muted {
+  color: var(--forest-200, #d1e4c2);
+}order Colors */
   --border-light: #e7e5e4;
   --border-medium: #d6d3d1;
   --border-dark: #44403c;
