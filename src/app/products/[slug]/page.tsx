@@ -7,6 +7,7 @@ import { Product, Category } from '../../../types';
 import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import { useCart } from '../../../hooks/api';
 import { fetchSanityData, queries, getSanityImageUrl, ProductContent } from '../../../lib/sanity';
+import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -109,7 +110,9 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">😔</div>
+          <div className="text-6xl mb-4 text-oak-600 flex justify-center">
+            <SentimentDissatisfied sx={{ fontSize: 72 }} />
+          </div>
           <h1 className="text-2xl font-bold text-oak-800 mb-2">Product Not Found</h1>
           <p className="text-oak-600 mb-6">The product you're looking for doesn't exist or has been moved.</p>
           <Link 
@@ -165,7 +168,9 @@ export default function ProductDetailPage() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-oak-50">
-                    <div className="text-oak-400 text-8xl">🪵</div>
+                    <div className="text-oak-400 text-8xl">
+                      <TableBar sx={{ fontSize: 96 }} />
+                    </div>
                   </div>
                 )}
               </div>
@@ -196,7 +201,8 @@ export default function ProductDetailPage() {
             <div>
               {product.featured && (
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800 mb-4">
-                  ⭐ Featured Product
+                  <Star className="text-amber-600 mr-1" sx={{ fontSize: 16 }} />
+                  Featured Product
                 </div>
               )}
               
@@ -315,7 +321,8 @@ export default function ProductDetailPage() {
               {/* Care Instructions */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🧽 Care Instructions
+                  <CleaningServices className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Care Instructions
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
                   <li>• Dust regularly with a soft, lint-free cloth</li>
@@ -329,7 +336,8 @@ export default function ProductDetailPage() {
               {/* Delivery Information */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🚚 Delivery & Setup
+                  <LocalShipping className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Delivery & Setup
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
                   <li>• Free delivery within 50km of our workshop</li>
@@ -343,7 +351,8 @@ export default function ProductDetailPage() {
               {/* Warranty */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🛡️ Warranty & Support
+                  <Security className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Warranty & Support
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
                   <li>• 25-year structural warranty</li>
