@@ -76,6 +76,23 @@
   background-color: var(--oak-700);
 }
 
+/* Social Links */
+.social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--oak-700);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.social-link:hover {
+  background-color: var(--oak-600);
+  transform: translateY(-1px);
+}
+
 /* Section Text Colors */
 .section-oak-800 .text-muted {
   color: var(--oak-200, #e7d5c4);
