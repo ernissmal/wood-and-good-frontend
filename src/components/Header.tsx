@@ -126,7 +126,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 onClick={closeMenu}
-                className="bg-oak-primary text-white block px-4 py-3 text-base font-medium hover:bg-oak-600 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
+                className="bg-oak-primary text-white px-4 py-3 text-base font-medium hover:bg-oak-600 transition-colors duration-200 rounded-lg flex items-center space-x-3 relative"
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
