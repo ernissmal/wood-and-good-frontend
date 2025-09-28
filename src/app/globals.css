@@ -837,6 +837,70 @@ a:hover {
   }
 }
 
+/* Responsive Helpers */
+.hide-sm {
+  @media (max-width: 639px) {
+    display: none !important;
+  }
+}
+
+.show-sm {
+  @media (min-width: 640px) {
+    display: none !important;
+  }
+}
+
+.hide-md {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.show-md {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hide-lg {
+  @media (max-width: 1023px) {
+    display: none !important;
+  }
+}
+
+.show-lg {
+  @media (min-width: 1024px) {
+    display: none !important;
+  }
+}
+
+/* Responsive Typography */
+.text-responsive {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+}
+
+.heading-responsive {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+
+/* Responsive Spacing */
+.section-responsive {
+  padding-top: clamp(2rem, 8vw, 6rem);
+  padding-bottom: clamp(2rem, 8vw, 6rem);
+}
+
+.gap-responsive {
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Responsive Grid */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: var(--spacing-lg);
+}
+
 /* Enhanced List Styles */
 .list-none {
   list-style: none;

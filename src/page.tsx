@@ -34,12 +34,12 @@ export default function Home() {
                 <span>Sustainably Crafted Since 1970</span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-textPrimary mb-6 leading-tight">
+              <h1 className="text-display-1 text-primary mb-6">
                 Handcrafted
                 <span className="block text-oak-600">Oak Furniture</span>
               </h1>
               
-              <p className="text-lg sm:text-xl text-textSecondary mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-body-lg text-muted mb-8 max-w-3xl mx-auto">
                 Premium quality solid oak furniture, sustainably sourced and expertly crafted 
                 in Latvia. Each piece tells a story of timeless craftsmanship and three generations 
                 of woodworking excellence.
@@ -47,12 +47,12 @@ export default function Home() {
             </div>
             
             <div className="flex gap-4 justify-center flex-col sm:flex-row max-w-md mx-auto sm:max-w-none">
-              <Link href="/products" className="btn-primary text-lg px-8 py-4">
+              <Link href="/products" className="btn btn-primary btn-lg">
                 <ShoppingBagIcon className="w-5 h-5" />
                 <span>Shop Collection</span>
                 <ArrowForwardIcon className="w-4 h-4" />
               </Link>
-              <Link href="/about" className="btn-secondary text-lg px-8 py-4">
+              <Link href="/about" className="btn btn-secondary btn-lg">
                 <InfoIcon className="w-5 h-5" />
                 <span>Our Story</span>
               </Link>
@@ -70,10 +70,10 @@ export default function Home() {
               <span>Explore Our Collections</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
+            <h2 className="text-h2 text-primary mb-6">
               Shop by Category
             </h2>
-            <p className="text-lg text-textSecondary max-w-3xl mx-auto leading-relaxed">
+            <p className="text-body-lg text-muted max-w-3xl mx-auto">
               From elegant dining tables to comfortable seating, discover furniture that combines 
               traditional Latvian craftsmanship with modern functionality and timeless design.
             </p>
@@ -118,10 +118,10 @@ export default function Home() {
               <span>Handpicked by Our Masters</span>
             </div>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
+            <h2 className="text-h2 text-primary mb-6">
               Featured Collection
             </h2>
-            <p className="text-lg text-textSecondary max-w-3xl mx-auto leading-relaxed">
+            <p className="text-body-lg text-muted max-w-3xl mx-auto">
               Handpicked pieces that showcase the beauty and durability of solid oak wood. 
               Perfect for creating spaces that last generations and tell your family's story.
             </p>
@@ -140,7 +140,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Link
                 href="/products"
-                className="btn-primary text-lg px-8 py-4"
+                className="btn btn-primary btn-lg"
               >
                 <ShoppingBagIcon className="w-5 h-5" />
                 <span>View All Products</span>
@@ -162,10 +162,10 @@ export default function Home() {
                   <span>Three Generations of Excellence</span>
                 </div>
                 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-textPrimary mb-6">
+                <h2 className="text-h2 text-primary mb-6">
                   Sustainable Craftsmanship
                 </h2>
-                <p className="text-lg text-textSecondary mb-8 leading-relaxed">
+                <p className="text-body-lg text-muted mb-8">
                   For over three generations, SIA The Wood and Good has been crafting premium oak 
                   furniture using traditional techniques passed down through our family. Every piece 
                   is made from sustainably sourced solid oak from Latvian forests, ensuring both 
@@ -176,19 +176,19 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-4 mb-8">
                 <div className="text-center p-6 bg-white rounded-xl shadow-warm">
                   <div className="text-3xl font-bold text-oak-600 mb-2">50+</div>
-                  <div className="text-textMuted text-sm">Years Experience</div>
+                  <div className="text-muted text-sm">Years Experience</div>
                 </div>
                 <div className="text-center p-6 bg-white rounded-xl shadow-warm">
                   <div className="text-3xl font-bold text-forest-600 mb-2">100%</div>
-                  <div className="text-textMuted text-sm">Sustainable Oak</div>
+                  <div className="text-muted text-sm">Sustainable Oak</div>
                 </div>
                 <div className="text-center p-6 bg-white rounded-xl shadow-warm">
                   <div className="text-3xl font-bold text-earth-600 mb-2">3</div>
-                  <div className="text-textMuted text-sm">Generations</div>
+                  <div className="text-muted text-sm">Generations</div>
                 </div>
               </div>
               
-              <Link href="/about" className="btn-primary text-lg px-8 py-4">
+              <Link href="/about" className="btn btn-primary btn-lg">
                 <InfoIcon className="w-5 h-5" />
                 <span>Learn More</span>
                 <ArrowForwardIcon className="w-4 h-4" />
@@ -223,10 +223,10 @@ export default function Home() {
       <section className="section section-white">
         <div className="section-container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-textPrimary mb-4">
+            <h2 className="text-h2 text-primary mb-4">
               Latest From Our Blog
             </h2>
-            <p className="text-textSecondary max-w-2xl mx-auto">
+            <p className="text-body text-muted max-w-2xl mx-auto">
               Learn about wood care, design tips, and the stories behind our craftsmanship.
             </p>
           </div>
@@ -257,8 +257,8 @@ export default function Home() {
               <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <InfoIcon sx={{ fontSize: 48 }} className="text-oak-400" />
               </div>
-              <h3 className="text-xl font-semibold text-textPrimary mb-2">No blog posts yet</h3>
-              <p className="text-textSecondary max-w-md mx-auto">
+              <h3 className="text-xl font-semibold text-primary mb-2">No blog posts yet</h3>
+              <p className="text-muted max-w-md mx-auto">
                 Check back soon for updates, craftsmanship insights, and stories from our workshop.
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-8">
               <Link
                 href="/blog"
-                className="text-textSecondary hover:text-textPrimary font-semibold transition-colors"
+                className="text-muted hover:text-primary font-semibold transition-colors"
               >
                 Read All Articles →
               </Link>
@@ -278,9 +278,9 @@ export default function Home() {
       </section>
 
       {/* Enhanced Newsletter Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-earth-800 text-white relative overflow-hidden">
+      <section className="section section-earth-800 relative overflow-hidden">
         <div className="absolute inset-0 wood-texture opacity-10"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <div className="section-content-lg text-center relative">
           <div className="mb-8">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Stay Updated</h2>
             <p className="text-xl text-oak-200 leading-relaxed max-w-2xl mx-auto">
@@ -294,7 +294,7 @@ export default function Home() {
               <input 
                 type="email" 
                 placeholder="Enter your email address" 
-                className="flex-1 px-6 py-4 rounded-xl text-textPrimary bg-white border-0 focus:ring-2 focus:ring-oak-400 focus:outline-none text-lg"
+                className="flex-1 px-6 py-4 rounded-xl text-primary bg-white border-0 focus:ring-2 focus:ring-oak-400 focus:outline-none text-lg"
                 required
               />
               <button 
