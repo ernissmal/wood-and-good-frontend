@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
@@ -5,21 +7,6 @@ import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import { useCart } from '../../../hooks/api';
 import { sanityApi } from '../../../lib/sanity';
 import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
-
-// Generate static params for static export
-export async function generateStaticParams() {
-  // For static export, we'll return common product slugs
-  // In production, you would fetch actual product slugs from your CMS
-  return [
-    { slug: 'oak-dining-table' },
-    { slug: 'oak-coffee-table' },
-    { slug: 'oak-table-legs' },
-    { slug: 'oak-tabletop' },
-    { slug: 'rustic-dining-table' },
-  ];
-}
-
-'use client';
 
 export default function ProductDetailPage() {
   const params = useParams();
