@@ -5,8 +5,10 @@
   "description": "Wood & Good E-commerce Frontend - Next.js Application",
   "scripts": {
     "dev": "next dev --port 3001",
+    "dev:prod": "next dev --port 3000",
     "build": "next build",
-    "start": "next start --port 3001",
+    "start": "next start --port 3000",
+    "start:dev": "next start --port 3001",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true npm run build",
