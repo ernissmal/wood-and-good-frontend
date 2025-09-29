@@ -1,47 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { useSanityProducts, useSanityCategories } from '../../hooks/sanity';
-import { useCart } from '../../hooks/api';
-import { ProductGrid, CategoryCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
+import Link from 'next/link';
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-
-  const { products, loading: productsLoading, error: productsError, refetch } = useSanityProducts(selectedCategory);
+  const { products, loading: productsLoading, error: productsError } = useSanityProducts();
   const { categories, loading: categoriesLoading } = useSanityCategories();
-  const { addToCart, loading: cartLoading } = useCart();
-
-  const handleAddToCart = async (productId: number) => {
-    await addToCart(productId, 1);
-  };
-
-  const handleFilterChange = (key: string, value: any) => {
-    setFilters(prev => ({
-      ...prev,
-      [key]: value,
-      page: 1 // Reset to first page when filters change
-    }));
-  };
-
-  const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const clearFilters = () => {
-    setFilters({
-      page: 1,
-      limit: 12,
-      category_id: undefined,
-      q: '',
-      shape: '',
-      finish: '',
-      min_price: undefined,
-      max_price: undefined,
-      sort: 'name'
-    });
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -49,10 +13,10 @@ export default function ProductsPage() {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-textPrimary mb-4">
+            <h1 className="text-4xl font-bold text-oak-800 mb-4">
               Oak Furniture Collection
             </h1>
-            <p className="text-lg text-textSecondary max-w-3xl mx-auto">
+            <p className="text-lg text-oak-600 max-w-3xl mx-auto">
               Discover our complete range of handcrafted solid oak furniture. 
               Each piece is sustainably sourced and expertly crafted for lasting beauty.
             </p>
@@ -60,160 +24,127 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Filters */}
+      {/* Categories */}
       <section className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {/* Search */}
-            <div>
-              <label className="form-label">Search</label>
-              <input
-                type="text"
-                value={filters.q}
-                onChange={(e) => handleFilterChange('q', e.target.value)}
-                placeholder="Search products..."
-                className="form-control"
-              />
+          <h2 className="text-xl font-semibold text-oak-800 mb-4">Categories</h2>
+          {categoriesLoading ? (
+            <div className="flex space-x-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-oak-100 rounded-lg px-4 py-2 animate-pulse w-24 h-10"></div>
+              ))}
             </div>
-
-            {/* Category */}
-            <div>
-              <label className="form-label">Category</label>
-              <select
-                value={filters.category_id || ''}
-                onChange={(e) => handleFilterChange('category_id', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="form-control"
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              <Link
+                href="/products"
+                className="bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors"
               >
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+                All Products
+              </Link>
+              {categories.map((category: any) => (
+                <Link
+                  key={category._id}
+                  href={`/products?category=${category.name}`}
+                  className="bg-oak-100 text-oak-800 px-4 py-2 rounded-lg hover:bg-oak-200 transition-colors"
+                >
+                  {category.name}
+                </Link>
+              ))}
             </div>
-
-            {/* Shape */}
-            <div>
-              <label className="form-label">Shape</label>
-              <select
-                value={filters.shape}
-                onChange={(e) => handleFilterChange('shape', e.target.value)}
-                className="form-control"
-              >
-                <option value="">All Shapes</option>
-                <option value="round">Round</option>
-                <option value="rectangular">Rectangular</option>
-                <option value="square">Square</option>
-              </select>
-            </div>
-
-            {/* Finish */}
-            <div>
-              <label className="form-label">Finish</label>
-              <select
-                value={filters.finish}
-                onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="form-control"
-              >
-                <option value="">All Finishes</option>
-                <option value="natural oil">Natural Oil</option>
-                <option value="matte lacquer">Matte Lacquer</option>
-                <option value="gloss lacquer">Gloss Lacquer</option>
-              </select>
-            </div>
-
-            {/* Sort */}
-            <div>
-              <label className="form-label">Sort By</label>
-              <select
-                value={filters.sort}
-                onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="form-control"
-              >
-                <option value="name">Name A-Z</option>
-                <option value="name_desc">Name Z-A</option>
-                <option value="price">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-                <option value="featured">Featured First</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Filter Actions */}
-          <div className="filter-actions">
-            <div className="filter-summary">
-              {pagination.total > 0 && (
-                <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} products</>
-              )}
-            </div>
-            <button
-              onClick={clearFilters}
-              className="filter-clear-btn"
-            >
-              Clear All Filters
-            </button>
-          </div>
+          )}
         </div>
       </section>
 
       {/* Products Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductGrid
-            products={products}
-            loading={productsLoading}
-            error={productsError || undefined}
-            onAddToCart={handleAddToCart}
-            addingToCartId={cartLoading ? undefined : undefined}
-            onRetry={refetch}
-          />
-
-          {/* Pagination */}
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={pagination.totalPages}
-            onPageChange={handlePageChange}
-            loading={productsLoading}
-          />
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-oak-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-oak-200 rounded mb-2"></div>
+                    <div className="h-3 bg-oak-200 rounded mb-3 w-2/3"></div>
+                    <div className="h-3 bg-oak-200 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : productsError ? (
+            <div className="text-center py-16">
+              <div className="text-red-600 mb-4">
+                <p className="text-xl font-semibold">Error loading products</p>
+                <p className="text-sm">{productsError}</p>
+              </div>
+              <p className="text-oak-600">Please check that Sanity CMS is running on port 3333</p>
+              <Link
+                href="/sanity-test"
+                className="inline-block mt-4 bg-oak-600 text-white px-6 py-2 rounded-lg hover:bg-oak-700 transition-colors"
+              >
+                Test Connection
+              </Link>
+            </div>
+          ) : products && products.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.map((product: any) => (
+                <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-square bg-oak-50 flex items-center justify-center">
+                    {product.images && product.images.length > 0 ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-oak-400 text-4xl">🪵</div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-oak-800 mb-2">{product.name}</h3>
+                    <p className="text-sm text-oak-600 mb-2">{product.category}</p>
+                    {product.specifications?.dimensions && (
+                      <p className="text-xs text-oak-500 mb-3">
+                        {product.category === 'table' && product.tableShape === 'rectangular' && (
+                          <>L{product.specifications.dimensions.length} × W{product.specifications.dimensions.width} × H{product.specifications.dimensions.height}cm</>
+                        )}
+                        {product.category === 'table' && product.tableShape === 'oval' && (
+                          <>⌀{product.specifications.dimensions.diameter} × D{product.specifications.dimensions.depth} × H{product.specifications.dimensions.height}cm</>
+                        )}
+                        {product.category !== 'table' && (
+                          <>L{product.specifications.dimensions.genericLength} × W{product.specifications.dimensions.genericWidth} × H{product.specifications.dimensions.genericHeight}cm</>
+                        )}
+                      </p>
+                    )}
+                    <Link
+                      href={`/products/${product.id}`}
+                      className="inline-block bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="text-oak-600 mb-4">
+                <div className="text-6xl mb-4">📦</div>
+                <h3 className="text-xl font-semibold mb-2">No products found</h3>
+                <p>Create some products in your Sanity Studio to see them here.</p>
+              </div>
+              <Link
+                href="http://localhost:3333"
+                target="_blank"
+                className="inline-block bg-oak-600 text-white px-6 py-2 rounded-lg hover:bg-oak-700 transition-colors"
+              >
+                Open Sanity Studio
+              </Link>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Categories Section (if no filters applied) */}
-      {!filters.category_id && !filters.q && (
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-textPrimary mb-4">
-                Browse by Category
-              </h2>
-              <p className="text-textSecondary max-w-2xl mx-auto">
-                Explore our furniture collections organized by type and functionality.
-              </p>
-            </div>
-
-            {categoriesLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="bg-oak-100 rounded-lg aspect-video animate-pulse"></div>
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {categories.map((category) => (
-                  <div
-                    key={category.id}
-                    onClick={() => handleFilterChange('category_id', category.id)}
-                    className="cursor-pointer"
-                  >
-                    <CategoryCard category={category} />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
     </div>
   );
 }
