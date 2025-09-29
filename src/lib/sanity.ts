@@ -13,11 +13,6 @@ export const sanityClient = createClient({
   // Security configuration
   perspective: 'published', // Only published content
   stega: false, // Disable live editing for security
-  
-  // Local development configuration
-  ...(process.env.NODE_ENV === 'development' && {
-    url: `http://localhost:3333/v2024-09-26/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
-  })
 })
 
 // Read-only API methods for frontend
