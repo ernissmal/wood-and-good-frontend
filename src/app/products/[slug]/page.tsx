@@ -10,10 +10,8 @@ import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star,
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const slug = params.slug as string;
-  const [product, setProduct] = useState<Product | null>(null);
-  const [category, setCategory] = useState<Category | null>(null);
-  const [productContent, setProductContent] = useState<ProductContent | null>(null);
+  const productId = params.slug as string; // Using slug as product ID for now
+  const [product, setProduct] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -27,52 +25,27 @@ export default function ProductDetailPage() {
         setLoading(true);
         setError(null);
         
-        // Fetch product by slug
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333'}/api/products?slug=${slug}`);
+        // Fetch product from Sanity by ID
+        const productData = await sanityApi.getProductById(productId);
         
-        if (!response.ok) {
+        if (!productData) {
           throw new Error('Product not found');
         }
         
-        const data = await response.json() as { products: Product[] };
-        
-        if (!data.products || data.products.length === 0) {
-          throw new Error('Product not found');
-        }
-        
-        const productData = data.products[0];
         setProduct(productData);
         
-        // Fetch category information
-        if (productData.category_id) {
-          const categoryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333'}/api/categories/${productData.category_id}`);
-          if (categoryResponse.ok) {
-            const categoryData = await categoryResponse.json() as { category: Category };
-            setCategory(categoryData.category);
-          }
-        }
-        
-        // Fetch additional content from Sanity CMS
-        try {
-          const sanityContent = await fetchSanityData(queries.productContentById(productData.id));
-          if (sanityContent) {
-            setProductContent(sanityContent);
-          }
-        } catch (sanityError) {
-          console.log('No additional Sanity content found for product', productData.id);
-        }
-        
       } catch (err) {
+        console.error('Error fetching product:', err);
         setError(err instanceof Error ? err.message : 'Failed to load product');
       } finally {
         setLoading(false);
       }
     };
 
-    if (slug) {
+    if (productId) {
       fetchProduct();
     }
-  }, [slug]);
+  }, [productId]);
 
   const handleAddToCart = async () => {
     if (!product) return;
