@@ -169,30 +169,36 @@ export default function ProductDetailPage() {
 
             {/* Product Information */}
             <div>
-              {product.featured && (
+              {product?.featured && (
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800 mb-4">
                   <Star className="text-amber-600 mr-1" sx={{ fontSize: 16 }} />
                   Featured Product
                 </div>
               )}
               
-              <h1 className="text-4xl font-bold text-oak-800 mb-4">{product.name}</h1>
+              <h1 className="text-4xl font-bold text-oak-800 mb-4">{product?.name}</h1>
               
-              {category && (
+              {product?.category && (
                 <Link 
-                  href={`/categories/${category.seo_slug}`}
+                  href={`/categories/${product.category}`}
                   className="text-oak-600 hover:text-oak-800 font-medium mb-4 inline-block"
                 >
-                  {category.name} →
+                  {product.category} →
                 </Link>
               )}
               
               <div className="text-3xl font-bold text-oak-800 mb-6">
-                {formatPrice(product.price)}
+                Price on Request
               </div>
 
               <div className="prose prose-oak mb-8">
-                <p className="text-lg text-oak-700">{product.description}</p>
+                {product?.detailedDescription && (
+                  <div className="text-lg text-oak-700 space-y-4">
+                    {product.detailedDescription.map((block: any, index: number) => (
+                      <p key={index}>{block.children?.[0]?.text || ''}</p>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Product Specifications */}
