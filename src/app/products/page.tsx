@@ -1,24 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useProducts, useCategories, useCart } from '../../hooks/api';
-import { ProductGrid, CategoryCard, LoadingSpinner, ErrorMessage, Pagination } from '../../components/ui';
+import { useSanityProducts, useSanityCategories } from '../../hooks/sanity';
+import { useCart } from '../../hooks/api';
+import { ProductGrid, CategoryCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
 
 export default function ProductsPage() {
-  const [filters, setFilters] = useState({
-    page: 1,
-    limit: 12,
-    category_id: undefined as number | undefined,
-    q: '',
-    shape: '',
-    finish: '',
-    min_price: undefined as number | undefined,
-    max_price: undefined as number | undefined,
-    sort: 'name'
-  });
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
-  const { products, pagination, loading: productsLoading, error: productsError, refetch } = useProducts(filters);
-  const { categories, loading: categoriesLoading } = useCategories();
+  const { products, loading: productsLoading, error: productsError, refetch } = useSanityProducts(selectedCategory);
+  const { categories, loading: categoriesLoading } = useSanityCategories();
   const { addToCart, loading: cartLoading } = useCart();
 
   const handleAddToCart = async (productId: number) => {
