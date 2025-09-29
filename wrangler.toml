@@ -16,7 +16,7 @@ NEXT_PUBLIC_COMPANY_PHONE = "+371-XXXXXXXX"
 NEXT_PUBLIC_COMPANY_ADDRESS = "Your Company Address"
 NEXT_PUBLIC_ENABLE_CART = "true"
 NEXT_PUBLIC_ENABLE_BLOG = "true"
-NEXT_PUBLIC_CMS_URL = "https://wood-and-good-cms.sanity.studio"
+NEXT_PUBLIC_CMS_URL = "https://twg.sanity.studio"
 NEXT_PUBLIC_DATABASE_BACKUP_URL = "https://wood-and-good-database.smalikisernests.workers.dev"
 
 # Preview environment variables
@@ -24,5 +24,5 @@ NEXT_PUBLIC_DATABASE_BACKUP_URL = "https://wood-and-good-database.smalikisernest
 NEXT_PUBLIC_SANITY_PROJECT_ID = "hrcndigj"
 NEXT_PUBLIC_SANITY_DATASET = "production"
 NEXT_PUBLIC_SITE_URL = "https://wood-and-good-frontend.pages.dev"
-NEXT_PUBLIC_CMS_URL = "http://localhost:3333"
+NEXT_PUBLIC_CMS_URL = "https://twg.sanity.studio"
 NEXT_PUBLIC_DATABASE_BACKUP_URL = "http://localhost:3333"
