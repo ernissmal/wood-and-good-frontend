@@ -104,6 +104,12 @@ export default function ProductsPage() {
                   <div className="p-4">
                     <h3 className="text-lg font-semibold text-oak-800 mb-2">{product.name}</h3>
                     <p className="text-sm text-oak-600 mb-2">{product.category}</p>
+                    
+                    {/* Price */}
+                    <div className="text-xl font-bold text-oak-800 mb-2">
+                      {product.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
+                    </div>
+                    
                     {product.specifications?.dimensions && (
                       <p className="text-xs text-oak-500 mb-3">
                         {product.category === 'table' && product.tableShape === 'rectangular' && (
@@ -117,12 +123,44 @@ export default function ProductsPage() {
                         )}
                       </p>
                     )}
-                    <Link
-                      href={`/products/${product.id}`}
-                      className="inline-block bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm"
-                    >
-                      View Details
-                    </Link>
+                    
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/products/${product.id}`}
+                        className="flex-1 text-center bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm"
+                      >
+                        View Details
+                      </Link>
+                      {product.price && (
+                        <button
+                          onClick={() => {
+                            // Quick add to cart from products page
+                            const cart = JSON.parse(localStorage.getItem('wood_good_cart') || '[]');
+                            const existingItem = cart.find((item: any) => item.id === product.id);
+                            
+                            if (existingItem) {
+                              existingItem.quantity += 1;
+                            } else {
+                              cart.push({
+                                id: product.id,
+                                name: product.name,
+                                price: product.price,
+                                quantity: 1,
+                                image: product.images?.[0] || null,
+                                category: product.category
+                              });
+                            }
+                            
+                            localStorage.setItem('wood_good_cart', JSON.stringify(cart));
+                            alert(`Added ${product.name} to cart!`);
+                          }}
+                          className="bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                          title="Quick add to cart"
+                        >
+                          🛒
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
