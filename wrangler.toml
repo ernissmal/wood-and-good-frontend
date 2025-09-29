@@ -1,0 +1,39 @@
+# Generated from #file:.env.example
+
+name = "wood-and-good-frontend"
+type = "javascript" # Adjust based on your project type
+
+# Cloudflare account configuration – update these with your account details
+account_id = "your-account-id"
+workers_dev = true
+route = ""
+zone_id = ""
+
+[build]
+command = "npm run build"
+cwd = "."
+
+# Production environment variables
+[vars]
+NEXT_PUBLIC_SANITY_PROJECT_ID = "hrcndigj"
+NEXT_PUBLIC_SANITY_DATASET = "production"
+NEXT_PUBLIC_SITE_URL = "https://wood-and-good.lv"
+NEXT_PUBLIC_SITE_NAME = "Wood & Good"
+NEXT_PUBLIC_COMPANY_EMAIL = "info@wood-and-good.lv"
+NEXT_PUBLIC_COMPANY_PHONE = "+371-XXXXXXXX"
+NEXT_PUBLIC_COMPANY_ADDRESS = "Your Company Address"
+NEXT_PUBLIC_ENABLE_CART = "true"
+NEXT_PUBLIC_ENABLE_BLOG = "true"
+NEXT_PUBLIC_CMS_URL = "https://wood-and-good-cms.sanity.studio"
+NEXT_PUBLIC_DATABASE_BACKUP_URL = "https://wood-and-good-database.smalikisernests.workers.dev"
+
+# Development environment
+[env.development]
+name = "wood-and-good-frontend-dev"
+
+[env.development.vars]
+NEXT_PUBLIC_SANITY_PROJECT_ID = "hrcndigj"
+NEXT_PUBLIC_SANITY_DATASET = "production"
+NEXT_PUBLIC_SITE_URL = "http://localhost:3001"
+NEXT_PUBLIC_CMS_URL = "http://localhost:3333"
+NEXT_PUBLIC_DATABASE_BACKUP_URL = "http://localhost:3333"
