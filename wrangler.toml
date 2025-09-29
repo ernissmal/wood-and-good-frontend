@@ -3,7 +3,7 @@
 name = "wood-and-good-frontend"
 
 # Pages configuration
-pages_build_output_dir = ".next"
+pages_build_output_dir = "out"
 
 # Production environment variables
 [env.production.vars]
