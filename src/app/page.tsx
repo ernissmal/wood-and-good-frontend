@@ -1,6 +1,7 @@
 'use client';
 
-import { useCategories, useFeaturedProducts, useFeaturedBlogPosts, useCart } from '../hooks/api';
+import { useSanityCategories, useSanityFeaturedProducts, useSanityFeaturedBlogPosts } from '../hooks/sanity';
+import { useCart } from '../hooks/api';
 import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from '../components/ui';
 import Link from 'next/link';
 import HandymanIcon from '@mui/icons-material/Handyman';
@@ -12,9 +13,9 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import InfoIcon from '@mui/icons-material/Info';
 
 export default function Home() {
-  const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
-  const { products: featuredProducts, loading: productsLoading, error: productsError, refetch: refetchProducts } = useFeaturedProducts();
-  const { posts: featuredPosts, loading: postsLoading, error: postsError } = useFeaturedBlogPosts();
+  const { categories, loading: categoriesLoading, error: categoriesError } = useSanityCategories();
+  const { products: featuredProducts, loading: productsLoading, error: productsError, refetch: refetchProducts } = useSanityFeaturedProducts();
+  const { posts: featuredPosts, loading: postsLoading, error: postsError } = useSanityFeaturedBlogPosts();
   const { addToCart, loading: cartLoading } = useCart();
 
   const handleAddToCart = async (productId: number) => {
