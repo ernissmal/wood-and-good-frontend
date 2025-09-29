@@ -8,6 +8,9 @@ import { useCart } from '../../../hooks/api';
 import { sanityApi } from '../../../lib/sanity';
 import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
+// Configure for Edge Runtime
+export const runtime = 'edge';
+
 export default function ProductDetailPage() {
   const params = useParams();
   const productId = params.slug as string; // Using slug as product ID for now
