@@ -51,11 +51,32 @@ export default function ProductDetailPage() {
     if (!product) return;
     
     try {
-      // For now, we'll use a mock cart since we don't have pricing in Sanity yet
-      console.log('Adding to cart:', product.name, selectedQuantity);
-      // await addToCart(product.id, selectedQuantity);
+      // Add product to local storage cart for now
+      const cart = JSON.parse(localStorage.getItem('wood_good_cart') || '[]');
+      const existingItem = cart.find((item: any) => item.id === product.id);
+      
+      if (existingItem) {
+        existingItem.quantity += selectedQuantity;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: selectedQuantity,
+          image: product.images?.[0] || null,
+          category: product.category
+        });
+      }
+      
+      localStorage.setItem('wood_good_cart', JSON.stringify(cart));
+      
+      // Show success feedback (you can replace with a toast notification later)
+      alert(`Added ${selectedQuantity} × ${product.name} to cart!`);
+      
+      console.log('Added to cart:', product.name, selectedQuantity, `€${product.price}`);
     } catch (err) {
       console.error('Failed to add to cart:', err);
+      alert('Failed to add to cart. Please try again.');
     }
   };
 
@@ -188,7 +209,7 @@ export default function ProductDetailPage() {
               )}
               
               <div className="text-3xl font-bold text-oak-800 mb-6">
-                Price on Request
+                {product?.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
               </div>
 
               <div className="prose prose-oak mb-8">
@@ -286,10 +307,14 @@ export default function ProductDetailPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={handleAddToCart}
-                    disabled={cartLoading}
-                    className="flex-1 py-3 px-6 rounded-lg font-semibold transition-colors bg-oak-600 hover:bg-oak-700 text-white"
+                    disabled={cartLoading || !product?.price}
+                    className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
+                      product?.price 
+                        ? 'bg-oak-600 hover:bg-oak-700 text-white' 
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
                   >
-                    {cartLoading ? 'Adding...' : 'Request Quote'}
+                    {cartLoading ? 'Adding...' : product?.price ? 'Add to Cart' : 'Price on Request'}
                   </button>
                   
                   <Link
