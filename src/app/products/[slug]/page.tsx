@@ -51,8 +51,9 @@ export default function ProductDetailPage() {
     if (!product) return;
     
     try {
-      await addToCart(product.id, selectedQuantity);
-      // Could add a success notification here
+      // For now, we'll use a mock cart since we don't have pricing in Sanity yet
+      console.log('Adding to cart:', product.name, selectedQuantity);
+      // await addToCart(product.id, selectedQuantity);
     } catch (err) {
       console.error('Failed to add to cart:', err);
     }
@@ -65,10 +66,7 @@ export default function ProductDetailPage() {
     }).format(price);
   };
 
-  const productImages = [
-    product?.image_url || '/images/placeholder-product.jpg',
-    ...(productContent?.additionalImages?.map(img => getSanityImageUrl(img, 800, 800)) || []).filter(Boolean) as string[]
-  ];
+  const productImages = product?.images || [];
 
   if (loading) {
     return (
@@ -107,19 +105,19 @@ export default function ProductDetailPage() {
             <Link href="/" className="text-oak-600 hover:text-oak-800">Home</Link>
             <span className="mx-2 text-gray-400">/</span>
             <Link href="/products" className="text-oak-600 hover:text-oak-800">Products</Link>
-            {category && (
+            {product?.category && (
               <>
                 <span className="mx-2 text-gray-400">/</span>
                 <Link 
-                  href={`/categories/${category.seo_slug}`} 
+                  href={`/categories/${product.category}`} 
                   className="text-oak-600 hover:text-oak-800"
                 >
-                  {category.name}
+                  {product.category}
                 </Link>
               </>
             )}
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">{product.name}</span>
+            <span className="text-gray-900">{product?.name}</span>
           </nav>
         </div>
       </section>
