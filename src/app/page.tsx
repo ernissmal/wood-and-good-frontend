@@ -29,7 +29,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
             <div className="mb-8">
-              <div className="inline-flex items-center space-x-2 bg-oak-600/90 backdrop-blur-sm rounded-full px-4 py-2 text-white text-sm font-medium mb-6">
+              <div className="inline-flex items-center space-x-2 bg-oak-600/90 backdrop-blur-sm rounded-full px-4 py-2 text-oak400 text-sm font-medium mb-6">
                 <NatureIcon className="w-4 h-4" />
                 <span>Sustainably Crafted Since 1970</span>
               </div>
@@ -113,7 +113,7 @@ export default function Home() {
       <section className="py-16 sm:py-20 lg:py-24 bg-oak-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
-            <div className="inline-flex items-center space-x-2 bg-oak-600 rounded-full px-4 py-2 text-white text-sm font-medium mb-4">
+            <div className="inline-flex items-center space-x-2 bg-oak-600 rounded-full px-4 py-2 text-oak400 text-sm font-medium mb-4">
               <StarIcon className="w-4 h-4" />
               <span>Handpicked by Our Masters</span>
             </div>
@@ -157,7 +157,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
               <div className="mb-6">
-                <div className="inline-flex items-center space-x-2 bg-forest-600 rounded-full px-4 py-2 text-white text-sm font-medium mb-4">
+                <div className="inline-flex items-center space-x-2 bg-forest-600 rounded-full px-4 py-2 text-oak400 text-sm font-medium mb-4">
                   <NatureIcon className="w-4 h-4" />
                   <span>Three Generations of Excellence</span>
                 </div>
@@ -197,7 +197,7 @@ export default function Home() {
             
             <div className="relative">
               <div className="wood-texture h-96 lg:h-[28rem] bg-oak-gradient rounded-2xl flex items-center justify-center shadow-warm-lg overflow-hidden">
-                <div className="text-center text-white">
+                <div className="text-center text-oak-50 px-6">
                   <HandymanIcon sx={{ fontSize: 80 }} className="mb-4 opacity-80" />
                   <p className="text-lg font-medium opacity-90">Master Craftsman at Work</p>
                   <p className="text-sm opacity-70">Traditional techniques, modern precision</p>
@@ -205,12 +205,12 @@ export default function Home() {
               </div>
               
               {/* Floating feature badges */}
-              <div className="absolute -top-4 -right-4 bg-forest-500 text-white p-4 rounded-xl shadow-lg">
+              <div className="absolute -top-4 -right-4 bg-forest-500 text-oak-50 p-4 rounded-xl shadow-lg">
                 <NatureIcon className="w-6 h-6 mb-1" />
                 <div className="text-xs font-medium">Eco-Friendly</div>
               </div>
               
-              <div className="absolute -bottom-4 -left-4 bg-oak-600 text-white p-4 rounded-xl shadow-lg">
+              <div className="absolute -bottom-4 -left-4 bg-oak-600 text-oak-50 p-4 rounded-xl shadow-lg">
                 <HandymanIcon className="w-6 h-6 mb-1" />
                 <div className="text-xs font-medium">Handcrafted</div>
               </div>
@@ -284,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Newsletter Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-earth-800 text-white relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-24 bg-earth-800 text-oak-50 relative overflow-hidden">
         <div className="absolute inset-0 wood-texture opacity-10"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <div className="mb-8">
