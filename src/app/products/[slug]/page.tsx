@@ -1,62 +1,120 @@
-// Generate static params for static export
+'use client';// Generate static params for static export
+
 export async function generateStaticParams() {
-  // Return common product slugs for static generation
-  return [
-    { slug: 'oak-dining-table' },
+
+import { useState, useEffect } from 'react';  // Return common product slugs for static generation
+
+import { useParams } from 'next/navigation';  return [
+
+import Link from 'next/link';    { slug: 'oak-dining-table' },
+
     { slug: 'oak-coffee-table' },
-    { slug: 'oak-table-legs' },
-    { slug: 'oak-tabletop' },
+
+// Generate static params for static export    { slug: 'oak-table-legs' },
+
+export async function generateStaticParams() {    { slug: 'oak-tabletop' },
+
+  return [    { slug: 'rustic-dining-table' },
+
+    { slug: 'oak-dining-table' },    { slug: 'modern-table-legs' },
+
+    { slug: 'oak-coffee-table' },    { slug: 'live-edge-tabletop' },
+
+    { slug: 'oak-table-legs' },  ];
+
+    { slug: 'oak-tabletop' },}
+
     { slug: 'rustic-dining-table' },
-    { slug: 'modern-table-legs' },
-    { slug: 'live-edge-tabletop' },
-  ];
-}
 
-// Client component for dynamic functionality
-'use client';
+  ];// Client component for dynamic functionality
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
+}'use client';
+
+
+
+export default function ProductDetailPage() {import { useState, useEffect } from 'react';
+
+  const params = useParams();import { useParams } from 'next/navigation';
+
+  const productSlug = params.slug as string;import Link from 'next/link';
+
 import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
-import { useCart } from '../../../hooks/api';
-import { sanityApi } from '../../../lib/sanity';
-import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
-function ProductDetailClient() {
-  const params = useParams();
-  const productId = params.slug as string; // Using slug as product ID for now
-  const [product, setProduct] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(0);
-  
-  const { addToCart, loading: cartLoading } = useCart();
+  return (import { useCart } from '../../../hooks/api';
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        // Fetch product from Sanity by ID
-        const productData = await sanityApi.getProductById(productId);
-        
-        if (!productData) {
-          throw new Error('Product not found');
-        }
-        
-        setProduct(productData);
-        
-      } catch (err) {
-        console.error('Error fetching product:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load product');
-      } finally {
-        setLoading(false);
-      }
-    };
+    <div className="min-h-screen bg-gray-50">import { sanityApi } from '../../../lib/sanity';
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
+
+        <div className="bg-white rounded-lg shadow-md p-8">
+
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">function ProductDetailClient() {
+
+            Product: {productSlug}  const params = useParams();
+
+          </h1>  const productId = params.slug as string; // Using slug as product ID for now
+
+          <p className="text-gray-600 mb-6">  const [product, setProduct] = useState<any | null>(null);
+
+            This is a placeholder for the product detail page. The product slug is: {productSlug}  const [loading, setLoading] = useState(true);
+
+          </p>  const [error, setError] = useState<string | null>(null);
+
+          <div className="space-y-4">  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+            <p className="text-gray-700">  const [selectedImage, setSelectedImage] = useState(0);
+
+              <strong>Note:</strong> This page will be dynamically populated with product data from Sanity CMS.  
+
+            </p>  const { addToCart, loading: cartLoading } = useCart();
+
+            <p className="text-gray-700">
+
+              Features to be implemented:  useEffect(() => {
+
+            </p>    const fetchProduct = async () => {
+
+            <ul className="list-disc list-inside text-gray-700 space-y-1">      try {
+
+              <li>Product images gallery</li>        setLoading(true);
+
+              <li>Product specifications</li>        setError(null);
+
+              <li>Pricing information</li>        
+
+              <li>Add to cart functionality</li>        // Fetch product from Sanity by ID
+
+              <li>Product reviews</li>        const productData = await sanityApi.getProductById(productId);
+
+            </ul>        
+
+          </div>        if (!productData) {
+
+          <div className="mt-8">          throw new Error('Product not found');
+
+            <Link         }
+
+              href="/products"        
+
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"        setProduct(productData);
+
+            >        
+
+              ← Back to Products      } catch (err) {
+
+            </Link>        console.error('Error fetching product:', err);
+
+          </div>        setError(err instanceof Error ? err.message : 'Failed to load product');
+
+        </div>      } finally {
+
+      </div>        setLoading(false);
+
+    </div>      }
+
+  );    };
+
+}
     if (productId) {
       fetchProduct();
     }
