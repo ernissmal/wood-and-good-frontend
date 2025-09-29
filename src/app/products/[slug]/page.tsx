@@ -3,10 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Product, Category } from '../../../types';
 import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import { useCart } from '../../../hooks/api';
-import { fetchSanityData, queries, getSanityImageUrl, ProductContent } from '../../../lib/sanity';
+import { sanityApi } from '../../../lib/sanity';
 import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
 export default function ProductDetailPage() {
@@ -29,7 +28,7 @@ export default function ProductDetailPage() {
         setError(null);
         
         // Fetch product by slug
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/api/products?slug=${slug}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333'}/api/products?slug=${slug}`);
         
         if (!response.ok) {
           throw new Error('Product not found');
@@ -46,7 +45,7 @@ export default function ProductDetailPage() {
         
         // Fetch category information
         if (productData.category_id) {
-          const categoryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/api/categories/${productData.category_id}`);
+          const categoryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333'}/api/categories/${productData.category_id}`);
           if (categoryResponse.ok) {
             const categoryData = await categoryResponse.json() as { category: Category };
             setCategory(categoryData.category);
