@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
@@ -8,10 +6,22 @@ import { useCart } from '../../../hooks/api';
 import { sanityApi } from '../../../lib/sanity';
 import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
-// Configure for Edge Runtime
-export const runtime = 'edge';
+// Generate static params for static export
+export async function generateStaticParams() {
+  // Return common product slugs for static generation
+  return [
+    { slug: 'oak-dining-table' },
+    { slug: 'oak-coffee-table' },
+    { slug: 'oak-table-legs' },
+    { slug: 'oak-tabletop' },
+    { slug: 'rustic-dining-table' },
+    { slug: 'modern-table-legs' },
+    { slug: 'live-edge-tabletop' },
+  ];
+}
 
-export default function ProductDetailPage() {
+// Client component for dynamic functionality
+function ProductDetailClient() {
   const params = useParams();
   const productId = params.slug as string; // Using slug as product ID for now
   const [product, setProduct] = useState<any | null>(null);
@@ -415,4 +425,9 @@ export default function ProductDetailPage() {
       </section>
     </div>
   );
+}
+
+// Main component that uses client component
+export default function ProductDetailPage() {
+  return <ProductDetailClient />;
 }
