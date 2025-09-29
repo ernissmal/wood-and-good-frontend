@@ -3,7 +3,7 @@
 name = "wood-and-good-frontend"
 
 # Pages configuration
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = "dist"
 
 # Production environment variables
 [env.production.vars]
