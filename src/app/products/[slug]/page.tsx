@@ -130,7 +130,7 @@ export default function ProductDetailPage() {
             {/* Product Images */}
             <div>
               <div className="aspect-square bg-white rounded-lg shadow-md overflow-hidden mb-4">
-                {product.image_url ? (
+                {productImages && productImages.length > 0 ? (
                   <img
                     src={productImages[selectedImage]}
                     alt={product.name}
@@ -146,9 +146,9 @@ export default function ProductDetailPage() {
               </div>
               
               {/* Thumbnail Gallery (when multiple images available) */}
-              {productImages.length > 1 && (
+              {productImages && productImages.length > 1 && (
                 <div className="flex space-x-2">
-                  {productImages.map((image, index) => (
+                  {productImages.map((image: string, index: number) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
