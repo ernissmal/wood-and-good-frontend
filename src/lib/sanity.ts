@@ -61,6 +61,7 @@ export const sanityQueries = {
       name,
       category,
       tableShape,
+      price,
       detailedDescription,
       careInstructions,
       specifications {
@@ -86,6 +87,7 @@ export const sanityQueries = {
       name,
       category,
       tableShape,
+      price,
       detailedDescription,
       careInstructions,
       specifications {
@@ -111,6 +113,7 @@ export const sanityQueries = {
       name,
       category,
       tableShape,
+      price,
       detailedDescription,
       careInstructions,
       specifications {
@@ -136,6 +139,7 @@ export const sanityQueries = {
       name,
       category,
       tableShape,
+      price,
       detailedDescription[0..1],
       specifications {
         weight,
