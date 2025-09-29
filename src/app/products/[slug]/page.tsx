@@ -205,40 +205,62 @@ export default function ProductDetailPage() {
               <div className="bg-white rounded-lg p-6 mb-8 shadow-sm">
                 <h3 className="text-xl font-bold text-oak-800 mb-4">Product Specifications</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  {product.dimensions && (
+                  {product?.specifications?.dimensions && (
                     <div>
                       <span className="font-semibold text-oak-800">Dimensions:</span>
-                      <div className="text-oak-600">{product.dimensions}</div>
+                      <div className="text-oak-600">
+                        {product.category === 'table' && product.tableShape === 'rectangular' && (
+                          <>
+                            {product.specifications.dimensions.length} × {product.specifications.dimensions.width} × {product.specifications.dimensions.height} cm
+                          </>
+                        )}
+                        {product.category === 'table' && product.tableShape === 'oval' && (
+                          <>
+                            ⌀{product.specifications.dimensions.diameter} × {product.specifications.dimensions.depth} × {product.specifications.dimensions.height} cm
+                          </>
+                        )}
+                        {product.category !== 'table' && (
+                          <>
+                            {product.specifications.dimensions.genericLength} × {product.specifications.dimensions.genericWidth} × {product.specifications.dimensions.genericHeight} cm
+                          </>
+                        )}
+                      </div>
                     </div>
                   )}
-                  {product.wood_type && (
-                    <div>
-                      <span className="font-semibold text-oak-800">Wood Type:</span>
-                      <div className="text-oak-600">{product.wood_type}</div>
-                    </div>
-                  )}
-                  {product.finish && (
+                  {product?.specifications?.finish && (
                     <div>
                       <span className="font-semibold text-oak-800">Finish:</span>
-                      <div className="text-oak-600">{product.finish}</div>
+                      <div className="text-oak-600">{product.specifications.finish}</div>
                     </div>
                   )}
-                  {product.shape && (
+                  {product?.tableShape && (
                     <div>
                       <span className="font-semibold text-oak-800">Shape:</span>
-                      <div className="text-oak-600">{product.shape}</div>
+                      <div className="text-oak-600">{product.tableShape}</div>
                     </div>
                   )}
-                  {product.weight_kg && (
+                  {product?.specifications?.legShape && (
+                    <div>
+                      <span className="font-semibold text-oak-800">Leg Shape:</span>
+                      <div className="text-oak-600">{product.specifications.legShape}</div>
+                    </div>
+                  )}
+                  {product?.specifications?.weight && (
                     <div>
                       <span className="font-semibold text-oak-800">Weight:</span>
-                      <div className="text-oak-600">{product.weight_kg} kg</div>
+                      <div className="text-oak-600">{product.specifications.weight} kg</div>
+                    </div>
+                  )}
+                  {product?.specifications?.color && (
+                    <div>
+                      <span className="font-semibold text-oak-800">Color:</span>
+                      <div className="text-oak-600">{product.specifications.color}</div>
                     </div>
                   )}
                   <div>
                     <span className="font-semibold text-oak-800">Stock:</span>
-                    <div className={`${product.stock > 5 ? 'text-green-600' : product.stock > 0 ? 'text-amber-600' : 'text-red-600'}`}>
-                      {product.stock > 5 ? 'In Stock' : product.stock > 0 ? `Only ${product.stock} left` : 'Out of Stock'}
+                    <div className="text-green-600">
+                      {product?.inStock ? 'Available' : 'Made to Order'}
                     </div>
                   </div>
                 </div>
@@ -252,9 +274,8 @@ export default function ProductDetailPage() {
                     value={selectedQuantity}
                     onChange={(e) => setSelectedQuantity(parseInt(e.target.value))}
                     className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
-                    disabled={product.stock === 0}
                   >
-                    {[...Array(Math.min(product.stock, 10))].map((_, i) => (
+                    {[...Array(10)].map((_, i) => (
                       <option key={i + 1} value={i + 1}>
                         {i + 1}
                       </option>
@@ -265,21 +286,17 @@ export default function ProductDetailPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={handleAddToCart}
-                    disabled={product.stock === 0 || cartLoading}
-                    className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
-                      product.stock === 0
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-oak-600 hover:bg-oak-700 text-white'
-                    }`}
+                    disabled={cartLoading}
+                    className="flex-1 py-3 px-6 rounded-lg font-semibold transition-colors bg-oak-600 hover:bg-oak-700 text-white"
                   >
-                    {cartLoading ? 'Adding...' : product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                    {cartLoading ? 'Adding...' : 'Request Quote'}
                   </button>
                   
                   <Link
                     href="/contact"
                     className="flex-1 py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-oak-600 text-oak-600 hover:bg-oak-600 hover:text-white transition-colors text-center"
                   >
-                    Custom Quote
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -301,11 +318,19 @@ export default function ProductDetailPage() {
                   Care Instructions
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
-                  <li>• Dust regularly with a soft, lint-free cloth</li>
-                  <li>• Clean spills immediately to prevent staining</li>
-                  <li>• Use coasters and placemats to protect surface</li>
-                  <li>• Reapply oil finish annually for natural oil finishes</li>
-                  <li>• Avoid harsh chemicals and abrasive cleaners</li>
+                  {product?.careInstructions && product.careInstructions.length > 0 ? (
+                    product.careInstructions.map((instruction: string, index: number) => (
+                      <li key={index}>• {instruction}</li>
+                    ))
+                  ) : (
+                    <>
+                      <li>• Dust regularly with a soft, lint-free cloth</li>
+                      <li>• Clean spills immediately to prevent staining</li>
+                      <li>• Use coasters and placemats to protect surface</li>
+                      <li>• Reapply oil finish annually for natural oil finishes</li>
+                      <li>• Avoid harsh chemicals and abrasive cleaners</li>
+                    </>
+                  )}
                 </ul>
               </div>
 
@@ -352,10 +377,10 @@ export default function ProductDetailPage() {
           <div className="text-center text-oak-600">
             <p>Related products will be displayed here based on category and style.</p>
             <Link 
-              href={category ? `/categories/${category.seo_slug}` : '/products'}
+              href={product?.category ? `/categories/${product.category}` : '/products'}
               className="inline-block mt-4 text-oak-600 hover:text-oak-800 font-medium"
             >
-              Browse {category ? category.name : 'All Products'} →
+              Browse {product?.category ? product.category : 'All Products'} →
             </Link>
           </div>
         </div>
