@@ -236,18 +236,55 @@ export default function Home() {
                 Create some featured products in your Sanity Studio to showcase them here.
               </p>
             </div>
-          )
+          )}
 
           {featuredProducts && featuredProducts.length > 0 && (
-            <div className="text-center mt-12">
-              <Link
-                href="/products"
-                className="btn-primary text-lg px-8 py-4"
-              >
-                <ShoppingBagIcon className="w-5 h-5" />
-                <span>View All Products</span>
-                <ArrowForwardIcon className="w-4 h-4" />
-              </Link>
+            <div className="text-center mt-12 lg:mt-16">
+              <div className="bg-white rounded-2xl p-8 shadow-warm-lg border border-oak-100 max-w-2xl mx-auto">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-oak-800 mb-3">
+                    Discover Our Complete Collection
+                  </h3>
+                  <p className="text-oak-600 leading-relaxed">
+                    Explore our full range of handcrafted oak furniture. From dining sets to 
+                    bedroom essentials, find the perfect piece for every room in your home.
+                  </p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Link
+                    href="/products"
+                    className="btn-primary text-lg px-8 py-4 group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                  >
+                    <ShoppingBagIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span>View All Products</span>
+                    <ArrowForwardIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  
+                  <Link
+                    href="/categories"
+                    className="btn-secondary text-lg px-8 py-4 group"
+                  >
+                    <span>Browse Categories</span>
+                    <ArrowForwardIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+                
+                <div className="mt-6 flex items-center justify-center space-x-6 text-sm text-oak-600">
+                  <div className="flex items-center space-x-2">
+                    <LocalShippingIcon className="w-4 h-4 text-green-600" />
+                    <span>Free Delivery</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <HandymanIcon className="w-4 h-4 text-oak-600" />
+                    <span>Handcrafted</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <NatureIcon className="w-4 h-4 text-forest-600" />
+                    <span>Sustainable</span>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
