@@ -18,8 +18,30 @@ export default function Home() {
   const { posts: featuredPosts, loading: postsLoading, error: postsError } = useSanityFeaturedBlogPosts();
   const { addToCart, loading: cartLoading } = useCart();
 
-  const handleAddToCart = async (productId: number) => {
-    await addToCart(productId, 1);
+  const handleAddToCart = async (productId: string) => {
+    // Simple localStorage cart for now
+    const cart = JSON.parse(localStorage.getItem('wood_good_cart') || '[]');
+    const product = featuredProducts.find((p: any) => p.id === productId);
+    
+    if (product) {
+      const existingItem = cart.find((item: any) => item.id === productId);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          image: product.images?.[0] || null,
+          category: product.category
+        });
+      }
+      
+      localStorage.setItem('wood_good_cart', JSON.stringify(cart));
+      alert(`Added ${product.name} to cart!`);
+    }
   };
   
   return (
@@ -128,16 +150,95 @@ export default function Home() {
             </p>
           </div>
           
-          <ProductGrid
-            products={featuredProducts}
-            loading={productsLoading}
-            error={productsError || undefined}
-            onAddToCart={handleAddToCart}
-            addingToCartId={cartLoading ? undefined : undefined}
-            onRetry={refetchProducts}
-          />
-          
-          {featuredProducts.length > 0 && (
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-oak-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-oak-200 rounded mb-2"></div>
+                    <div className="h-6 bg-oak-200 rounded mb-3 w-20"></div>
+                    <div className="h-3 bg-oak-200 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : productsError ? (
+            <ErrorMessage message={productsError} onRetry={refetchProducts} />
+          ) : featuredProducts && featuredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {featuredProducts.map((product: any) => (
+                <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
+                  <Link href={`/products/${product.id}`}>
+                    <div className="aspect-square bg-oak-50 relative overflow-hidden">
+                      {product.images && product.images.length > 0 ? (
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-oak-100 text-oak-600">
+                          <span className="text-6xl">🪵</span>
+                        </div>
+                      )}
+                      {product.featured && (
+                        <div className="absolute top-3 left-3 bg-oak-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
+                          <StarIcon className="w-4 h-4" />
+                          <span>Featured</span>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                  
+                  <div className="p-4">
+                    <Link href={`/products/${product.id}`}>
+                      <h3 className="font-semibold text-oak-800 mb-2 hover:text-oak-600 transition-colors text-lg">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    
+                    <p className="text-sm text-oak-600 mb-2">{product.category}</p>
+                    
+                    <div className="text-xl font-bold text-oak-800 mb-4">
+                      {product.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/products/${product.id}`}
+                        className="flex-1 text-center bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm"
+                      >
+                        View Details
+                      </Link>
+                      {product.price && (
+                        <button
+                          onClick={() => handleAddToCart(product.id)}
+                          disabled={cartLoading}
+                          className="bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm disabled:opacity-50"
+                          title="Add to cart"
+                        >
+                          🛒
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">📦</span>
+              </div>
+              <h3 className="text-xl font-semibold text-oak-800 mb-2">No featured products yet</h3>
+              <p className="text-oak-600 max-w-md mx-auto">
+                Create some featured products in your Sanity Studio to showcase them here.
+              </p>
+            </div>
+          )
+
+          {featuredProducts && featuredProducts.length > 0 && (
             <div className="text-center mt-12">
               <Link
                 href="/products"
