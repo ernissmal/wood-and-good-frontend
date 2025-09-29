@@ -3,17 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Product, Category } from '../../../types';
 import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import { useCart } from '../../../hooks/api';
-import { fetchSanityData, queries, getSanityImageUrl, ProductContent } from '../../../lib/sanity';
+import { sanityApi } from '../../../lib/sanity';
+import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const slug = params.slug as string;
-  const [product, setProduct] = useState<Product | null>(null);
-  const [category, setCategory] = useState<Category | null>(null);
-  const [productContent, setProductContent] = useState<ProductContent | null>(null);
+  const productId = params.slug as string; // Using slug as product ID for now
+  const [product, setProduct] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -27,61 +25,58 @@ export default function ProductDetailPage() {
         setLoading(true);
         setError(null);
         
-        // Fetch product by slug
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/api/products?slug=${slug}`);
+        // Fetch product from Sanity by ID
+        const productData = await sanityApi.getProductById(productId);
         
-        if (!response.ok) {
+        if (!productData) {
           throw new Error('Product not found');
         }
         
-        const data = await response.json() as { products: Product[] };
-        
-        if (!data.products || data.products.length === 0) {
-          throw new Error('Product not found');
-        }
-        
-        const productData = data.products[0];
         setProduct(productData);
         
-        // Fetch category information
-        if (productData.category_id) {
-          const categoryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/api/categories/${productData.category_id}`);
-          if (categoryResponse.ok) {
-            const categoryData = await categoryResponse.json() as { category: Category };
-            setCategory(categoryData.category);
-          }
-        }
-        
-        // Fetch additional content from Sanity CMS
-        try {
-          const sanityContent = await fetchSanityData(queries.productContentById(productData.id));
-          if (sanityContent) {
-            setProductContent(sanityContent);
-          }
-        } catch (sanityError) {
-          console.log('No additional Sanity content found for product', productData.id);
-        }
-        
       } catch (err) {
+        console.error('Error fetching product:', err);
         setError(err instanceof Error ? err.message : 'Failed to load product');
       } finally {
         setLoading(false);
       }
     };
 
-    if (slug) {
+    if (productId) {
       fetchProduct();
     }
-  }, [slug]);
+  }, [productId]);
 
   const handleAddToCart = async () => {
     if (!product) return;
     
     try {
-      await addToCart(product.id, selectedQuantity);
-      // Could add a success notification here
+      // Add product to local storage cart for now
+      const cart = JSON.parse(localStorage.getItem('wood_good_cart') || '[]');
+      const existingItem = cart.find((item: any) => item.id === product.id);
+      
+      if (existingItem) {
+        existingItem.quantity += selectedQuantity;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: selectedQuantity,
+          image: product.images?.[0] || null,
+          category: product.category
+        });
+      }
+      
+      localStorage.setItem('wood_good_cart', JSON.stringify(cart));
+      
+      // Show success feedback (you can replace with a toast notification later)
+      alert(`Added ${selectedQuantity} × ${product.name} to cart!`);
+      
+      console.log('Added to cart:', product.name, selectedQuantity, `€${product.price}`);
     } catch (err) {
       console.error('Failed to add to cart:', err);
+      alert('Failed to add to cart. Please try again.');
     }
   };
 
@@ -92,10 +87,7 @@ export default function ProductDetailPage() {
     }).format(price);
   };
 
-  const productImages = [
-    product?.image_url || '/images/placeholder-product.jpg',
-    ...(productContent?.additionalImages?.map(img => getSanityImageUrl(img, 800, 800)) || []).filter(Boolean) as string[]
-  ];
+  const productImages = product?.images || [];
 
   if (loading) {
     return (
@@ -109,7 +101,9 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-6xl mb-4">😔</div>
+          <div className="text-6xl mb-4 text-oak-600 flex justify-center">
+            <SentimentDissatisfied sx={{ fontSize: 72 }} />
+          </div>
           <h1 className="text-2xl font-bold text-oak-800 mb-2">Product Not Found</h1>
           <p className="text-oak-600 mb-6">The product you're looking for doesn't exist or has been moved.</p>
           <Link 
@@ -132,19 +126,19 @@ export default function ProductDetailPage() {
             <Link href="/" className="text-oak-600 hover:text-oak-800">Home</Link>
             <span className="mx-2 text-gray-400">/</span>
             <Link href="/products" className="text-oak-600 hover:text-oak-800">Products</Link>
-            {category && (
+            {product?.category && (
               <>
                 <span className="mx-2 text-gray-400">/</span>
                 <Link 
-                  href={`/categories/${category.seo_slug}`} 
+                  href={`/categories/${product.category}`} 
                   className="text-oak-600 hover:text-oak-800"
                 >
-                  {category.name}
+                  {product.category}
                 </Link>
               </>
             )}
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900">{product.name}</span>
+            <span className="text-gray-900">{product?.name}</span>
           </nav>
         </div>
       </section>
@@ -157,7 +151,7 @@ export default function ProductDetailPage() {
             {/* Product Images */}
             <div>
               <div className="aspect-square bg-white rounded-lg shadow-md overflow-hidden mb-4">
-                {product.image_url ? (
+                {productImages && productImages.length > 0 ? (
                   <img
                     src={productImages[selectedImage]}
                     alt={product.name}
@@ -165,15 +159,17 @@ export default function ProductDetailPage() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-oak-50">
-                    <div className="text-oak-400 text-8xl">🪵</div>
+                    <div className="text-oak-400 text-8xl">
+                      <TableBar sx={{ fontSize: 96 }} />
+                    </div>
                   </div>
                 )}
               </div>
               
               {/* Thumbnail Gallery (when multiple images available) */}
-              {productImages.length > 1 && (
+              {productImages && productImages.length > 1 && (
                 <div className="flex space-x-2">
-                  {productImages.map((image, index) => (
+                  {productImages.map((image: string, index: number) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
@@ -194,69 +190,98 @@ export default function ProductDetailPage() {
 
             {/* Product Information */}
             <div>
-              {product.featured && (
+              {product?.featured && (
                 <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800 mb-4">
-                  ⭐ Featured Product
+                  <Star className="text-amber-600 mr-1" sx={{ fontSize: 16 }} />
+                  Featured Product
                 </div>
               )}
               
-              <h1 className="text-4xl font-bold text-oak-800 mb-4">{product.name}</h1>
+              <h1 className="text-4xl font-bold text-oak-800 mb-4">{product?.name}</h1>
               
-              {category && (
+              {product?.category && (
                 <Link 
-                  href={`/categories/${category.seo_slug}`}
+                  href={`/categories/${product.category}`}
                   className="text-oak-600 hover:text-oak-800 font-medium mb-4 inline-block"
                 >
-                  {category.name} →
+                  {product.category} →
                 </Link>
               )}
               
               <div className="text-3xl font-bold text-oak-800 mb-6">
-                {formatPrice(product.price)}
+                {product?.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
               </div>
 
               <div className="prose prose-oak mb-8">
-                <p className="text-lg text-oak-700">{product.description}</p>
+                {product?.detailedDescription && (
+                  <div className="text-lg text-oak-700 space-y-4">
+                    {product.detailedDescription.map((block: any, index: number) => (
+                      <p key={index}>{block.children?.[0]?.text || ''}</p>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Product Specifications */}
               <div className="bg-white rounded-lg p-6 mb-8 shadow-sm">
                 <h3 className="text-xl font-bold text-oak-800 mb-4">Product Specifications</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  {product.dimensions && (
+                  {product?.specifications?.dimensions && (
                     <div>
                       <span className="font-semibold text-oak-800">Dimensions:</span>
-                      <div className="text-oak-600">{product.dimensions}</div>
+                      <div className="text-oak-600">
+                        {product.category === 'table' && product.tableShape === 'rectangular' && (
+                          <>
+                            {product.specifications.dimensions.length} × {product.specifications.dimensions.width} × {product.specifications.dimensions.height} cm
+                          </>
+                        )}
+                        {product.category === 'table' && product.tableShape === 'oval' && (
+                          <>
+                            ⌀{product.specifications.dimensions.diameter} × {product.specifications.dimensions.depth} × {product.specifications.dimensions.height} cm
+                          </>
+                        )}
+                        {product.category !== 'table' && (
+                          <>
+                            {product.specifications.dimensions.genericLength} × {product.specifications.dimensions.genericWidth} × {product.specifications.dimensions.genericHeight} cm
+                          </>
+                        )}
+                      </div>
                     </div>
                   )}
-                  {product.wood_type && (
-                    <div>
-                      <span className="font-semibold text-oak-800">Wood Type:</span>
-                      <div className="text-oak-600">{product.wood_type}</div>
-                    </div>
-                  )}
-                  {product.finish && (
+                  {product?.specifications?.finish && (
                     <div>
                       <span className="font-semibold text-oak-800">Finish:</span>
-                      <div className="text-oak-600">{product.finish}</div>
+                      <div className="text-oak-600">{product.specifications.finish}</div>
                     </div>
                   )}
-                  {product.shape && (
+                  {product?.tableShape && (
                     <div>
                       <span className="font-semibold text-oak-800">Shape:</span>
-                      <div className="text-oak-600">{product.shape}</div>
+                      <div className="text-oak-600">{product.tableShape}</div>
                     </div>
                   )}
-                  {product.weight_kg && (
+                  {product?.specifications?.legShape && (
+                    <div>
+                      <span className="font-semibold text-oak-800">Leg Shape:</span>
+                      <div className="text-oak-600">{product.specifications.legShape}</div>
+                    </div>
+                  )}
+                  {product?.specifications?.weight && (
                     <div>
                       <span className="font-semibold text-oak-800">Weight:</span>
-                      <div className="text-oak-600">{product.weight_kg} kg</div>
+                      <div className="text-oak-600">{product.specifications.weight} kg</div>
+                    </div>
+                  )}
+                  {product?.specifications?.color && (
+                    <div>
+                      <span className="font-semibold text-oak-800">Color:</span>
+                      <div className="text-oak-600">{product.specifications.color}</div>
                     </div>
                   )}
                   <div>
                     <span className="font-semibold text-oak-800">Stock:</span>
-                    <div className={`${product.stock > 5 ? 'text-green-600' : product.stock > 0 ? 'text-amber-600' : 'text-red-600'}`}>
-                      {product.stock > 5 ? 'In Stock' : product.stock > 0 ? `Only ${product.stock} left` : 'Out of Stock'}
+                    <div className="text-green-600">
+                      {product?.inStock ? 'Available' : 'Made to Order'}
                     </div>
                   </div>
                 </div>
@@ -270,9 +295,8 @@ export default function ProductDetailPage() {
                     value={selectedQuantity}
                     onChange={(e) => setSelectedQuantity(parseInt(e.target.value))}
                     className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
-                    disabled={product.stock === 0}
                   >
-                    {[...Array(Math.min(product.stock, 10))].map((_, i) => (
+                    {[...Array(10)].map((_, i) => (
                       <option key={i + 1} value={i + 1}>
                         {i + 1}
                       </option>
@@ -283,21 +307,21 @@ export default function ProductDetailPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={handleAddToCart}
-                    disabled={product.stock === 0 || cartLoading}
+                    disabled={cartLoading || !product?.price}
                     className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
-                      product.stock === 0
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-oak-600 hover:bg-oak-700 text-white'
+                      product?.price 
+                        ? 'bg-oak-600 hover:bg-oak-700 text-white' 
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                     }`}
                   >
-                    {cartLoading ? 'Adding...' : product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                    {cartLoading ? 'Adding...' : product?.price ? 'Add to Cart' : 'Price on Request'}
                   </button>
                   
                   <Link
                     href="/contact"
                     className="flex-1 py-3 px-6 rounded-lg font-semibold bg-transparent border-2 border-oak-600 text-oak-600 hover:bg-oak-600 hover:text-white transition-colors text-center"
                   >
-                    Custom Quote
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -315,21 +339,31 @@ export default function ProductDetailPage() {
               {/* Care Instructions */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🧽 Care Instructions
+                  <CleaningServices className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Care Instructions
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
-                  <li>• Dust regularly with a soft, lint-free cloth</li>
-                  <li>• Clean spills immediately to prevent staining</li>
-                  <li>• Use coasters and placemats to protect surface</li>
-                  <li>• Reapply oil finish annually for natural oil finishes</li>
-                  <li>• Avoid harsh chemicals and abrasive cleaners</li>
+                  {product?.careInstructions && product.careInstructions.length > 0 ? (
+                    product.careInstructions.map((instruction: string, index: number) => (
+                      <li key={index}>• {instruction}</li>
+                    ))
+                  ) : (
+                    <>
+                      <li>• Dust regularly with a soft, lint-free cloth</li>
+                      <li>• Clean spills immediately to prevent staining</li>
+                      <li>• Use coasters and placemats to protect surface</li>
+                      <li>• Reapply oil finish annually for natural oil finishes</li>
+                      <li>• Avoid harsh chemicals and abrasive cleaners</li>
+                    </>
+                  )}
                 </ul>
               </div>
 
               {/* Delivery Information */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🚚 Delivery & Setup
+                  <LocalShipping className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Delivery & Setup
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
                   <li>• Free delivery within 50km of our workshop</li>
@@ -343,7 +377,8 @@ export default function ProductDetailPage() {
               {/* Warranty */}
               <div>
                 <h3 className="text-xl font-bold text-oak-800 mb-4 flex items-center">
-                  🛡️ Warranty & Support
+                  <Security className="text-oak-600 mr-2" sx={{ fontSize: 24 }} />
+                  Warranty & Support
                 </h3>
                 <ul className="space-y-2 text-oak-600 text-sm">
                   <li>• 25-year structural warranty</li>
@@ -367,10 +402,10 @@ export default function ProductDetailPage() {
           <div className="text-center text-oak-600">
             <p>Related products will be displayed here based on category and style.</p>
             <Link 
-              href={category ? `/categories/${category.seo_slug}` : '/products'}
+              href={product?.category ? `/categories/${product.category}` : '/products'}
               className="inline-block mt-4 text-oak-600 hover:text-oak-800 font-medium"
             >
-              Browse {category ? category.name : 'All Products'} →
+              Browse {product?.category ? product.category : 'All Products'} →
             </Link>
           </div>
         </div>

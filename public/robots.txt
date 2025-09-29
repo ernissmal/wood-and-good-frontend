@@ -1,0 +1,41 @@
+# Robots.txt for SIA The Wood and Good
+# This website is currently under development and should not be indexed
+
+User-agent: *
+Disallow: /
+
+# Specifically block all major search engines
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: facebookexternalhit
+Disallow: /
+
+User-agent: Twitterbot
+Disallow: /
+
+# Block crawling of admin and development paths
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /dev/
+Disallow: /test/
+
+# Sitemap location (disabled until launch)
+# Sitemap: https://woodandgood.com/sitemap.xml

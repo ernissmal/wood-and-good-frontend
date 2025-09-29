@@ -1,24 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useProducts, useCategories, useCart } from '../../hooks/api';
-import { ProductGrid, CategoryCard, LoadingSpinner, ErrorMessage, Pagination } from '../../components/ui';
+import { useSanityProducts, useSanityCategories } from '../../hooks/sanity';
+import { useCart } from '../../hooks/api';
+import { ProductGrid, CategoryCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
 
 export default function ProductsPage() {
-  const [filters, setFilters] = useState({
-    page: 1,
-    limit: 12,
-    category_id: undefined as number | undefined,
-    q: '',
-    shape: '',
-    finish: '',
-    min_price: undefined as number | undefined,
-    max_price: undefined as number | undefined,
-    sort: 'name'
-  });
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
-  const { products, pagination, loading: productsLoading, error: productsError, refetch } = useProducts(filters);
-  const { categories, loading: categoriesLoading } = useCategories();
+  const { products, loading: productsLoading, error: productsError, refetch } = useSanityProducts(selectedCategory);
+  const { categories, loading: categoriesLoading } = useSanityCategories();
   const { addToCart, loading: cartLoading } = useCart();
 
   const handleAddToCart = async (productId: number) => {
@@ -58,10 +49,10 @@ export default function ProductsPage() {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-oak-800 mb-4">
+            <h1 className="text-4xl font-bold text-textPrimary mb-4">
               Oak Furniture Collection
             </h1>
-            <p className="text-lg text-oak-600 max-w-3xl mx-auto">
+            <p className="text-lg text-textSecondary max-w-3xl mx-auto">
               Discover our complete range of handcrafted solid oak furniture. 
               Each piece is sustainably sourced and expertly crafted for lasting beauty.
             </p>
@@ -75,27 +66,23 @@ export default function ProductsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Search
-              </label>
+              <label className="form-label">Search</label>
               <input
                 type="text"
                 value={filters.q}
                 onChange={(e) => handleFilterChange('q', e.target.value)}
                 placeholder="Search products..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Category
-              </label>
+              <label className="form-label">Category</label>
               <select
                 value={filters.category_id || ''}
                 onChange={(e) => handleFilterChange('category_id', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Categories</option>
                 {categories.map((category) => (
@@ -108,13 +95,11 @@ export default function ProductsPage() {
 
             {/* Shape */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Shape
-              </label>
+              <label className="form-label">Shape</label>
               <select
                 value={filters.shape}
                 onChange={(e) => handleFilterChange('shape', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Shapes</option>
                 <option value="round">Round</option>
@@ -125,13 +110,11 @@ export default function ProductsPage() {
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Finish
-              </label>
+              <label className="form-label">Finish</label>
               <select
                 value={filters.finish}
                 onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Finishes</option>
                 <option value="natural oil">Natural Oil</option>
@@ -142,13 +125,11 @@ export default function ProductsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Sort By
-              </label>
+              <label className="form-label">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="name">Name A-Z</option>
                 <option value="name_desc">Name Z-A</option>
@@ -160,15 +141,15 @@ export default function ProductsPage() {
           </div>
 
           {/* Filter Actions */}
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-oak-600">
+          <div className="filter-actions">
+            <div className="filter-summary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} products</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+              className="filter-clear-btn"
             >
               Clear All Filters
             </button>
@@ -203,10 +184,10 @@ export default function ProductsPage() {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-oak-800 mb-4">
+              <h2 className="text-3xl font-bold text-textPrimary mb-4">
                 Browse by Category
               </h2>
-              <p className="text-oak-600 max-w-2xl mx-auto">
+              <p className="text-textSecondary max-w-2xl mx-auto">
                 Explore our furniture collections organized by type and functionality.
               </p>
             </div>

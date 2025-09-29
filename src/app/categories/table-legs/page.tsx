@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useProducts } from '../../../hooks/api';
 import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
 import Link from 'next/link';
+import { AccountBalance, StraightenRounded, Cabin, Architecture, Build, StraightenSharp, Construction } from '@mui/icons-material';
 
 export default function TableLegsPage() {
   const [filters, setFilters] = useState({
@@ -54,7 +55,7 @@ export default function TableLegsPage() {
       characteristics: ["Hand-turned profiles", "Elegant tapered design", "Traditional proportions", "Suitable for formal and casual settings"],
       bestFor: "Traditional, transitional, and farmhouse styles",
       height: "Standard 72cm dining height",
-      icon: "🏛️"
+      icon: AccountBalance
     },
     {
       style: "Modern Hairpin Legs",
@@ -62,7 +63,7 @@ export default function TableLegsPage() {
       characteristics: ["Minimalist design", "Steel reinforcement", "Space-saving profile", "Easy to install"],
       bestFor: "Modern, industrial, and Scandinavian styles",
       height: "Available in multiple heights",
-      icon: "📐"
+      icon: StraightenRounded
     },
     {
       style: "Rustic Farmhouse Legs", 
@@ -70,7 +71,7 @@ export default function TableLegsPage() {
       characteristics: ["Thick, sturdy construction", "Distressed finish", "Visible wood character", "Mortise and tenon joinery"],
       bestFor: "Farmhouse, rustic, and country styles",
       height: "Standard 75cm for farmhouse tables",
-      icon: "🏚️"
+      icon: Cabin
     },
     {
       style: "Pedestal Bases",
@@ -78,7 +79,7 @@ export default function TableLegsPage() {
       characteristics: ["Maximum legroom", "Single point support", "Heavy-duty construction", "Various top attachment options"],
       bestFor: "Conference tables, round dining tables",
       height: "Custom heights available",
-      icon: "⚱️"
+      icon: Architecture
     }
   ];
 
@@ -178,7 +179,7 @@ export default function TableLegsPage() {
               </button>
               <button
                 onClick={() => document.getElementById('guide')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
               >
                 Selection Guide
               </button>
@@ -193,27 +194,23 @@ export default function TableLegsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Search Table Legs
-              </label>
+              <label className="form-label">Search Table Legs</label>
               <input
                 type="text"
                 value={filters.q}
                 onChange={(e) => handleFilterChange('q', e.target.value)}
                 placeholder="Search table legs..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               />
             </div>
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Finish
-              </label>
+              <label className="form-label">Finish</label>
               <select
                 value={filters.finish}
                 onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Finishes</option>
                 <option value="natural oil">Natural Oil</option>
@@ -224,13 +221,11 @@ export default function TableLegsPage() {
 
             {/* Price Range */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Max Price (€)
-              </label>
+              <label className="form-label">Max Price (€)</label>
               <select
                 value={filters.max_price || ''}
                 onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">Any Price</option>
                 <option value="150">Under €150</option>
@@ -242,13 +237,11 @@ export default function TableLegsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Sort By
-              </label>
+              <label className="form-label">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="featured">Featured First</option>
                 <option value="name">Name A-Z</option>
@@ -258,15 +251,15 @@ export default function TableLegsPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-oak-600">
+          <div className="filter-actions">
+            <div className="filter-summary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} table legs</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+              className="filter-clear-btn"
             >
               Clear Filters
             </button>
@@ -316,7 +309,9 @@ export default function TableLegsPage() {
               {legStyles.map((style, index) => (
                 <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start">
-                    <div className="text-4xl mr-4 mt-1">{style.icon}</div>
+                    <div className="text-4xl mr-4 mt-1 text-oak-600">
+                      <style.icon sx={{ fontSize: 48 }} />
+                    </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold text-oak-800 mb-2">{style.style}</h4>
                       <p className="text-oak-600 mb-4">{style.description}</p>
@@ -432,8 +427,8 @@ export default function TableLegsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                🔧
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                <Build sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-bold text-oak-800 mb-3">Professional Installation</h3>
               <p className="text-oak-600 mb-4">
@@ -445,8 +440,8 @@ export default function TableLegsPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                📏
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                <StraightenSharp sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-bold text-oak-800 mb-3">Custom Heights</h3>
               <p className="text-oak-600 mb-4">
@@ -458,8 +453,8 @@ export default function TableLegsPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                🛠️
+              <div className="w-16 h-16 bg-oak-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                <Construction sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-bold text-oak-800 mb-3">Hardware Included</h3>
               <p className="text-oak-600 mb-4">
@@ -492,7 +487,7 @@ export default function TableLegsPage() {
             </Link>
             <Link 
               href="/contact"
-              className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               Custom Table Consultation
             </Link>

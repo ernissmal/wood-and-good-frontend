@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { NaturePeople, LocalFlorist, Park, Build, Home, Recycling, WbSunny, WaterDrop, RepeatOne, Inventory } from '@mui/icons-material';
+
 export default function SustainabilityPage() {
   const [activeSection, setActiveSection] = useState('sourcing');
 
@@ -10,25 +12,25 @@ export default function SustainabilityPage() {
     {
       name: "FSC Certified",
       description: "Forest Stewardship Council certification ensures responsible forest management",
-      icon: "🌲",
+      icon: NaturePeople,
       details: "All our oak is sourced from FSC-certified European forests"
     },
     {
       name: "Carbon Neutral",
       description: "Our production process is carbon neutral through local sourcing and renewable energy",
-      icon: "🌱",
+      icon: LocalFlorist,
       details: "Solar-powered workshop and local material sourcing"
     },
     {
       name: "Zero Waste",
       description: "100% of our wood waste is repurposed or recycled into useful products",
-      icon: "♻️", 
+      icon: Recycling, 
       details: "Sawdust becomes compost, offcuts become accessories"
     },
     {
       name: "Local Economy",
       description: "Supporting local forestry and reducing transportation impact",
-      icon: "🏠",
+      icon: Home,
       details: "All materials sourced within 200km of our workshop"
     }
   ];
@@ -129,7 +131,7 @@ export default function SustainabilityPage() {
             </Link>
             <button
               onClick={() => setActiveSection('impact')}
-              className="inline-block bg-transparent border-2 border-white hover:bg-white hover:text-green-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="inline-block bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               See Our Impact
             </button>
@@ -178,7 +180,9 @@ export default function SustainabilityPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 {certifications.map((cert, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                    <div className="text-4xl mb-4">{cert.icon}</div>
+                    <div className="text-4xl mb-4 text-oak-600">
+                      <cert.icon sx={{ fontSize: 48 }} />
+                    </div>
                     <h3 className="text-xl font-bold text-oak-800 mb-2">{cert.name}</h3>
                     <p className="text-oak-600 mb-3 text-sm">{cert.description}</p>
                     <p className="text-xs text-green-700 font-medium">{cert.details}</p>
@@ -217,7 +221,9 @@ export default function SustainabilityPage() {
                   <div>
                     <div className="bg-green-50 rounded-lg p-8">
                       <div className="text-center">
-                        <div className="text-6xl text-green-600 mb-4">🌳</div>
+                        <div className="text-6xl text-green-600 mb-4">
+                          <Park sx={{ fontSize: 72 }} />
+                        </div>
                         <h4 className="text-2xl font-bold text-oak-800 mb-2">Tree-to-Furniture Tracking</h4>
                         <p className="text-oak-600">
                           Every piece of furniture comes with documentation tracing its wood 
@@ -247,7 +253,9 @@ export default function SustainabilityPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                 <div className="bg-white rounded-lg shadow-md p-8">
                   <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center text-2xl mr-4">☀️</div>
+                    <div className="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center text-2xl mr-4">
+                      <WbSunny />
+                    </div>
                     <h3 className="text-2xl font-bold text-oak-800">Solar-Powered Workshop</h3>
                   </div>
                   <ul className="space-y-3">
@@ -272,7 +280,9 @@ export default function SustainabilityPage() {
 
                 <div className="bg-white rounded-lg shadow-md p-8">
                   <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl mr-4">💧</div>
+                    <div className="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl mr-4">
+                      <WaterDrop />
+                    </div>
                     <h3 className="text-2xl font-bold text-oak-800">Water-Based Finishes</h3>
                   </div>
                   <ul className="space-y-3">
@@ -300,7 +310,9 @@ export default function SustainabilityPage() {
                 <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Zero Waste Workshop</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">♻️</div>
+                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                      <Recycling />
+                    </div>
                     <h4 className="text-xl font-semibold text-oak-800 mb-2">Wood Waste</h4>
                     <p className="text-oak-600 text-sm">
                       Sawdust becomes compost for local gardens. Wood shavings are used for biomass heating. 
@@ -308,7 +320,9 @@ export default function SustainabilityPage() {
                     </p>
                   </div>
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">🔄</div>
+                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                      <RepeatOne />
+                    </div>
                     <h4 className="text-xl font-semibold text-oak-800 mb-2">Material Efficiency</h4>
                     <p className="text-oak-600 text-sm">
                       Advanced cutting optimization software maximizes material usage. 
@@ -316,7 +330,9 @@ export default function SustainabilityPage() {
                     </p>
                   </div>
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">📦</div>
+                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                      <Inventory />
+                    </div>
                     <h4 className="text-xl font-semibold text-oak-800 mb-2">Packaging</h4>
                     <p className="text-oak-600 text-sm">
                       Recyclable cardboard and biodegradable protective materials. 
@@ -372,7 +388,10 @@ export default function SustainabilityPage() {
                       <div className="bg-green-50 rounded-lg p-6 flex items-center justify-center">
                         <div className="text-center">
                           <div className="text-4xl mb-4">
-                            {index === 0 ? '🌲' : index === 1 ? '🔨' : index === 2 ? '🏠' : '♻️'}
+{index === 0 ? <NaturePeople className="text-green-600" sx={{ fontSize: 20 }} /> : 
+                             index === 1 ? <Build className="text-green-600" sx={{ fontSize: 20 }} /> : 
+                             index === 2 ? <Home className="text-green-600" sx={{ fontSize: 20 }} /> : 
+                             <Recycling className="text-green-600" sx={{ fontSize: 20 }} />}
                           </div>
                           <h4 className="text-lg font-semibold text-oak-800 mb-2">Environmental Impact</h4>
                           <p className="text-oak-600 text-sm">{stage.impact}</p>
@@ -493,7 +512,7 @@ export default function SustainabilityPage() {
             </Link>
             <Link 
               href="/contact"
-              className="bg-transparent border-2 border-white hover:bg-white hover:text-green-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               Learn More About Our Practices
             </Link>

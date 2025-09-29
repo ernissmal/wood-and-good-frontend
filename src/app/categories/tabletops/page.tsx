@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useProducts } from '../../../hooks/api';
 import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
 import Link from 'next/link';
+import { RadioButtonUnchecked, CropLandscape, Stop, NaturePeople } from '@mui/icons-material';
 
 export default function TabletopsPage() {
   const [filters, setFilters] = useState({
@@ -53,28 +54,28 @@ export default function TabletopsPage() {
       description: "Perfect for intimate dining and conversation. Round tables create a warm, inclusive atmosphere.",
       bestFor: "Small to medium dining rooms, breakfast nooks, bistro settings",
       seating: "4-6 people comfortably",
-      icon: "⭕"
+      icon: "round"
     },
     {
       shape: "Rectangular Tabletops", 
       description: "Classic choice for formal dining. Maximum seating capacity and traditional elegance.",
       bestFor: "Larger dining rooms, family gatherings, formal occasions",
       seating: "6-10 people comfortably",
-      icon: "📐"
+      icon: "rectangular"
     },
     {
       shape: "Square Tabletops",
       description: "Balanced and versatile. Great for both intimate meals and group conversations.",
       bestFor: "Square dining rooms, casual dining, small families",
       seating: "4 people comfortably",
-      icon: "⏹️"
+      icon: "square"
     },
     {
       shape: "Live Edge Slabs",
       description: "Unique, natural beauty with preserved bark edges. Each piece is one-of-a-kind.",
       bestFor: "Statement pieces, rustic decor, nature-inspired interiors",
       seating: "Variable, depending on size",
-      icon: "🌳"
+      icon: "natural"
     }
   ];
 
@@ -132,7 +133,7 @@ export default function TabletopsPage() {
               </button>
               <button
                 onClick={() => document.getElementById('guide')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
               >
                 Buying Guide
               </button>
@@ -147,27 +148,23 @@ export default function TabletopsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Search Tabletops
-              </label>
+              <label className="form-label">Search Tabletops</label>
               <input
                 type="text"
                 value={filters.q}
                 onChange={(e) => handleFilterChange('q', e.target.value)}
                 placeholder="Search tabletops..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               />
             </div>
 
             {/* Shape */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Shape
-              </label>
+              <label className="form-label">Shape</label>
               <select
                 value={filters.shape}
                 onChange={(e) => handleFilterChange('shape', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Shapes</option>
                 <option value="round">Round</option>
@@ -179,13 +176,11 @@ export default function TabletopsPage() {
 
             {/* Finish */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Finish
-              </label>
+              <label className="form-label">Finish</label>
               <select
                 value={filters.finish}
                 onChange={(e) => handleFilterChange('finish', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">All Finishes</option>
                 <option value="natural oil">Natural Oil</option>
@@ -196,13 +191,11 @@ export default function TabletopsPage() {
 
             {/* Price Range */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Max Price (€)
-              </label>
+              <label className="form-label">Max Price (€)</label>
               <select
                 value={filters.max_price || ''}
                 onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="">Any Price</option>
                 <option value="300">Under €300</option>
@@ -214,13 +207,11 @@ export default function TabletopsPage() {
 
             {/* Sort */}
             <div>
-              <label className="block text-sm font-medium text-oak-700 mb-1">
-                Sort By
-              </label>
+              <label className="form-label">Sort By</label>
               <select
                 value={filters.sort}
                 onChange={(e) => handleFilterChange('sort', e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-oak-500"
+                className="form-control"
               >
                 <option value="featured">Featured First</option>
                 <option value="name">Name A-Z</option>
@@ -230,15 +221,15 @@ export default function TabletopsPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mt-4">
-            <div className="text-sm text-oak-600">
+          <div className="filter-actions">
+            <div className="filter-summary">
               {pagination.total > 0 && (
                 <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} tabletops</>
               )}
             </div>
             <button
               onClick={clearFilters}
-              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
+              className="filter-clear-btn"
             >
               Clear Filters
             </button>
@@ -288,7 +279,12 @@ export default function TabletopsPage() {
               {tabletopGuide.map((guide, index) => (
                 <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start">
-                    <div className="text-4xl mr-4 mt-1">{guide.icon}</div>
+                    <div className="text-4xl mr-4 mt-1 text-oak-600">
+                      {guide.icon === "round" && <RadioButtonUnchecked sx={{ fontSize: 48 }} />}
+                      {guide.icon === "rectangular" && <CropLandscape sx={{ fontSize: 48 }} />}
+                      {guide.icon === "square" && <Stop sx={{ fontSize: 48 }} />}
+                      {guide.icon === "natural" && <NaturePeople sx={{ fontSize: 48 }} />}
+                    </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold text-oak-800 mb-2">{guide.shape}</h4>
                       <p className="text-oak-600 mb-3">{guide.description}</p>
@@ -387,7 +383,7 @@ export default function TabletopsPage() {
             </Link>
             <Link 
               href="/categories/table-legs"
-              className="bg-transparent border-2 border-white hover:bg-white hover:text-oak-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
             >
               Browse Table Legs
             </Link>

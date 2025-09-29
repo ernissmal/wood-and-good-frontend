@@ -1,8 +1,15 @@
 'use client';
 
-import { useCategories, useFeaturedProducts, useFeaturedBlogPosts, useCart } from '../hooks/api';
-import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from '../components/ui';
+import { useCategories, useFeaturedProducts, useFeaturedBlogPosts, useCart } from './hooks/api';
+import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from './components/ui';
 import Link from 'next/link';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import NatureIcon from '@mui/icons-material/Nature';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import StarIcon from '@mui/icons-material/Star';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function Home() {
   const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
@@ -13,83 +20,110 @@ export default function Home() {
   const handleAddToCart = async (productId: number) => {
     await addToCart(productId, 1);
   };
+  
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-gradient py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Hero Section */}
+      <section className="section hero-gradient relative overflow-hidden">
+        <div className="absolute inset-0 wood-texture opacity-30"></div>
+        <div className="section-container relative">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-oak-800 mb-6">
-              Handcrafted Oak Furniture
-            </h1>
-            <p className="text-xl text-oak-600 mb-8 max-w-3xl mx-auto">
-              Premium quality solid oak furniture, sustainably sourced and expertly crafted 
-              for your home. Each piece tells a story of timeless craftsmanship.
-            </p>
-            <div className="flex gap-4 justify-center flex-col sm:flex-row">
-              <Link href="/products" className="btn-primary inline-block">
-                Shop Collection
+            <div className="mb-8">
+              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-oak-700 text-sm font-medium mb-6">
+                <NatureIcon className="w-4 h-4" />
+                <span>Sustainably Crafted Since 1970</span>
+              </div>
+              
+              <h1 className="text-display-1 text-primary mb-6">
+                Handcrafted
+                <span className="block text-oak-600">Oak Furniture</span>
+              </h1>
+              
+              <p className="text-body-lg text-muted mb-8 max-w-3xl mx-auto">
+                Premium quality solid oak furniture, sustainably sourced and expertly crafted 
+                in Latvia. Each piece tells a story of timeless craftsmanship and three generations 
+                of woodworking excellence.
+              </p>
+            </div>
+            
+            <div className="flex gap-4 justify-center flex-col sm:flex-row max-w-md mx-auto sm:max-w-none">
+              <Link href="/products" className="btn btn-primary btn-lg">
+                <ShoppingBagIcon className="w-5 h-5" />
+                <span>Shop Collection</span>
+                <ArrowForwardIcon className="w-4 h-4" />
               </Link>
-              <Link href="/about" className="btn-secondary inline-block">
-                Our Story
+              <Link href="/about" className="btn btn-secondary btn-lg">
+                <InfoIcon className="w-5 h-5" />
+                <span>Our Story</span>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+      {/* Enhanced Categories Section */}
+      <section className="section section-white">
+        <div className="section-container">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center space-x-2 bg-oak-50 rounded-full px-4 py-2 text-oak-600 text-sm font-medium mb-4">
+              <HandymanIcon className="w-4 h-4" />
+              <span>Explore Our Collections</span>
+            </div>
+            
+            <h2 className="text-h2 text-primary mb-6">
               Shop by Category
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
+            <p className="text-body-lg text-muted max-w-3xl mx-auto">
               From elegant dining tables to comfortable seating, discover furniture that combines 
-              traditional craftsmanship with modern functionality.
+              traditional Latvian craftsmanship with modern functionality and timeless design.
             </p>
           </div>
           
           {categoriesLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-oak-100 rounded-lg aspect-video animate-pulse"></div>
+                <div key={i} className="bg-oak-100 rounded-xl aspect-video animate-pulse"></div>
               ))}
             </div>
           ) : categoriesError ? (
             <ErrorMessage message={categoriesError} />
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {categories.slice(0, 4).map((category) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+              {categories.slice(0, 4).map((category: any) => (
                 <CategoryCard key={category.id} category={category} />
               ))}
             </div>
           )}
           
           {categories.length > 4 && (
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Link
                 href="/categories"
-                className="text-oak-600 hover:text-oak-800 font-semibold"
+                className="inline-flex items-center space-x-2 text-text-accent hover:text-oak-600 font-semibold text-lg transition-colors duration-200"
               >
-                View All Categories →
+                <span>View All Categories</span>
+                <ArrowForwardIcon className="w-5 h-5" />
               </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+      {/* Enhanced Featured Products Section */}
+      <section className="section section-oak-50">
+        <div className="section-container">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 text-oak-600 text-sm font-medium mb-4">
+              <StarIcon className="w-4 h-4" />
+              <span>Handpicked by Our Masters</span>
+            </div>
+            
+            <h2 className="text-h2 text-primary mb-6">
               Featured Collection
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
+            <p className="text-body-lg text-muted max-w-3xl mx-auto">
               Handpicked pieces that showcase the beauty and durability of solid oak wood. 
-              Perfect for creating spaces that last generations.
+              Perfect for creating spaces that last generations and tell your family's story.
             </p>
           </div>
           
@@ -103,56 +137,96 @@ export default function Home() {
           />
           
           {featuredProducts.length > 0 && (
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Link
                 href="/products"
-                className="btn-primary inline-block"
+                className="btn btn-primary btn-lg"
               >
-                View All Products
+                <ShoppingBagIcon className="w-5 h-5" />
+                <span>View All Products</span>
+                <ArrowForwardIcon className="w-4 h-4" />
               </Link>
             </div>
           )}
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-16 bg-oak-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Enhanced About Section */}
+      <section className="section section-earth-50">
+        <div className="section-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-oak-800 mb-6">Sustainable Craftsmanship</h2>
-              <p className="text-oak-600 mb-6 text-lg">
-                For over three generations, we&apos;ve been crafting premium oak furniture using traditional 
-                techniques passed down through our family. Every piece is made from sustainably sourced 
-                solid oak, ensuring both quality and environmental responsibility.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="text-center p-4 bg-white rounded-lg">
-                  <div className="text-2xl font-bold text-oak-700">50+</div>
-                  <div className="text-oak-600 text-sm">Years Experience</div>
+              <div className="mb-6">
+                <div className="inline-flex items-center space-x-2 bg-forest-100 rounded-full px-4 py-2 text-forest-600 text-sm font-medium mb-4">
+                  <NatureIcon className="w-4 h-4" />
+                  <span>Three Generations of Excellence</span>
                 </div>
-                <div className="text-center p-4 bg-white rounded-lg">
-                  <div className="text-2xl font-bold text-oak-700">100%</div>
-                  <div className="text-oak-600 text-sm">Solid Oak</div>
+                
+                <h2 className="text-h2 text-primary mb-6">
+                  Sustainable Craftsmanship
+                </h2>
+                <p className="text-body-lg text-muted mb-8">
+                  For over three generations, SIA The Wood and Good has been crafting premium oak 
+                  furniture using traditional techniques passed down through our family. Every piece 
+                  is made from sustainably sourced solid oak from Latvian forests, ensuring both 
+                  exceptional quality and environmental responsibility.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="text-center p-6 bg-white rounded-xl shadow-warm">
+                  <div className="text-3xl font-bold text-oak-600 mb-2">50+</div>
+                  <div className="text-muted text-sm">Years Experience</div>
+                </div>
+                <div className="text-center p-6 bg-white rounded-xl shadow-warm">
+                  <div className="text-3xl font-bold text-forest-600 mb-2">100%</div>
+                  <div className="text-muted text-sm">Sustainable Oak</div>
+                </div>
+                <div className="text-center p-6 bg-white rounded-xl shadow-warm">
+                  <div className="text-3xl font-bold text-earth-600 mb-2">3</div>
+                  <div className="text-muted text-sm">Generations</div>
                 </div>
               </div>
-              <Link href="/about" className="btn-primary">Learn More</Link>
+              
+              <Link href="/about" className="btn btn-primary btn-lg">
+                <InfoIcon className="w-5 h-5" />
+                <span>Learn More</span>
+                <ArrowForwardIcon className="w-4 h-4" />
+              </Link>
             </div>
-            <div className="wood-texture h-96 bg-oak-200 rounded-lg flex items-center justify-center">
-              <span className="text-oak-600 font-medium">Craftsmanship Image</span>
+            
+            <div className="relative">
+              <div className="wood-texture h-96 lg:h-[28rem] bg-oak-gradient rounded-2xl flex items-center justify-center shadow-warm-lg overflow-hidden">
+                <div className="text-center text-white">
+                  <HandymanIcon sx={{ fontSize: 80 }} className="mb-4 opacity-80" />
+                  <p className="text-lg font-medium opacity-90">Master Craftsman at Work</p>
+                  <p className="text-sm opacity-70">Traditional techniques, modern precision</p>
+                </div>
+              </div>
+              
+              {/* Floating feature badges */}
+              <div className="absolute -top-4 -right-4 bg-forest-500 text-white p-4 rounded-xl shadow-lg">
+                <NatureIcon className="w-6 h-6 mb-1" />
+                <div className="text-xs font-medium">Eco-Friendly</div>
+              </div>
+              
+              <div className="absolute -bottom-4 -left-4 bg-oak-600 text-white p-4 rounded-xl shadow-lg">
+                <HandymanIcon className="w-6 h-6 mb-1" />
+                <div className="text-xs font-medium">Handcrafted</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Blog Posts Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section section-white">
+        <div className="section-container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-oak-800 mb-4">
+            <h2 className="text-h2 text-primary mb-4">
               Latest From Our Blog
             </h2>
-            <p className="text-oak-600 max-w-2xl mx-auto">
+            <p className="text-body text-muted max-w-2xl mx-auto">
               Learn about wood care, design tips, and the stories behind our craftsmanship.
             </p>
           </div>
@@ -173,16 +247,20 @@ export default function Home() {
           ) : postsError ? (
             <ErrorMessage message={postsError} />
           ) : featuredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredPosts.slice(0, 3).map((post, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {featuredPosts.slice(0, 3).map((post: any, index: number) => (
                 <BlogPostCard key={post.id || index} post={post} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📝</div>
-              <h3 className="text-lg font-semibold text-oak-800 mb-2">No blog posts yet</h3>
-              <p className="text-oak-600">Check back soon for updates and insights.</p>
+            <div className="text-center py-16">
+              <div className="w-24 h-24 bg-oak-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <InfoIcon sx={{ fontSize: 48 }} className="text-oak-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-primary mb-2">No blog posts yet</h3>
+              <p className="text-muted max-w-md mx-auto">
+                Check back soon for updates, craftsmanship insights, and stories from our workshop.
+              </p>
             </div>
           )}
           
@@ -190,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-8">
               <Link
                 href="/blog"
-                className="text-oak-600 hover:text-oak-800 font-semibold"
+                className="text-muted hover:text-primary font-semibold transition-colors"
               >
                 Read All Articles →
               </Link>
@@ -199,22 +277,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-16 bg-oak-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-oak-200 mb-8 max-w-2xl mx-auto">
-            Get the latest updates on new collections, craftsmanship insights, and exclusive offers.
-          </p>
-          <div className="max-w-md mx-auto flex gap-4">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="flex-1 px-4 py-3 rounded-md text-oak-800"
-            />
-            <button className="bg-oak-600 hover:bg-oak-700 px-6 py-3 rounded-md font-medium transition-colors">
-              Subscribe
-            </button>
+      {/* Enhanced Newsletter Section */}
+      <section className="section section-earth-800 relative overflow-hidden">
+        <div className="absolute inset-0 wood-texture opacity-10"></div>
+        <div className="section-content-lg text-center relative">
+          <div className="mb-8">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">Stay Updated</h2>
+            <p className="text-xl text-oak-200 leading-relaxed max-w-2xl mx-auto">
+              Get the latest updates on new collections, craftsmanship insights, 
+              exclusive offers, and stories from our workshop in Latvia.
+            </p>
+          </div>
+          
+          <div className="max-w-lg mx-auto">
+            <form className="flex flex-col sm:flex-row gap-4">
+              <input 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="flex-1 px-6 py-4 rounded-xl text-primary bg-white border-0 focus:ring-2 focus:ring-oak-400 focus:outline-none text-lg"
+                required
+              />
+              <button 
+                type="submit"
+                className="bg-oak-600 hover:bg-oak-700 px-8 py-4 rounded-xl font-semibold transition-all duration-200 whitespace-nowrap text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                Subscribe
+              </button>
+            </form>
+            
+            <p className="text-sm text-oak-300 mt-4">
+              Join 500+ furniture enthusiasts. Unsubscribe anytime.
+            </p>
+          </div>
+          
+          {/* Features */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-12 border-t border-oak-700">
+            <div className="flex items-center justify-center space-x-3">
+              <LocalShippingIcon className="w-6 h-6 text-oak-400" />
+              <div className="text-left">
+                <p className="font-semibold">Free Delivery</p>
+                <p className="text-sm text-oak-300">Throughout Latvia</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-3">
+              <HandymanIcon className="w-6 h-6 text-oak-400" />
+              <div className="text-left">
+                <p className="font-semibold">Custom Orders</p>
+                <p className="text-sm text-oak-300">Made to measure</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-3">
+              <NatureIcon className="w-6 h-6 text-forest-400" />
+              <div className="text-left">
+                <p className="font-semibold">Sustainable</p>
+                <p className="text-sm text-oak-300">Locally sourced</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

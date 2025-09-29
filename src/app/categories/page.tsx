@@ -2,6 +2,7 @@
 
 import { useCategories } from '../../hooks/api';
 import { CategoryCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
+import { TableBar, TableRestaurant, Chair, GpsFixed, Palette, StraightenRounded, Restaurant, WeekendRounded, Hotel, Work } from '@mui/icons-material';
 
 export default function CategoriesPage() {
   const { categories, loading, error, refetch } = useCategories();
@@ -39,7 +40,9 @@ export default function CategoriesPage() {
             {/* Tabletops */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-oak-100 flex items-center justify-center">
-                <div className="text-6xl text-oak-600">🪵</div>
+                <div className="text-6xl text-oak-600">
+                  <TableBar sx={{ fontSize: 72 }} />
+                </div>
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-oak-800 mb-4 group-hover:text-oak-600 transition-colors">
@@ -79,7 +82,9 @@ export default function CategoriesPage() {
             {/* Table Legs */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-oak-100 flex items-center justify-center">
-                <div className="text-6xl text-oak-600">🦵</div>
+                <div className="text-6xl text-oak-600">
+                  <TableRestaurant sx={{ fontSize: 72 }} />
+                </div>
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-oak-800 mb-4 group-hover:text-oak-600 transition-colors">
@@ -152,7 +157,9 @@ export default function CategoriesPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="text-6xl mb-4">🪑</div>
+              <div className="text-6xl mb-4 text-oak-600 flex justify-center">
+                <Chair sx={{ fontSize: 72 }} />
+              </div>
               <h3 className="text-lg font-semibold text-oak-800 mb-2">No categories available</h3>
               <p className="text-oak-600">Check back soon for our furniture categories.</p>
             </div>
@@ -176,7 +183,7 @@ export default function CategoriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎯</span>
+                <GpsFixed className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-3">
                 Targeted Shopping
@@ -189,7 +196,7 @@ export default function CategoriesPage() {
 
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎨</span>
+                <Palette className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-3">
                 Coordinated Design
@@ -202,7 +209,7 @@ export default function CategoriesPage() {
 
             <div className="text-center">
               <div className="bg-oak-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📐</span>
+                <StraightenRounded className="text-oak-600" sx={{ fontSize: 24 }} />
               </div>
               <h3 className="text-xl font-semibold text-oak-800 mb-3">
                 Size & Function
@@ -232,7 +239,8 @@ export default function CategoriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-oak-800 mb-3 flex items-center">
-                🍽️ Dining Room
+                <Restaurant className="text-oak-600 mr-2" sx={{ fontSize: 20 }} />
+                Dining Room
               </h3>
               <ul className="text-sm text-oak-600 space-y-1">
                 <li>• Dining Tables</li>
@@ -244,7 +252,8 @@ export default function CategoriesPage() {
 
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-oak-800 mb-3 flex items-center">
-                🛋️ Living Room
+                <WeekendRounded className="text-oak-600 mr-2" sx={{ fontSize: 20 }} />
+                Living Room
               </h3>
               <ul className="text-sm text-oak-600 space-y-1">
                 <li>• Coffee Tables</li>
@@ -256,7 +265,8 @@ export default function CategoriesPage() {
 
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-oak-800 mb-3 flex items-center">
-                🛏️ Bedroom
+                <Hotel className="text-oak-600 mr-2" sx={{ fontSize: 20 }} />
+                Bedroom
               </h3>
               <ul className="text-sm text-oak-600 space-y-1">
                 <li>• Bed Frames</li>
@@ -268,7 +278,8 @@ export default function CategoriesPage() {
 
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-oak-800 mb-3 flex items-center">
-                💼 Office
+                <Work className="text-oak-600 mr-2" sx={{ fontSize: 20 }} />
+                Office
               </h3>
               <ul className="text-sm text-oak-600 space-y-1">
                 <li>• Desks</li>
