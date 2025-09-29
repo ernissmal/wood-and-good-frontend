@@ -21,6 +21,7 @@ export async function generateStaticParams() {
 }
 
 // Client component for dynamic functionality
+'use client';
 function ProductDetailClient() {
   const params = useParams();
   const productId = params.slug as string; // Using slug as product ID for now
