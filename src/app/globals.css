@@ -1866,3 +1866,13 @@ a:hover {
 .section-forest-800 .text-muted {
   color: var(--forest-200, #d1e4c2);
 };
+
+/* Card Component */
+
+/* Span content across multiple columns */
+span .inline-flex.items-center.space-x-2.bg-oak-600\/90.backdrop-blur-sm.rounded-full.px-4.py-2.text-white.text-sm.font-medium.mb-6 {
+  grid-column: span 2;
+  text-align: center;
+  border: 1px solid var(--oak-200, #e7d5c4);
+
+}
