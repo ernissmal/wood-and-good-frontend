@@ -236,8 +236,15 @@ export function ProductGrid({
 }
 
 // Category Card Component
+interface SanityCategory {
+  name: string;
+  imageUrl?: string;
+  image_url?: string;
+  description?: string;
+}
+
 interface CategoryCardProps {
-  category: any; // Using any for Sanity data flexibility
+  category: SanityCategory;
 }
 
 export function CategoryCard({ category }: CategoryCardProps) {
@@ -271,10 +278,23 @@ export function CategoryCard({ category }: CategoryCardProps) {
             <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
               <VisibilityIcon className="w-4 h-4 text-white" />
             </div>
-          </div>
-        </div>
-      </div>
-    </Link>
+// Blog Post Card Component
+interface BlogPost {
+  slug: { current: string } | string;
+  imageUrl?: string;
+  featured_image?: string;
+  title: string;
+  categories?: { title: string }[];
+  publishedAt?: string;
+  created_at?: string;
+  author?: string;
+  excerpt?: string;
+  featured?: boolean;
+}
+
+interface BlogPostCardProps {
+  post: BlogPost;
+}
   );
 }
 
