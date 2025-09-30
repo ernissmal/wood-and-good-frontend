@@ -1,12 +1,4 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
-import { useCart } from '../../../hooks/api';
-import { sanityApi } from '../../../lib/sanity';
-import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
+import ProductDetailClient from './ProductDetailClient';
 
 // This function is required for static export
 export async function generateStaticParams() {
@@ -16,6 +8,8 @@ export async function generateStaticParams() {
 }
 
 export default function ProductDetailPage() {
+  return <ProductDetailClient />;
+}
   const params = useParams();
   const productId = params.slug as string; // Using slug as product ID for now
   const [product, setProduct] = useState<any | null>(null);
