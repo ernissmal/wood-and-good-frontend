@@ -57,7 +57,7 @@ export function useProducts(filters?: {
   finish?: string;
   min_price?: number;
   max_price?: number;
-  sort?: string;
+  sort?: 'price_asc' | 'price_desc' | 'name_asc' | 'name_desc' | 'newest';
 }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [pagination, setPagination] = useState({
