@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Temporarily disable static export to fix build issues
-  // output: 'export',
+  // Enable static export for Cloudflare Pages
+  output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   distDir: 'dist',
