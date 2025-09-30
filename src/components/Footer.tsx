@@ -48,7 +48,7 @@ export default function Footer() {
                 className="social-link"
                 aria-label="Follow us on Instagram"
               >
-                <InstagramIcon className="w-5 h-5" />
+                <InstagramIcon className="icon-md" />
               </a>
               <a
                 href="https://facebook.com/woodandgood"
@@ -57,14 +57,14 @@ export default function Footer() {
                 className="social-link"
                 aria-label="Follow us on Facebook"
               >
-                <FacebookIcon className="w-5 h-5" />
+                <FacebookIcon className="icon-md" />
               </a>
               <a
                 href="mailto:info@woodandgood.com"
                 className="social-link"
                 aria-label="Send us an email"
               >
-                <EmailIcon className="w-5 h-5" />
+                <EmailIcon className="icon-md" />
               </a>
             </div>
           </div>
