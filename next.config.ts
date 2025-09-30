@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Temporarily disable static export to debug the error
-  // output: 'export',
+  // Use regular build instead of static export for now
   trailingSlash: true,
   images: {
     unoptimized: true,
