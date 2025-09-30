@@ -8,42 +8,26 @@ import { RadioButtonUnchecked, CropLandscape, Stop, NaturePeople } from '@mui/ic
 
 export default function TabletopsPage() {
   const [filters, setFilters] = useState({
-    page: 1,
-    limit: 12,
-    category_id: 1, // Tabletops category ID
     q: '',
     shape: '',
     finish: '',
-    min_price: undefined as number | undefined,
-    max_price: undefined as number | undefined,
     sort: 'featured'
   });
 
-  const { products, pagination, loading: productsLoading, error: productsError, refetch } = useProducts(filters);
+  const { products, loading: productsLoading, error: productsError, refetch } = useSanityProducts('table');
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({
       ...prev,
-      [key]: value,
-      page: 1 // Reset to first page when filters change
+      [key]: value
     }));
-  };
-
-  const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const clearFilters = () => {
     setFilters({
-      page: 1,
-      limit: 12,
-      category_id: 1, // Keep tabletops category
       q: '',
       shape: '',
       finish: '',
-      min_price: undefined,
-      max_price: undefined,
       sort: 'featured'
     });
   };
