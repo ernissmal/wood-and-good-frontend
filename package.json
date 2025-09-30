@@ -14,7 +14,7 @@
     "analyze": "ANALYZE=true npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "export": "next export"
+    "export": "echo 'Static export is handled by next build with output: export'"
   },
   "repository": {
     "type": "git",
