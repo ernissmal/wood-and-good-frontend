@@ -712,9 +712,12 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-md);
   text-decoration: none;
   transition: all var(--transition-fast);
+  min-height: 48px; /* Better touch target */
+  font-size: 1rem;
 }
 
-.nav-link-mobile:hover {
+.nav-link-mobile:hover,
+.nav-link-mobile:active {
   color: var(--color-oak-600);
   background-color: var(--color-oak-50);
 }
@@ -729,9 +732,13 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   font-weight: 600;
   transition: all var(--transition-base);
+  min-height: 48px;
+  font-size: 1rem;
+  touch-action: manipulation;
 }
 
-.btn-primary-mobile:hover {
+.btn-primary-mobile:hover,
+.btn-primary-mobile:active {
   background-color: var(--color-oak-700);
 }
 
@@ -828,24 +835,62 @@ h1, h2, h3, h4, h5, h6 {
 .responsive-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
+  gap: var(--space-4);
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .responsive-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
   }
 }
 
 @media (min-width: 1024px) {
   .responsive-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
   }
 }
 
 @media (min-width: 1280px) {
   .responsive-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* Mobile-first flex utilities */
+.flex-mobile-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .flex-mobile-column {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+  }
+}
+
+/* Mobile safe areas for iOS */
+@supports (padding: max(0px)) {
+  .mobile-safe-top {
+    padding-top: max(var(--space-4), env(safe-area-inset-top));
+  }
+  
+  .mobile-safe-bottom {
+    padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  }
+  
+  .mobile-safe-left {
+    padding-left: max(var(--space-4), env(safe-area-inset-left));
+  }
+  
+  .mobile-safe-right {
+    padding-right: max(var(--space-4), env(safe-area-inset-right));
   }
 }
 
