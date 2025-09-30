@@ -132,8 +132,12 @@ export function useProduct(slug: string | null) {
 // Hook for managing cart session ID
 export function useCartSession() {
   const [sessionId, setSessionId] = useState<string>('');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Mark that we're on the client side
+    setIsClient(true);
+    
     // Get or create cart session ID
     let cartSessionId = localStorage.getItem('cart_session_id');
     if (!cartSessionId) {
@@ -143,7 +147,7 @@ export function useCartSession() {
     setSessionId(cartSessionId);
   }, []);
 
-  return sessionId;
+  return { sessionId, isClient };
 }
 
 // Hook for managing shopping cart
