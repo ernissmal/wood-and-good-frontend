@@ -300,14 +300,7 @@ interface BlogPost {
 }
 
 interface BlogPostCardProps {
-  post: BlogPost;
-}
-  );
-}
-
-// Blog Post Card Component
-interface BlogPostCardProps {
-  post: any; // Using any for Sanity data flexibility
+  post: BlogPost | any; // Accept either the typed BlogPost or raw Sanity data
 }
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
