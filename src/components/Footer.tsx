@@ -13,7 +13,12 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState(2024); // Default fallback year
+
+  useEffect(() => {
+    // Set the actual year on client side
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="section section-earth-800 mt-20">
