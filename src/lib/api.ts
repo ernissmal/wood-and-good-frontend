@@ -3,7 +3,7 @@
 import { Product, Category, BlogPost, Cart, ApiResponse, PaginatedResponse, SearchParams } from '../types';
 
 const API_BASE_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost' 
-  ? 'http://localhost:3333' 
+  ? 'twg.sanity.studio' 
   : 'https://cms.woodandgood.com';
 
 class ApiClient {
