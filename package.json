@@ -42,6 +42,7 @@
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.10.1",
     "@types/stripe": "^8.0.416",
+    "autoprefixer": "^10.4.21",
     "hono": "^4.9.8",
     "next": "^15.5.4",
     "next-sanity": "^11.4.2",
