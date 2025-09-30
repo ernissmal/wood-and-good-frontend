@@ -1,49 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import { useProducts } from '../../../hooks/api';
-import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
+import { useSanityProducts } from '../../../hooks/sanity';
+import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import Link from 'next/link';
 import { AccountBalance, StraightenRounded, Cabin, Architecture, Build, StraightenSharp, Construction } from '@mui/icons-material';
 
 export default function TableLegsPage() {
   const [filters, setFilters] = useState({
-    page: 1,
-    limit: 12,
-    category_id: 2, // Table Legs category ID
     q: '',
     shape: '',
     finish: '',
-    min_price: undefined as number | undefined,
-    max_price: undefined as number | undefined,
     sort: 'featured'
   });
 
-  const { products, pagination, loading: productsLoading, error: productsError, refetch } = useProducts(filters);
+  const { products, loading: productsLoading, error: productsError, refetch } = useSanityProducts('table');
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({
       ...prev,
-      [key]: value,
-      page: 1 // Reset to first page when filters change
+      [key]: value
     }));
-  };
-
-  const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const clearFilters = () => {
     setFilters({
-      page: 1,
-      limit: 12,
-      category_id: 2, // Keep table legs category
       q: '',
       shape: '',
       finish: '',
-      min_price: undefined,
-      max_price: undefined,
       sort: 'featured'
     });
   };
@@ -219,19 +203,19 @@ export default function TableLegsPage() {
               </select>
             </div>
 
-            {/* Price Range */}
+            {/* Placeholder for future filter */}
             <div>
-              <label className="form-label">Max Price (€)</label>
+              <label className="form-label">Style</label>
               <select
-                value={filters.max_price || ''}
-                onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
+                value={filters.shape}
+                onChange={(e) => handleFilterChange('shape', e.target.value)}
                 className="form-control"
               >
-                <option value="">Any Price</option>
-                <option value="150">Under €150</option>
-                <option value="200">Under €200</option>
-                <option value="250">Under €250</option>
-                <option value="300">Under €300</option>
+                <option value="">All Styles</option>
+                <option value="turned">Classic Turned</option>
+                <option value="hairpin">Modern Hairpin</option>
+                <option value="farmhouse">Rustic Farmhouse</option>
+                <option value="pedestal">Pedestal Base</option>
               </select>
             </div>
 
@@ -251,15 +235,13 @@ export default function TableLegsPage() {
             </div>
           </div>
 
-          <div className="filter-actions">
-            <div className="filter-summary">
-              {pagination.total > 0 && (
-                <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} table legs</>
-              )}
+          <div className="flex justify-between items-center mt-4">
+            <div className="text-sm text-oak-600">
+              {products.length > 0 && `Showing ${products.length} table legs`}
             </div>
             <button
               onClick={clearFilters}
-              className="filter-clear-btn"
+              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
             >
               Clear Filters
             </button>
@@ -270,23 +252,59 @@ export default function TableLegsPage() {
       {/* Products Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductGrid
-            products={products}
-            loading={productsLoading}
-            error={productsError || undefined}
-            onAddToCart={(productId) => {
-              // Add to cart functionality
-              console.log('Add to cart:', productId);
-            }}
-            onRetry={refetch}
-          />
-
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={pagination.totalPages}
-            onPageChange={handlePageChange}
-            loading={productsLoading}
-          />
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-oak-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-oak-200 rounded mb-2"></div>
+                    <div className="h-3 bg-oak-200 rounded mb-3 w-2/3"></div>
+                    <div className="h-3 bg-oak-200 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : productsError ? (
+            <ErrorMessage message={productsError} onRetry={refetch} />
+          ) : products && products.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.map((product: any) => (
+                <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-square bg-oak-50 flex items-center justify-center">
+                    {product.images && product.images.length > 0 ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-oak-400 text-4xl">🪵</div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-oak-800 mb-2">{product.name}</h3>
+                    <p className="text-sm text-oak-600 mb-2">{product.category}</p>
+                    <div className="text-xl font-bold text-oak-800 mb-2">
+                      {product.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
+                    </div>
+                    <Link
+                      href={`/products/${product.id}`}
+                      className="w-full text-center bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm block"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">🪵</div>
+              <h3 className="text-lg font-semibold text-oak-800 mb-2">No table legs found</h3>
+              <p className="text-oak-600">Check back soon for our table leg collection.</p>
+            </div>
+          )}
         </div>
       </section>
 
