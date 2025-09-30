@@ -1,4 +1,4 @@
-// Enhanced UI components for Wood & Good E-commerce with Material Icons
+// Enhanced UI components for The Wood and Good E-commerce with Material Icons
 'use client';
 
 import React from 'react';
@@ -236,18 +236,25 @@ export function ProductGrid({
 }
 
 // Category Card Component
+interface SanityCategory {
+  name: string;
+  imageUrl?: string;
+  image_url?: string;
+  description?: string;
+}
+
 interface CategoryCardProps {
-  category: Category;
+  category: SanityCategory;
 }
 
 export function CategoryCard({ category }: CategoryCardProps) {
   return (
-    <Link href={`/products?category=${category.id}`}>
+    <Link href={`/products?category=${category.name}`}>
       <div className="furniture-card group">
         <div className="aspect-video bg-oak-gradient relative overflow-hidden">
-          {category.image_url ? (
+          {category.imageUrl || category.image_url ? (
             <img
-              src={category.image_url}
+              src={category.imageUrl || category.image_url}
               alt={category.name}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
@@ -271,16 +278,29 @@ export function CategoryCard({ category }: CategoryCardProps) {
             <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
               <VisibilityIcon className="w-4 h-4 text-white" />
             </div>
-          </div>
-        </div>
-      </div>
-    </Link>
+// Blog Post Card Component
+interface BlogPost {
+  slug: { current: string } | string;
+  imageUrl?: string;
+  featured_image?: string;
+  title: string;
+  categories?: { title: string }[];
+  publishedAt?: string;
+  created_at?: string;
+  author?: string;
+  excerpt?: string;
+  featured?: boolean;
+}
+
+interface BlogPostCardProps {
+  post: BlogPost;
+}
   );
 }
 
 // Blog Post Card Component
 interface BlogPostCardProps {
-  post: Partial<BlogPost>;
+  post: any; // Using any for Sanity data flexibility
 }
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
@@ -293,12 +313,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
   };
 
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link href={`/blog/${post.slug?.current || post.slug}`}>
       <article className="furniture-card group">
         <div className="aspect-video bg-oak-50 relative overflow-hidden">
-          {post.featured_image ? (
+          {post.imageUrl || post.featured_image ? (
             <img
-              src={post.featured_image}
+              src={post.imageUrl || post.featured_image}
               alt={post.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
@@ -307,10 +327,10 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               <CalendarTodayIcon sx={{ fontSize: 48 }} className="text-oak-600" />
             </div>
           )}
-          {post.category && (
+          {post.categories && post.categories.length > 0 && (
             <div className="absolute top-3 left-3 bg-oak-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
               <LocalOfferIcon className="w-3 h-3" />
-              <span>{post.category}</span>
+              <span>{post.categories[0].title}</span>
             </div>
           )}
           {post.featured && (
@@ -339,10 +359,10 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
                 <span>By {post.author}</span>
               </div>
             )}
-            {post.created_at && (
+            {(post.publishedAt || post.created_at) && (
               <div className="flex items-center space-x-2">
                 <CalendarTodayIcon className="w-4 h-4" />
-                <span>{formatDate(post.created_at)}</span>
+                <span>{formatDate(post.publishedAt || post.created_at)}</span>
               </div>
             )}
           </div>

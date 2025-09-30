@@ -3,30 +3,22 @@
 import { CleaningServices, Palette, Build, LocalFlorist, Home, MenuBook } from '@mui/icons-material';
 
 import { useState } from 'react';
-import { useBlogPosts } from '../../hooks/api';
-import { BlogPostCard, LoadingSpinner, ErrorMessage, Pagination } from '../../components/ui';
+import { useSanityBlogPosts } from '../../hooks/sanity';
+import { BlogPostCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
 
 export default function BlogPage() {
   const [filters, setFilters] = useState({
-    page: 1,
-    limit: 9,
     category: '',
     featured: false
   });
 
-  const { posts, pagination, loading, error, refetch } = useBlogPosts(filters);
+  const { posts, loading, error, refetch } = useSanityBlogPosts();
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters(prev => ({
       ...prev,
-      [key]: value,
-      page: 1 // Reset to first page when filters change
+      [key]: value
     }));
-  };
-
-  const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const categories = [
@@ -45,7 +37,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-textPrimary mb-4">
-              Wood & Good Blog
+              The Wood and Good Blog
             </h1>
             <p className="text-lg text-textSecondary max-w-3xl mx-auto">
               Discover the art of woodworking, care tips for your furniture, design inspiration, 
@@ -88,7 +80,7 @@ export default function BlogPage() {
 
             {/* Clear Filters */}
             <button
-              onClick={() => setFilters({ page: 1, limit: 9, category: '', featured: false })}
+              onClick={() => setFilters({ category: '', featured: false })}
               className="text-oak-600 hover:text-oak-800 text-sm font-medium ml-auto"
             >
               Clear Filters
@@ -96,9 +88,9 @@ export default function BlogPage() {
           </div>
 
           {/* Results Count */}
-          {pagination.total > 0 && (
+          {posts.length > 0 && (
             <div className="filter-summary mt-4">
-              Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} articles
+              Showing {posts.length} articles
             </div>
           )}
         </div>
@@ -123,21 +115,11 @@ export default function BlogPage() {
           ) : error ? (
             <ErrorMessage message={error} onRetry={refetch} />
           ) : posts.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post) => (
-                  <BlogPostCard key={post.id} post={post} />
-                ))}
-              </div>
-
-              {/* Pagination */}
-              <Pagination
-                currentPage={pagination.page}
-                totalPages={pagination.totalPages}
-                onPageChange={handlePageChange}
-                loading={loading}
-              />
-            </>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map((post) => (
+                <BlogPostCard key={post._id} post={post} />
+              ))}
+            </div>
           ) : (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📝</div>

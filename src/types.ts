@@ -1,4 +1,4 @@
-// Frontend Types for Wood & Good E-commerce
+// Frontend Types for The Wood and Good E-commerce
 
 export interface ApiResponse<T = any> {
   success: boolean

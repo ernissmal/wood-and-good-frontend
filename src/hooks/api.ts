@@ -1,4 +1,4 @@
-// React hooks for Wood & Good E-commerce API integration
+// React hooks for The Wood and Good E-commerce API integration
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';

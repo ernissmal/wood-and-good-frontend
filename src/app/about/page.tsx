@@ -26,7 +26,7 @@ export default function AboutPage() {
                 Heritage & Tradition
               </h2>
               <p className="text-oak-600 mb-6 text-lg leading-relaxed">
-                Founded in 1975 by master craftsman Jānis Ozols, Wood & Good began as a small 
+                Founded in 1975 by master craftsman Jānis Ozols, The Wood and Good began as a small 
                 workshop in the heart of Latvia's oak forests. What started as a passion for 
                 working with solid oak has grown into a family business spanning three generations.
               </p>

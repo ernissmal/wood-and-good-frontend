@@ -47,7 +47,7 @@ export default function Header() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-primary leading-tight">
-                  Wood & Good
+                  The Wood and Good
                 </h1>
                 <p className="text-sm text-muted leading-none">Premium Oak Furniture</p>
               </div>
