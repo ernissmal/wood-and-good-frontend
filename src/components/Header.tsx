@@ -130,7 +130,7 @@ export default function Header() {
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
-                {totalItems > 0 && (
+                {isClient && totalItems > 0 && (
                   <span className="bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-auto">
                     {totalItems}
                   </span>
