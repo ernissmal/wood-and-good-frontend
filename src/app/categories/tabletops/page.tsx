@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useProducts } from '../../../hooks/api';
-import { ProductGrid, LoadingSpinner, ErrorMessage, Pagination } from '../../../components/ui';
+import { useSanityProducts } from '../../../hooks/sanity';
+import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import Link from 'next/link';
 import { RadioButtonUnchecked, CropLandscape, Stop, NaturePeople } from '@mui/icons-material';
 
