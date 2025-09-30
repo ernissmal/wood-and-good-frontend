@@ -1,4 +1,4 @@
-// API client for Wood & Good E-commerce
+// API client for The Wood and Good E-commerce
 
 import { Product, Category, BlogPost, Cart, ApiResponse, PaginatedResponse, SearchParams } from '../types';
 
