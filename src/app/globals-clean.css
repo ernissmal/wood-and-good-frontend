@@ -1,6 +1,9 @@
+/* stylelint-disable at-rule-no-unknown */
+/* Using Tailwind directives for PostCSS/Tailwind build pipeline */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
 /* ==========================================================================
    The Wood and Good Design System - Clean & DRY
