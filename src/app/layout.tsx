@@ -37,9 +37,19 @@ export const metadata: Metadata = {
     description: "Handcrafted solid oak furniture, sustainably sourced and expertly crafted in Latvia.",
     images: ["/images/og-image.jpg"],
   },
-  viewport: "width=device-width, initial-scale=1",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   alternates: {
     canonical: "https://woodandgood.com",
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
   },
 };
 
