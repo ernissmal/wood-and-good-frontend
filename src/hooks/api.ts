@@ -152,65 +152,66 @@ export function useCartSession() {
 
 // Hook for managing shopping cart
 export function useCart() {
-  const sessionId = useCartSession();
+  const { sessionId, isClient } = useCartSession();
   const [cart, setCart] = useState<Cart | null>(null);
   const { loading, error, execute } = useLoading();
 
   const fetchCart = useCallback(async () => {
-    if (!sessionId) return;
+    if (!sessionId || !isClient) return;
     const result = await execute(() => api.getCart(sessionId)) as ApiResponse<Cart> | null;
     if (result?.success && result.data) {
       setCart(result.data);
     }
-  }, [sessionId, execute]);
+  }, [sessionId, isClient, execute]);
 
   const addToCart = useCallback(async (productId: number, quantity: number = 1, variantId?: number) => {
-    if (!sessionId) return;
+    if (!sessionId || !isClient) return;
     const result = await execute(() => api.addToCart(sessionId, productId, quantity, variantId)) as ApiResponse<Cart> | null;
     if (result?.success && result.data) {
       setCart(result.data);
       return result.data;
     }
-  }, [sessionId, execute]);
+  }, [sessionId, isClient, execute]);
 
   const updateCartItem = useCallback(async (productId: number, quantity: number) => {
-    if (!sessionId) return;
+    if (!sessionId || !isClient) return;
     const result = await execute(() => api.updateCartItem(sessionId, productId, quantity)) as ApiResponse<Cart> | null;
     if (result?.success && result.data) {
       setCart(result.data);
       return result.data;
     }
-  }, [sessionId, execute]);
+  }, [sessionId, isClient, execute]);
 
   const removeFromCart = useCallback(async (productId: number) => {
-    if (!sessionId) return;
+    if (!sessionId || !isClient) return;
     const result = await execute(() => api.removeFromCart(sessionId, productId)) as ApiResponse<Cart> | null;
     if (result?.success && result.data) {
       setCart(result.data);
       return result.data;
     }
-  }, [sessionId, execute]);
+  }, [sessionId, isClient, execute]);
 
   const clearCart = useCallback(async () => {
-    if (!sessionId) return;
+    if (!sessionId || !isClient) return;
     const result = await execute(() => api.clearCart(sessionId)) as ApiResponse<Cart> | null;
     if (result?.success && result.data) {
       setCart(result.data);
       return result.data;
     }
-  }, [sessionId, execute]);
+  }, [sessionId, isClient, execute]);
 
   useEffect(() => {
-    if (sessionId) {
+    if (sessionId && isClient) {
       fetchCart();
     }
-  }, [fetchCart, sessionId]);
+  }, [fetchCart, sessionId, isClient]);
 
   return {
     cart,
     loading,
     error,
     sessionId,
+    isClient,
     addToCart,
     updateCartItem,
     removeFromCart,
