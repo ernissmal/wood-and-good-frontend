@@ -408,6 +408,111 @@ body {
 }
 
 /* ==========================================================================
+   Backward Compatibility Classes (Transitional)
+   ========================================================================== */
+
+/* Section Classes */
+.section {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.section-white {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.section-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+/* Legacy Color Classes */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.oak-gradient {
+  background: linear-gradient(135deg, var(--color-oak-400) 0%, var(--color-oak-600) 100%);
+}
+
+.bg-oak-50 {
+  background-color: var(--color-oak-50);
+}
+
+.text-oak-600 {
+  color: var(--color-oak-600);
+}
+
+.hover\:text-oak-600:hover {
+  color: var(--color-oak-600);
+}
+
+.hover\:bg-oak-50:hover {
+  background-color: var(--color-oak-50);
+}
+
+.text-textSecondary {
+  color: var(--text-secondary);
+}
+
+.border-oak-200 {
+  border-color: var(--color-oak-200);
+}
+
+.bg-forest-500 {
+  background-color: var(--color-oak-600); /* Using oak for consistency */
+}
+
+/* Mobile Navigation Classes */
+.nav-link-mobile {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-primary);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.nav-link-mobile:hover {
+  color: var(--color-oak-600);
+  background-color: var(--color-oak-50);
+}
+
+.btn-primary-mobile {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-oak-600);
+  color: var(--text-inverse);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.btn-primary-mobile:hover {
+  background-color: var(--color-oak-700);
+}
+
+/* ==========================================================================
    Specific Component IDs (Only when absolutely necessary)
    ========================================================================== */
 
