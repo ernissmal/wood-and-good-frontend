@@ -224,23 +224,59 @@ export default function TabletopsPage() {
       {/* Products Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductGrid
-            products={products}
-            loading={productsLoading}
-            error={productsError || undefined}
-            onAddToCart={(productId) => {
-              // Add to cart functionality
-              console.log('Add to cart:', productId);
-            }}
-            onRetry={refetch}
-          />
-
-          <Pagination
-            currentPage={pagination.page}
-            totalPages={pagination.totalPages}
-            onPageChange={handlePageChange}
-            loading={productsLoading}
-          />
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-oak-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-oak-200 rounded mb-2"></div>
+                    <div className="h-3 bg-oak-200 rounded mb-3 w-2/3"></div>
+                    <div className="h-3 bg-oak-200 rounded"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : productsError ? (
+            <ErrorMessage message={productsError} onRetry={refetch} />
+          ) : products && products.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.map((product: any) => (
+                <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-square bg-oak-50 flex items-center justify-center">
+                    {product.images && product.images.length > 0 ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-oak-400 text-4xl">🪵</div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-oak-800 mb-2">{product.name}</h3>
+                    <p className="text-sm text-oak-600 mb-2">{product.category}</p>
+                    <div className="text-xl font-bold text-oak-800 mb-2">
+                      {product.price ? `€${product.price.toFixed(2)}` : 'Price on Request'}
+                    </div>
+                    <Link
+                      href={`/products/${product.id}`}
+                      className="w-full text-center bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm block"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">🪵</div>
+              <h3 className="text-lg font-semibold text-oak-800 mb-2">No tabletops found</h3>
+              <p className="text-oak-600">Check back soon for our tabletop collection.</p>
+            </div>
+          )}
         </div>
       </section>
 
