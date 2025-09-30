@@ -1,4 +1,4 @@
-// Enhanced UI components for Wood & Good E-commerce with Material Icons
+// Enhanced UI components for The Wood and Good E-commerce with Material Icons
 'use client';
 
 import React from 'react';
