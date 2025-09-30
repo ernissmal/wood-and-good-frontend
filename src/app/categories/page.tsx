@@ -1,11 +1,11 @@
 'use client';
 
-import { useCategories } from '../../hooks/api';
+import { useSanityCategories } from '../../hooks/sanity';
 import { CategoryCard, LoadingSpinner, ErrorMessage } from '../../components/ui';
 import { TableBar, TableRestaurant, Chair, GpsFixed, Palette, StraightenRounded, Restaurant, WeekendRounded, Hotel, Work } from '@mui/icons-material';
 
 export default function CategoriesPage() {
-  const { categories, loading, error, refetch } = useCategories();
+  const { categories, loading, error, refetch } = useSanityCategories();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -151,8 +151,8 @@ export default function CategoriesPage() {
             <ErrorMessage message={error} onRetry={refetch} />
           ) : categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {categories.map((category) => (
-                <CategoryCard key={category.id} category={category} />
+              {categories.map((category: any) => (
+                <CategoryCard key={category._id} category={category} />
               ))}
             </div>
           ) : (
