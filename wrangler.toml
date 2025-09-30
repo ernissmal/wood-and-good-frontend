@@ -10,8 +10,14 @@ route = ""
 zone_id = ""
 
 [build]
-command = "npm run build"
+command = "npm run build && npm run export"
 cwd = "."
+watch_dir = "src"
+
+# Static site configuration
+[site]
+bucket = "./out"
+entry-point = "workers-site"
 
 # Production environment variables
 [vars]
