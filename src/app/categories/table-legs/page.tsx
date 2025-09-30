@@ -333,11 +333,13 @@ export default function TableLegsPage() {
           <div className="mb-16">
             <h3 className="text-3xl font-bold text-oak-800 mb-8 text-center">Leg Styles</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {legStyles.map((style, index) => (
+              {legStyles.map((style, index) => {
+                const IconComponent = style.icon;
+                return (
                 <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start">
                     <div className="text-4xl mr-4 mt-1 text-oak-600">
-                      <style.icon sx={{ fontSize: 48 }} />
+                      <IconComponent sx={{ fontSize: 48 }} />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold text-oak-800 mb-2">{style.style}</h4>
@@ -366,7 +368,8 @@ export default function TableLegsPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
