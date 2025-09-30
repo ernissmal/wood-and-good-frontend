@@ -134,6 +134,9 @@ export function useCartSession() {
   const [sessionId, setSessionId] = useState<string>('');
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
     // Get or create cart session ID
     let cartSessionId = localStorage.getItem('cart_session_id');
     if (!cartSessionId) {
