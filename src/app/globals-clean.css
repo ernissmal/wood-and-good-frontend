@@ -953,11 +953,126 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
+   Critical Mobile Fixes
+   ========================================================================== */
+
+/* Prevent horizontal scrolling on mobile */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* Better mobile input styling */
+input, select, textarea {
+  font-size: 16px; /* Prevent zoom on iOS */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Mobile-friendly focus states */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Improve mobile touch targets */
+@media (max-width: 768px) {
+  a, button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Better mobile navigation */
+  .nav-link {
+    padding: var(--space-3) var(--space-4);
+    font-size: 1rem;
+  }
+  
+  /* Mobile typography improvements */
+  .heading-1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.1;
+  }
+  
+  .heading-2 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    line-height: 1.2;
+  }
+  
+  .heading-3 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    line-height: 1.3;
+  }
+  
+  /* Better mobile containers */
+  .container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  
+  .section {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+}
+
+/* ==========================================================================
+   Performance Optimizations
+   ========================================================================== */
+
+/* Optimize animations for better performance */
+.hover-lift,
+.hover-grow,
+.card,
+.btn {
+  will-change: transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
    Print Styles
    ========================================================================== */
 
 @media print {
   .no-print {
     display: none !important;
+  }
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
   }
 }
