@@ -88,7 +88,10 @@ export default function ProductsPage() {
             </div>
           ) : products && products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product: any) => (
+              {products.map((product: any) => {
+                // Debug logging for product data
+                console.log('Product data:', product);
+                return (
                 <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square bg-oak-50 flex items-center justify-center">
                     {product.images && product.images.length > 0 ? (
@@ -126,7 +129,7 @@ export default function ProductsPage() {
                     
                     <div className="flex gap-2">
                       <Link
-                        href={`/products/${product.id}`}
+                        href={`/product/${product.id || product._id}`}
                         className="flex-1 text-center bg-oak-600 text-white px-4 py-2 rounded-lg hover:bg-oak-700 transition-colors text-sm"
                       >
                         View Details
@@ -136,13 +139,13 @@ export default function ProductsPage() {
                           onClick={() => {
                             // Quick add to cart from products page
                             const cart = JSON.parse(localStorage.getItem('wood_good_cart') || '[]');
-                            const existingItem = cart.find((item: any) => item.id === product.id);
+                            const existingItem = cart.find((item: any) => item.id === product._id);
                             
                             if (existingItem) {
                               existingItem.quantity += 1;
                             } else {
                               cart.push({
-                                id: product.id,
+                                id: product._id,
                                 name: product.name,
                                 price: product.price,
                                 quantity: 1,
@@ -163,7 +166,8 @@ export default function ProductsPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-16">
