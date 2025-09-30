@@ -4,13 +4,7 @@ import { useSanityCategories, useSanityFeaturedProducts, useSanityFeaturedBlogPo
 import { useCart } from '../hooks/api';
 import { ProductGrid, CategoryCard, BlogPostCard, LoadingSpinner, ErrorMessage } from '../components/ui';
 import Link from 'next/link';
-import HandymanIcon from '@mui/icons-material/Handyman';
-import NatureIcon from '@mui/icons-material/Nature';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import StarIcon from '@mui/icons-material/Star';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import InfoIcon from '@mui/icons-material/Info';
+// Removed Material-UI icons to fix build issues
 
 export default function Home() {
   const { categories, loading: categoriesLoading, error: categoriesError } = useSanityCategories();
