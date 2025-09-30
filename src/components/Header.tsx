@@ -4,18 +4,17 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../hooks/api';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import HomeIcon from '@mui/icons-material/Home';
-import CategoryIcon from '@mui/icons-material/Category';
-import ArticleIcon from '@mui/icons-material/Article';
-import InfoIcon from '@mui/icons-material/Info';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
+// Removed Material-UI icons to fix build issues
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { cart } = useCart();
+
+  // Only render cart-dependent UI after hydration
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,14 +25,14 @@ export default function Header() {
   };
 
   const navigationItems = [
-    { href: '/', label: 'Home', icon: HomeIcon },
-    { href: '/products', label: 'Products', icon: CategoryIcon },
-    { href: '/blog', label: 'Blog', icon: ArticleIcon },
-    { href: '/about', label: 'About', icon: InfoIcon },
-    { href: '/contact', label: 'Contact', icon: ContactPageIcon },
+    { href: '/', label: 'Home' },
+    { href: '/products', label: 'Products' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ];
 
-  const totalItems = cart?.total_items || 0;
+  const totalItems = mounted && cart?.total_items ? cart.total_items : 0;
 
   return (
     <header className="section section-white shadow-sm sticky top-0 z-50">
@@ -57,28 +56,23 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-center space-x-8">
-              {navigationItems.map((item) => {
-                const IconComponent = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="nav-link flex items-center space-x-2 group"
-                  >
-                    <IconComponent className="w-4 h-4 transition-transform group-hover:scale-110" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="nav-link flex items-center space-x-2 group"
+                >
+                  <span>{item.label}</span>
+                </Link>
+              ))}
               
               {/* Cart Button */}
               <Link
                 href="/cart"
                 className="btn-primary flex items-center space-x-2 group relative"
               >
-                <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
-                {totalItems > 0 && (
+                {mounted && totalItems > 0 && (
                   <span className="absolute -top-2 -right-2 bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {totalItems}
                   </span>
@@ -94,11 +88,9 @@ export default function Header() {
               className="p-2 rounded-lg text-textSecondary hover:text-oak-600 hover:bg-oak-50 transition-colors duration-200"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? (
-                <CloseIcon className="w-6 h-6" />
-              ) : (
-                <MenuIcon className="w-6 h-6" />
-              )}
+              <span className="text-xl">
+                {isMenuOpen ? '✕' : '☰'}
+              </span>
             </button>
           </div>
         </div>
@@ -107,20 +99,16 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden">
             <div className="px-2 pt-2 pb-6 space-y-1 bg-white border-t border-oak-200">
-              {navigationItems.map((item) => {
-                const IconComponent = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeMenu}
-                    className="nav-link-mobile flex items-center space-x-3"
-                  >
-                    <IconComponent className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMenu}
+                  className="nav-link-mobile flex items-center space-x-3"
+                >
+                  <span>{item.label}</span>
+                </Link>
+              ))}
               
               {/* Mobile Cart Button */}
               <Link
@@ -128,9 +116,8 @@ export default function Header() {
                 onClick={closeMenu}
                 className="btn-primary-mobile flex items-center space-x-3 relative"
               >
-                <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
-                {totalItems > 0 && (
+                {mounted && totalItems > 0 && (
                   <span className="bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-auto">
                     {totalItems}
                   </span>
