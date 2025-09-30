@@ -2,7 +2,7 @@
   "name": "wood-and-good-frontend",
   "version": "1.0.0",
   "private": false,
-  "description": "Wood & Good E-commerce Frontend - Next.js Application",
+  "description": "The Wood and Good E-commerce Frontend - Next.js Application",
   "scripts": {
     "dev": "next dev --port 3001",
     "dev:prod": "next dev --port 3000",
@@ -29,7 +29,7 @@
     "tailwindcss",
     "typescript"
   ],
-  "author": "Wood & Good Team",
+  "author": "The Wood and Good Team",
   "license": "MIT",
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250926.0",
