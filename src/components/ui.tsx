@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Product, Category, BlogPost } from '@/types';
+import { Product, Category } from '@/types';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
