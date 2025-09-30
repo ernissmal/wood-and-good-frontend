@@ -365,6 +365,14 @@ body {
   border-radius: var(--radius-xl);
   font-size: 0.75rem;
   font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+@media (min-width: 640px) {
+  .badge {
+    font-size: 0.875rem;
+    padding: 0.375rem 1rem;
+  }
 }
 
 .badge-primary {
@@ -373,8 +381,8 @@ body {
 }
 
 .badge-success {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: var(--color-oak-100);
+  color: var(--color-oak-800); /* Use brand colors instead of green */
 }
 
 .badge-warning {
@@ -385,6 +393,55 @@ body {
 .badge-error {
   background-color: #fee2e2;
   color: #991b1b;
+}
+
+/* Responsive Icon System */
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .icon-md {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.icon-lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .icon-lg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.icon-xl {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (min-width: 640px) {
+  .icon-xl {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .icon-xl {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 /* Navigation */
@@ -420,6 +477,11 @@ body {
 .section-white {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+}
+
+.section-earth-800 {
+  background-color: var(--color-oak-800);
+  color: var(--text-inverse);
 }
 
 .section-container {
@@ -477,6 +539,123 @@ body {
 
 .bg-forest-500 {
   background-color: var(--color-oak-600); /* Using oak for consistency */
+}
+
+/* Footer Specific Classes */
+.footer-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-inverse);
+  margin-bottom: var(--space-4);
+}
+
+.footer-link {
+  color: var(--color-oak-200);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--color-oak-400); /* Warm oak color instead of white */
+  transform: translateX(2px);
+}
+
+.footer-text {
+  color: var(--color-oak-200);
+  line-height: 1.5;
+}
+
+.footer-text-bold {
+  color: var(--text-inverse);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-oak-200);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(8px);
+}
+
+.social-link:hover {
+  background-color: var(--color-oak-600);
+  color: var(--text-inverse);
+  transform: translateY(-2px);
+}
+
+/* Color fixes for brand consistency */
+.text-oak-200 {
+  color: var(--color-oak-200);
+}
+
+.text-oak-400 {
+  color: var(--color-oak-400);
+}
+
+.border-oak-700 {
+  border-color: var(--color-oak-700);
+}
+
+.text-forest-400 {
+  color: var(--color-oak-400); /* Use oak instead of green for brand consistency */
+}
+
+/* ==========================================================================
+   Brand-Consistent Environmental Colors (Sustainability Page)
+   ========================================================================== */
+
+/* Replace green with warm, earthy oak tones for sustainability */
+.bg-green-50 {
+  background-color: var(--color-oak-50); /* Light oak instead of green */
+}
+
+.bg-green-600 {
+  background-color: var(--color-oak-600); /* Oak instead of green */
+}
+
+.bg-green-700 {
+  background-color: var(--color-oak-700); /* Darker oak */
+}
+
+.bg-green-800 {
+  background-color: var(--color-oak-800); /* Deep oak */
+}
+
+.text-green-200 {
+  color: var(--color-oak-200); /* Light oak text */
+}
+
+.text-green-600 {
+  color: var(--color-oak-600); /* Oak accent text */
+}
+
+.text-green-700 {
+  color: var(--color-oak-700); /* Darker oak text */
+}
+
+.border-green-600 {
+  border-color: var(--color-oak-600); /* Oak borders */
+}
+
+.hover\:bg-green-700:hover {
+  background-color: var(--color-oak-700); /* Oak hover states */
+}
+
+/* Sustainability-specific gradient */
+.bg-gradient-to-r.from-green-800.to-oak-800 {
+  background: linear-gradient(to right, var(--color-oak-800), var(--color-oak-700));
 }
 
 /* Mobile Navigation Classes */
