@@ -78,12 +78,12 @@ export default function ProductsPage() {
                 <p className="text-xl font-semibold">Error loading products</p>
                 <p className="text-sm">{productsError}</p>
               </div>
-              <p className="text-oak-600">Please check that Sanity CMS is running on port 3333</p>
+              <p className="text-oak-600">Please check that Sanity CMS is running and accessible</p>
               <Link
-                href="/sanity-test"
+                href="/contact"
                 className="inline-block mt-4 bg-oak-600 text-white px-6 py-2 rounded-lg hover:bg-oak-700 transition-colors"
               >
-                Test Connection
+                Contact Support
               </Link>
             </div>
           ) : products && products.length > 0 ? (
