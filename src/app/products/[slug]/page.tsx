@@ -8,6 +8,13 @@ import { useCart } from '../../../hooks/api';
 import { sanityApi } from '../../../lib/sanity';
 import { SentimentDissatisfied, CleaningServices, LocalShipping, Security, Star, TableBar } from '@mui/icons-material';
 
+// This function is required for static export
+export async function generateStaticParams() {
+  // For now, return an empty array to prevent build errors
+  // In production, you would fetch all product slugs from your CMS
+  return [];
+}
+
 export default function ProductDetailPage() {
   const params = useParams();
   const productId = params.slug as string; // Using slug as product ID for now
