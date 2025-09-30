@@ -48,7 +48,7 @@ export default function TableLegsPage() {
       characteristics: ["Hand-turned profiles", "Elegant tapered design", "Traditional proportions", "Suitable for formal and casual settings"],
       bestFor: "Traditional, transitional, and farmhouse styles",
       height: "Standard 72cm dining height",
-      icon: AccountBalance
+      iconType: "classic"
     },
     {
       style: "Modern Hairpin Legs",
@@ -56,7 +56,7 @@ export default function TableLegsPage() {
       characteristics: ["Minimalist design", "Steel reinforcement", "Space-saving profile", "Easy to install"],
       bestFor: "Modern, industrial, and Scandinavian styles",
       height: "Available in multiple heights",
-      icon: StraightenRounded
+      iconType: "modern"
     },
     {
       style: "Rustic Farmhouse Legs", 
@@ -64,7 +64,7 @@ export default function TableLegsPage() {
       characteristics: ["Thick, sturdy construction", "Distressed finish", "Visible wood character", "Mortise and tenon joinery"],
       bestFor: "Farmhouse, rustic, and country styles",
       height: "Standard 75cm for farmhouse tables",
-      icon: Cabin
+      iconType: "rustic"
     },
     {
       style: "Pedestal Bases",
@@ -72,7 +72,7 @@ export default function TableLegsPage() {
       characteristics: ["Maximum legroom", "Single point support", "Heavy-duty construction", "Various top attachment options"],
       bestFor: "Conference tables, round dining tables",
       height: "Custom heights available",
-      icon: Architecture
+      iconType: "pedestal"
     }
   ];
 
@@ -337,7 +337,10 @@ export default function TableLegsPage() {
                 <div key={index} className="bg-oak-50 rounded-lg p-6 hover:shadow-md transition-shadow">
                   <div className="flex items-start">
                     <div className="text-4xl mr-4 mt-1 text-oak-600">
-                      <style.icon sx={{ fontSize: 48 }} />
+                      {style.iconType === "classic" && <AccountBalance sx={{ fontSize: 48 }} />}
+                      {style.iconType === "modern" && <StraightenRounded sx={{ fontSize: 48 }} />}
+                      {style.iconType === "rustic" && <Cabin sx={{ fontSize: 48 }} />}
+                      {style.iconType === "pedestal" && <Architecture sx={{ fontSize: 48 }} />}
                     </div>
                     <div className="flex-1">
                       <h4 className="text-xl font-bold text-oak-800 mb-2">{style.style}</h4>
