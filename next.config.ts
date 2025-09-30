@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Temporarily disable static export to fix deployment issues
-  // output: 'export',
+  // Use static export for Cloudflare Pages
+  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
@@ -20,7 +20,10 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Headers are handled by Cloudflare Pages instead of Next.js for static export
+  // Skip problematic routes during static generation
+  generateBuildId: async () => {
+    return 'wood-and-good-build'
+  },
 };
 
 export default nextConfig;
