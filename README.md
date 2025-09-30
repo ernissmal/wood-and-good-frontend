@@ -1,8 +1,8 @@
-# Wood & Good Frontend
+# The Wood and Good Frontend
 
 ## 🌐 E-commerce Frontend Application
 
-This repository contains the customer-facing Next.js application for Wood & Good - a premium oak wood furniture manufacturer. Built with security-first architecture, the frontend consumes read-only APIs from the secure CMS backend.
+This repository contains the customer-facing Next.js application for The Wood and Good - a premium oak wood furniture manufacturer. Built with security-first architecture, the frontend consumes read-only APIs from the secure CMS backend.
 
 ## ✨ Features
 
@@ -113,7 +113,7 @@ NEXT_PUBLIC_SANITY_DATASET=production
 
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=https://wood-and-good.lv
-NEXT_PUBLIC_SITE_NAME=Wood & Good
+NEXT_PUBLIC_SITE_NAME=The Wood and Good
 ```
 
 ## 🔧 Development
