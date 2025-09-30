@@ -6,6 +6,15 @@ import { LoadingSpinner, ErrorMessage } from '../../../components/ui';
 import Link from 'next/link';
 import { AccountBalance, StraightenRounded, Cabin, Architecture, Build, StraightenSharp, Construction } from '@mui/icons-material';
 
+interface SanityProduct {
+  _id: string;
+  id: string;
+  images?: string[];
+  name: string;
+  category?: string;
+  price?: number;
+}
+
 export default function TableLegsPage() {
   const [filters, setFilters] = useState({
     q: '',
@@ -269,7 +278,7 @@ export default function TableLegsPage() {
             <ErrorMessage message={productsError} onRetry={refetch} />
           ) : products && products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product: any) => (
+              {products.map((product: SanityProduct) => (
                 <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square bg-oak-50 flex items-center justify-center">
                     {product.images && product.images.length > 0 ? (
