@@ -105,9 +105,9 @@ export const sanityQueries = {
     }
   `,
 
-  // Get single product by ID
+  // Get single product by ID (supports both custom id and _id)
   getProductById: (productId: string) => `
-    *[_type == "productContent" && id == "${productId}"][0] {
+    *[_type == "productContent" && (id == "${productId}" || _id == "${productId}")][0] {
       _id,
       id,
       name,
