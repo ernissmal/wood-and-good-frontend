@@ -173,19 +173,19 @@ export default function TabletopsPage() {
               </select>
             </div>
 
-            {/* Price Range */}
+            {/* Shape Filter */}
             <div>
-              <label className="form-label">Max Price (€)</label>
+              <label className="form-label">Table Shape</label>
               <select
-                value={filters.max_price || ''}
-                onChange={(e) => handleFilterChange('max_price', e.target.value ? parseInt(e.target.value) : undefined)}
+                value={filters.shape}
+                onChange={(e) => handleFilterChange('shape', e.target.value)}
                 className="form-control"
               >
-                <option value="">Any Price</option>
-                <option value="300">Under €300</option>
-                <option value="400">Under €400</option>
-                <option value="500">Under €500</option>
-                <option value="600">Under €600</option>
+                <option value="">All Shapes</option>
+                <option value="rectangular">Rectangular</option>
+                <option value="round">Round</option>
+                <option value="oval">Oval</option>
+                <option value="square">Square</option>
               </select>
             </div>
 
@@ -205,15 +205,13 @@ export default function TabletopsPage() {
             </div>
           </div>
 
-          <div className="filter-actions">
-            <div className="filter-summary">
-              {pagination.total > 0 && (
-                <>Showing {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} tabletops</>
-              )}
+          <div className="flex justify-between items-center mt-4">
+            <div className="text-sm text-oak-600">
+              {products.length > 0 && `Showing ${products.length} tabletops`}
             </div>
             <button
               onClick={clearFilters}
-              className="filter-clear-btn"
+              className="text-oak-600 hover:text-oak-800 text-sm font-medium"
             >
               Clear Filters
             </button>
