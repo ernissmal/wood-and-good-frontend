@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Product, Category, BlogPost } from '@/types';
+import { Product, Category } from '@/types';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StarIcon from '@mui/icons-material/Star';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -278,6 +278,13 @@ export function CategoryCard({ category }: CategoryCardProps) {
             <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
               <VisibilityIcon className="w-4 h-4 text-white" />
             </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 // Blog Post Card Component
 interface BlogPost {
   slug: { current: string } | string;
@@ -295,13 +302,6 @@ interface BlogPost {
 interface BlogPostCardProps {
   post: BlogPost;
 }
-  );
-}
-
-// Blog Post Card Component
-interface BlogPostCardProps {
-  post: any; // Using any for Sanity data flexibility
-}
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   const formatDate = (dateString: string) => {
@@ -313,7 +313,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
   };
 
   return (
-    <Link href={`/blog/${post.slug?.current || post.slug}`}>
+    <Link href={`/blog/${typeof post.slug === 'string' ? post.slug : post.slug?.current}`}>
       <article className="furniture-card group">
         <div className="aspect-video bg-oak-50 relative overflow-hidden">
           {post.imageUrl || post.featured_image ? (
@@ -362,7 +362,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             {(post.publishedAt || post.created_at) && (
               <div className="flex items-center space-x-2">
                 <CalendarTodayIcon className="w-4 h-4" />
-                <span>{formatDate(post.publishedAt || post.created_at)}</span>
+                <span>{formatDate(post.publishedAt || post.created_at || '')}</span>
               </div>
             )}
           </div>
