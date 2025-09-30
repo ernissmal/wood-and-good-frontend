@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '../hooks/api';
+import ClientOnly from './ClientOnly';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -78,11 +79,13 @@ export default function Header() {
               >
                 <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
-                {isClient && totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
+                <ClientOnly>
+                  {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </ClientOnly>
               </Link>
             </div>
           </div>
@@ -130,11 +133,13 @@ export default function Header() {
               >
                 <ShoppingCartIcon className="w-5 h-5" />
                 <span>Cart</span>
-                {isClient && totalItems > 0 && (
-                  <span className="bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-auto">
-                    {totalItems}
-                  </span>
-                )}
+                <ClientOnly>
+                  {totalItems > 0 && (
+                    <span className="bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-auto">
+                      {totalItems}
+                    </span>
+                  )}
+                </ClientOnly>
               </Link>
             </div>
           </div>
