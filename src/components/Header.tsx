@@ -15,7 +15,7 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cart } = useCart();
+  const { cart, isClient } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -33,7 +33,7 @@ export default function Header() {
     { href: '/contact', label: 'Contact', icon: ContactPageIcon },
   ];
 
-  const totalItems = cart?.total_items || 0;
+  const totalItems = isClient ? (cart?.total_items || 0) : 0;
 
   return (
     <header className="section section-white shadow-sm sticky top-0 z-50">
@@ -78,7 +78,7 @@ export default function Header() {
               >
                 <ShoppingCartIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
                 <span>Cart</span>
-                {totalItems > 0 && (
+                {isClient && totalItems > 0 && (
                   <span className="absolute -top-2 -right-2 bg-forest-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {totalItems}
                   </span>
