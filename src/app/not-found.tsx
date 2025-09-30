@@ -1,4 +1,6 @@
-export default function Custom404() {
+import Link from 'next/link';
+
+export default function NotFound() {
   return (
     <div className="min-h-screen bg-oak-50 flex items-center justify-center">
       <div className="text-center">
@@ -8,18 +10,18 @@ export default function Custom404() {
           The page you are looking for could not be found.
         </p>
         <div className="space-x-4">
-          <a
+          <Link
             href="/"
             className="bg-oak-600 text-white px-6 py-3 rounded-lg hover:bg-oak-700 transition-colors inline-block"
           >
             Go Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="/products"
             className="bg-white text-oak-600 px-6 py-3 rounded-lg border border-oak-300 hover:bg-oak-50 transition-colors inline-block"
           >
             Browse Products
-          </a>
+          </Link>
         </div>
       </div>
     </div>
