@@ -37,7 +37,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-textPrimary mb-4">
-              Wood & Good Blog
+              The Wood and Good Blog
             </h1>
             <p className="text-lg text-textSecondary max-w-3xl mx-auto">
               Discover the art of woodworking, care tips for your furniture, design inspiration, 
