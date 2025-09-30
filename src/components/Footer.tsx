@@ -105,29 +105,29 @@ export default function Footer() {
               <NatureIcon className="w-5 h-5" />
               <span>Company</span>
             </h4>
-            <ul className="space-y-3 text-oak-200">
+            <ul className="space-y-3">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors duration-200">
+                <Link href="/about" className="footer-link">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/about/craftsmanship" className="hover:text-white transition-colors duration-200">
+                <Link href="/about/craftsmanship" className="footer-link">
                   Craftsmanship
                 </Link>
               </li>
               <li>
-                <Link href="/about/sustainability" className="hover:text-white transition-colors duration-200">
+                <Link href="/about/sustainability" className="footer-link">
                   Sustainability
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors duration-200">
+                <Link href="/contact" className="footer-link">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors duration-200">
+                <Link href="/blog" className="footer-link">
                   Blog
                 </Link>
               </li>
@@ -153,7 +153,7 @@ export default function Footer() {
                 <EmailIcon className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="footer-text-bold">Email Us</p>
-                  <a href="mailto:info@woodandgood.com" className="footer-text text-sm hover:text-white">
+                  <a href="mailto:info@woodandgood.com" className="footer-link text-sm">
                     info@woodandgood.com
                   </a>
                 </div>
