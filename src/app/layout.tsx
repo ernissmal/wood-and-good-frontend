@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-// @ts-ignore: allow importing global CSS without type declarations
+// @ts-expect-error: allow importing global CSS without type declarations
 import './globals-clean.css';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
