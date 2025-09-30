@@ -72,7 +72,7 @@ export default function Footer() {
           {/* Products */}
           <div>
             <h4 className="footer-heading">
-              <HandymanIcon className="w-5 h-5" />
+              <HandymanIcon className="icon-md" />
               <span>Products</span>
             </h4>
             <ul className="space-y-3 text-oak-200">
