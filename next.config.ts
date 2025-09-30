@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Use static export for Cloudflare Pages
-  output: 'export',
+  // Temporarily disable static export to debug the error
+  // output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
