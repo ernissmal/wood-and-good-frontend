@@ -304,10 +304,8 @@ The new schema supports a hierarchical categorization system that allows for:
    - Desk Tables
 
 2. **Table Legs** (`categoryType: 'table-legs'`)
-   - Traditional Turned Legs
-   - Modern Hairpin Legs
-   - Farmhouse Style Legs
-   - Industrial Legs
+   - X Shape Legs
+   - Rectangular Shape Legs
    - Custom Legs
 
 3. **Other Products** (`categoryType: 'other'`)
