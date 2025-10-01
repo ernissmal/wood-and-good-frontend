@@ -119,6 +119,73 @@ export default defineConfig({
                   ])
               ),
 
+            // Table Configuration Section
+            S.listItem()
+              .title('Table Configuration')
+              .child(
+                S.list()
+                  .title('Table Customization System')
+                  .items([
+                    S.listItem()
+                      .title('Table Configurations')
+                      .child(S.documentTypeList('tableConfiguration').title('Table Configurations')),
+                    S.divider(),
+                    S.listItem()
+                      .title('Table Shapes')
+                      .child(S.documentTypeList('tableShape').title('Table Shapes')),
+                    S.listItem()
+                      .title('Materials')
+                      .child(S.documentTypeList('tableMaterial').title('Table Materials')),
+                    S.listItem()
+                      .title('Sizes')
+                      .child(S.documentTypeList('tableSize').title('Table Sizes')),
+                    S.listItem()
+                      .title('Quality Grades')
+                      .child(S.documentTypeList('tableQuality').title('Quality Grades')),
+                  ])
+              ),
+
+            // Customer Quotes Section
+            S.listItem()
+              .title('Customer Quotes')
+              .child(
+                S.list()
+                  .title('Quote Management')
+                  .items([
+                    S.listItem()
+                      .title('All Quotes')
+                      .child(S.documentTypeList('customerQuote').title('All Quotes')),
+                    S.listItem()
+                      .title('Draft Quotes')
+                      .child(
+                        S.documentList()
+                          .title('Draft Quotes')
+                          .filter('_type == "customerQuote" && status == "draft"')
+                      ),
+                    S.listItem()
+                      .title('Sent Quotes')
+                      .child(
+                        S.documentList()
+                          .title('Sent Quotes')
+                          .filter('_type == "customerQuote" && status == "sent"')
+                      ),
+                    S.listItem()
+                      .title('Accepted Quotes')
+                      .child(
+                        S.documentList()
+                          .title('Accepted Quotes')
+                          .filter('_type == "customerQuote" && status == "accepted"')
+                      ),
+                    S.listItem()
+                      .title('Pending Review')
+                      .child(
+                        S.documentList()
+                          .title('Under Review')
+                          .filter('_type == "customerQuote" && status == "under-review"')
+                      ),
+                  ])
+              ),
+
             // Testimonials Section
             S.listItem()
               .title('Testimonials')
@@ -150,7 +217,7 @@ export default defineConfig({
             S.divider(),
             ...S.documentTypeListItems().filter(
               (listItem) => 
-                !['productContent', 'productCategory', 'productType', 'blogPost', 'blogCategory', 'testimonial'].includes(listItem.getId()!)
+                !['productContent', 'productCategory', 'productType', 'blogPost', 'blogCategory', 'testimonial', 'tableShape', 'tableMaterial', 'tableSize', 'tableQuality', 'tableConfiguration', 'customerQuote'].includes(listItem.getId()!)
             ),
           ])
     }),
