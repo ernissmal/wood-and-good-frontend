@@ -178,21 +178,21 @@ export function useTableConfigurationBuilder() {
   const size = sizes.find(s => s._id === selectedSize);
   const quality = qualities.find(q => q._id === selectedQuality);
 
-  // Calculate estimated price
+  // Calculate estimated price using new algorithm
   const estimatedPrice = useMemo(() => {
-    if (!material || !size || !quality) return null;
+    if (!shape || !material || !size || !quality) return null;
     
-    const basePrice = 1000; // This should come from the base product
+    const shapePriceRange = shape.basePriceRange || { min: 300, max: 800 }; // fallback
     const customSizeAdjustment = customDimensions.isCustom ? 15 : 0;
     
     return tableConfigAPI.calculatePrice(
-      basePrice,
+      shapePriceRange,
       material.priceMultiplier,
       size.priceMultiplier,
-      quality.priceMultiplier,
+      quality.qualityAdjustment,
       customSizeAdjustment
     );
-  }, [material, size, quality, customDimensions]);
+  }, [shape, material, size, quality, customDimensions]);
 
   // Check if configuration is complete
   const isComplete = selectedShape && selectedMaterial && selectedSize && selectedQuality;
