@@ -8,6 +8,8 @@ export interface TableShape {
   slug: { current: string };
   description?: string;
   image?: any;
+  areaMultiplier: number; // Material efficiency multiplier
+  hasRealData: boolean; // Whether pricing is based on real data
   isActive: boolean;
   sortOrder: number;
 }
@@ -25,6 +27,8 @@ export interface TableMaterial {
     durability?: number;
   };
   priceMultiplier: number;
+  hasRealData: boolean; // Whether pricing is based on real data
+  estimatedMultiplier: boolean; // Whether multiplier is estimated
   isActive: boolean;
   sortOrder: number;
 }
@@ -45,7 +49,14 @@ export interface TableSize {
     max: number;
     comfortable: number;
   };
-  priceMultiplier: number;
+  basePrice: number; // Real manufacturer base price
+  priceByQuality?: {
+    rustic: number;
+    character: number;
+    prime: number;
+  };
+  surfaceArea?: number;
+  priceMultiplier: number; // Legacy
   isStandard: boolean;
   isActive: boolean;
   sortOrder: number;
@@ -62,7 +73,10 @@ export interface TableQuality {
     description: string;
   }>;
   exampleImages?: any[];
-  priceMultiplier: number;
+  qualityAdjustment: number; // Percentage amount (always positive)
+  priceDirection: 'add' | 'subtract'; // Direction of adjustment
+  realWorldMultiplier: number; // Calculated from real data
+  priceMultiplier: number; // Legacy
   qualityScore: number;
   isActive: boolean;
   sortOrder: number;
@@ -150,6 +164,7 @@ export const tableConfigAPI = {
       slug,
       description,
       image,
+      basePriceRange,
       isActive,
       sortOrder
     }`;
@@ -210,6 +225,7 @@ export const tableConfigAPI = {
       description,
       characteristics,
       exampleImages,
+      qualityAdjustment,
       priceMultiplier,
       qualityScore,
       isActive,
@@ -359,8 +375,67 @@ export const tableConfigAPI = {
     return await sanityClient.fetch(query);
   },
 
-  // Calculate price for a configuration
+  // Calculate price using real-world data
+  calculateRealPrice(
+    sizeBasePrice: number, // Real price from manufacturer data
+    shapeMultiplier: number, // Area efficiency (0.785 for round/oval, 1.0 for rectangular)
+    materialMultiplier: number, // Material cost difference
+    qualityMultiplier: number, // Real world quality multiplier
+    customSizeAdjustment?: number,
+    additionalOptions?: number
+  ): number {
+    // 1. Start with real manufacturer base price
+    let price = sizeBasePrice;
+    
+    // 2. Apply shape efficiency (material usage)
+    price = price * shapeMultiplier;
+    
+    // 3. Apply material cost difference
+    price = price * materialMultiplier;
+    
+    // 4. Apply quality multiplier (from real data)
+    price = price * qualityMultiplier;
+    
+    // 5. Apply custom size adjustment if any
+    if (customSizeAdjustment) {
+      price += (price * customSizeAdjustment / 100);
+    }
+    
+    // 6. Add additional options
+    if (additionalOptions) {
+      price += additionalOptions;
+    }
+    
+    return Math.round(price * 100) / 100; // Round to 2 decimal places
+  },
+
+  // Legacy algorithm for backward compatibility
   calculatePrice(
+    shapePriceRange: { min: number; max: number },
+    materialMultiplier: number,
+    sizeMultiplier: number,
+    qualityAdjustment: number,
+    customSizeAdjustment?: number,
+    additionalOptions?: number
+  ): number {
+    const basePrice = (shapePriceRange.min + shapePriceRange.max) / 2;
+    const materialPrice = basePrice * materialMultiplier;
+    const sizedPrice = materialPrice * sizeMultiplier;
+    const qualityPrice = sizedPrice * (1 + qualityAdjustment / 100);
+    
+    let finalPrice = qualityPrice;
+    if (customSizeAdjustment) {
+      finalPrice += (finalPrice * customSizeAdjustment / 100);
+    }
+    if (additionalOptions) {
+      finalPrice += additionalOptions;
+    }
+    
+    return Math.round(finalPrice * 100) / 100;
+  },
+
+  // Legacy method for backward compatibility
+  calculatePriceLegacy(
     basePrice: number,
     materialMultiplier: number,
     sizeMultiplier: number,
@@ -378,7 +453,7 @@ export const tableConfigAPI = {
       price += additionalOptions;
     }
     
-    return Math.round(price * 100) / 100; // Round to 2 decimal places
+    return Math.round(price * 100) / 100;
   },
 
   // Get customer quotes with filtering
