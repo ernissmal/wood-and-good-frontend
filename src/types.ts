@@ -59,7 +59,7 @@ export interface SanityProduct {
     weight?: string
     color?: string
     finish?: string
-    legShape?: string
+    legShape?: 'x-shape' | 'rectangular' | 'custom'
     dimensions?: string
   }
   additionalImages?: Array<{
