@@ -50,6 +50,21 @@ export default defineType({
       initialValue: true,
     }),
     defineField({
+      name: 'areaMultiplier',
+      title: 'Area Efficiency Multiplier',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0.1).max(2),
+      initialValue: 1.0,
+      description: 'Multiplier based on material efficiency vs rectangular (e.g., 0.785 for round/oval)',
+    }),
+    defineField({
+      name: 'hasRealData',
+      title: 'Has Real Pricing Data',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Whether this shape has actual manufacturer pricing data',
+    }),
+    defineField({
       name: 'sortOrder',
       title: 'Sort Order',
       type: 'number',
