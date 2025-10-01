@@ -97,21 +97,21 @@ export default function CategoriesPage() {
                   Handcrafted Table Legs
                 </h3>
                 <p className="text-oak-600 mb-6">
-                  From classic turned legs to modern hairpin styles and rustic farmhouse designs. 
-                  Perfect support for any tabletop style.
+                  Choose from our signature X-shape legs for modern appeal or rectangular legs for classic elegance. 
+                  Custom solutions available for unique requirements.
                 </p>
                 <ul className="space-y-2 text-sm text-oak-600 mb-6">
                   <li className="flex items-center">
                     <span className="text-amber-600 mr-2">•</span>
-                    Traditional and contemporary styles
+                    X Shape Legs - Modern and striking design
                   </li>
                   <li className="flex items-center">
                     <span className="text-amber-600 mr-2">•</span>
-                    Standard and custom heights
+                    Rectangular Shape Legs - Classic and sturdy
                   </li>
                   <li className="flex items-center">
                     <span className="text-amber-600 mr-2">•</span>
-                    Mounting hardware included
+                    Custom legs designed to your specifications
                   </li>
                   <li className="flex items-center">
                     <span className="text-amber-600 mr-2">•</span>
