@@ -385,20 +385,20 @@ export function useCustomerQuote(quoteId: string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchQuote = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getCustomerQuote(quoteId);
-        setQuote(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch customer quote');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchQuote = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getCustomerQuote(quoteId);
+      setQuote(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch customer quote');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     if (quoteId) {
       fetchQuote();
     }
@@ -408,6 +408,6 @@ export function useCustomerQuote(quoteId: string) {
     quote,
     loading,
     error,
-    refetch: () => fetchQuote(),
+    refetch: fetchQuote,
   };
 }
