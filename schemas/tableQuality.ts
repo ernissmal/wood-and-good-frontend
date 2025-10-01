@@ -99,12 +99,41 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'qualityAdjustment',
+      title: 'Quality Price Adjustment (%)',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0).max(100),
+      initialValue: 0,
+      description: 'Percentage adjustment amount (always positive)',
+    }),
+    defineField({
+      name: 'priceDirection',
+      title: 'Price Direction',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Add to price', value: 'add'},
+          {title: 'Subtract from price', value: 'subtract'},
+        ],
+      },
+      initialValue: 'add',
+      description: 'Whether to add or subtract the adjustment percentage',
+    }),
+    defineField({
+      name: 'realWorldMultiplier',
+      title: 'Real World Multiplier',
+      type: 'number',
+      description: 'Actual multiplier calculated from real pricing data',
+      readOnly: true,
+    }),
+    defineField({
       name: 'priceMultiplier',
-      title: 'Price Multiplier',
+      title: 'Price Multiplier (Legacy)',
       type: 'number',
       validation: (Rule) => Rule.required().min(0.1),
       initialValue: 1.0,
-      description: 'Multiplier for base price based on quality (e.g., PRIME = 1.5, CHARACTER = 1.0, RUSTIC = 0.8)',
+      description: 'Legacy multiplier - kept for backward compatibility',
+      readOnly: true,
     }),
     defineField({
       name: 'qualityScore',
