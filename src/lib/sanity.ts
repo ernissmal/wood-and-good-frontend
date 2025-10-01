@@ -17,7 +17,7 @@ export const sanityClient = createClient({
 
 // Read-only API methods for frontend
 export const sanityQueries = {
-  // Get all published blog posts
+  // Get all published blog posts with enhanced categorization
   getAllBlogPosts: () => `
     *[_type == "blogPost" && !(_id in path("drafts.**"))] | order(publishedAt desc) {
       _id,
@@ -28,7 +28,58 @@ export const sanityQueries = {
       author,
       "imageUrl": mainImage.asset->url,
       "imageAlt": mainImage.alt,
-      categories[]->{ title, slug }
+      "category": category->{
+        _id,
+        title,
+        slug,
+        categoryType
+      },
+      featured,
+      tags[]
+    }
+  `,
+
+  // Get blog posts by category
+  getBlogPostsByCategory: (categorySlug: string) => `
+    *[_type == "blogPost" && !(_id in path("drafts.**")) && category->slug.current == "${categorySlug}"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      author,
+      "imageUrl": mainImage.asset->url,
+      "imageAlt": mainImage.alt,
+      "category": category->{
+        _id,
+        title,
+        slug,
+        categoryType
+      },
+      featured,
+      tags[]
+    }
+  `,
+
+  // Get blog posts by category type (for internal filtering)
+  getBlogPostsByCategoryType: (categoryType: string) => `
+    *[_type == "blogPost" && !(_id in path("drafts.**")) && category->categoryType == "${categoryType}"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      author,
+      "imageUrl": mainImage.asset->url,
+      "imageAlt": mainImage.alt,
+      "category": category->{
+        _id,
+        title,
+        slug,
+        categoryType
+      },
+      featured,
+      tags[]
     }
   `,
 
@@ -44,7 +95,14 @@ export const sanityQueries = {
       author,
       "imageUrl": mainImage.asset->url,
       "imageAlt": mainImage.alt,
-      categories[]->{ title, slug },
+      "category": category->{
+        _id,
+        title,
+        slug,
+        categoryType
+      },
+      featured,
+      tags[],
       seo {
         metaTitle,
         metaDescription,
@@ -53,13 +111,24 @@ export const sanityQueries = {
     }
   `,
 
-  // Get all products
+  // Get all products with enhanced categorization
   getAllProducts: () => `
     *[_type == "productContent" && inStock == true] | order(featured desc, _createdAt desc) {
       _id,
       id,
       name,
-      category,
+      "productCategory": productCategory->{
+        _id,
+        title,
+        slug,
+        categoryType,
+        parentCategory
+      },
+      "productType": productType->{
+        _id,
+        title,
+        slug
+      },
       tableShape,
       price,
       detailedDescription,
@@ -79,13 +148,61 @@ export const sanityQueries = {
     }
   `,
 
-  // Get products by category
-  getProductsByCategory: (category: string) => `
-    *[_type == "productContent" && category == "${category}" && inStock == true] | order(featured desc, _createdAt desc) {
+  // Get products by category (using reference)
+  getProductsByCategory: (categorySlug: string) => `
+    *[_type == "productContent" && productCategory->slug.current == "${categorySlug}" && inStock == true] | order(featured desc, _createdAt desc) {
       _id,
       id,
       name,
-      category,
+      "productCategory": productCategory->{
+        _id,
+        title,
+        slug,
+        categoryType,
+        parentCategory
+      },
+      "productType": productType->{
+        _id,
+        title,
+        slug
+      },
+      tableShape,
+      price,
+      detailedDescription,
+      careInstructions,
+      specifications {
+        weight,
+        color,
+        finish,
+        legShape,
+        dimensions
+      },
+      "images": additionalImages[].asset->url,
+      "imageAlts": additionalImages[].alt,
+      relatedProducts,
+      featured,
+      inStock
+    }
+  `,
+
+  // Get products by category type (for the main categories: tables, table-legs, other)
+  getProductsByCategoryType: (categoryType: string) => `
+    *[_type == "productContent" && productCategory->categoryType == "${categoryType}" && inStock == true] | order(featured desc, _createdAt desc) {
+      _id,
+      id,
+      name,
+      "productCategory": productCategory->{
+        _id,
+        title,
+        slug,
+        categoryType,
+        parentCategory
+      },
+      "productType": productType->{
+        _id,
+        title,
+        slug
+      },
       tableShape,
       price,
       detailedDescription,
@@ -111,7 +228,18 @@ export const sanityQueries = {
       _id,
       id,
       name,
-      category,
+      "productCategory": productCategory->{
+        _id,
+        title,
+        slug,
+        categoryType,
+        parentCategory
+      },
+      "productType": productType->{
+        _id,
+        title,
+        slug
+      },
       tableShape,
       price,
       detailedDescription,
@@ -137,7 +265,18 @@ export const sanityQueries = {
       _id,
       id,
       name,
-      category,
+      "productCategory": productCategory->{
+        _id,
+        title,
+        slug,
+        categoryType,
+        parentCategory
+      },
+      "productType": productType->{
+        _id,
+        title,
+        slug
+      },
       tableShape,
       price,
       detailedDescription[0..1],
@@ -154,7 +293,7 @@ export const sanityQueries = {
     }
   `,
 
-  // Get all testimonials
+  // Get all testimonials with enhanced categorization
   getTestimonials: () => `
     *[_type == "testimonial" && published == true] | order(featured desc, _createdAt desc) {
       _id,
@@ -163,6 +302,22 @@ export const sanityQueries = {
       rating,
       testimonialText,
       productPurchased,
+      testimonialType,
+      featured,
+      "imageUrl": customerImage.asset->url
+    }
+  `,
+
+  // Get testimonials by type (B2C or B2B - internal filtering, not exposed to users)
+  getTestimonialsByType: (testimonialType: string) => `
+    *[_type == "testimonial" && published == true && testimonialType == "${testimonialType}"] | order(featured desc, _createdAt desc) {
+      _id,
+      customerName,
+      customerLocation,
+      rating,
+      testimonialText,
+      productPurchased,
+      testimonialType,
       featured,
       "imageUrl": customerImage.asset->url
     }
@@ -177,15 +332,57 @@ export const sanityQueries = {
       rating,
       testimonialText,
       productPurchased,
+      testimonialType,
       "imageUrl": customerImage.asset->url
     }
   `,
 
-  // Get all categories
-  getAllCategories: () => `
-    *[_type == "category"] | order(name asc) {
+  // Get all product categories
+  getAllProductCategories: () => `
+    *[_type == "productCategory"] | order(categoryType asc, title asc) {
       _id,
-      name,
+      title,
+      slug,
+      description,
+      categoryType,
+      parentCategory,
+      displayOrder,
+      "imageUrl": image.asset->url
+    }
+  `,
+
+  // Get product categories by type (tables, table-legs, other)
+  getProductCategoriesByType: (categoryType: string) => `
+    *[_type == "productCategory" && categoryType == "${categoryType}"] | order(displayOrder asc, title asc) {
+      _id,
+      title,
+      slug,
+      description,
+      categoryType,
+      parentCategory,
+      displayOrder,
+      "imageUrl": image.asset->url
+    }
+  `,
+
+  // Get all blog categories
+  getAllBlogCategories: () => `
+    *[_type == "blogCategory"] | order(displayOrder asc, title asc) {
+      _id,
+      title,
+      slug,
+      description,
+      categoryType,
+      displayOrder,
+      "imageUrl": image.asset->url
+    }
+  `,
+
+  // Legacy support - Get all categories (for backward compatibility)
+  getAllCategories: () => `
+    *[_type == "productCategory"] | order(categoryType asc, title asc) {
+      _id,
+      "name": title,
       slug,
       description,
       "imageUrl": image.asset->url
@@ -211,6 +408,14 @@ export const sanityApi = {
     return fetchSanityData(sanityQueries.getAllBlogPosts())
   },
 
+  getBlogPostsByCategory: async (categorySlug: string) => {
+    return fetchSanityData(sanityQueries.getBlogPostsByCategory(categorySlug))
+  },
+
+  getBlogPostsByCategoryType: async (categoryType: string) => {
+    return fetchSanityData(sanityQueries.getBlogPostsByCategoryType(categoryType))
+  },
+
   getBlogPost: async (slug: string) => {
     return fetchSanityData(sanityQueries.getBlogPostBySlug(slug))
   },
@@ -220,8 +425,12 @@ export const sanityApi = {
     return fetchSanityData(sanityQueries.getAllProducts())
   },
 
-  getProductsByCategory: async (category: string) => {
-    return fetchSanityData(sanityQueries.getProductsByCategory(category))
+  getProductsByCategory: async (categorySlug: string) => {
+    return fetchSanityData(sanityQueries.getProductsByCategory(categorySlug))
+  },
+
+  getProductsByCategoryType: async (categoryType: string) => {
+    return fetchSanityData(sanityQueries.getProductsByCategoryType(categoryType))
   },
 
   getProductById: async (productId: string) => {
@@ -233,6 +442,19 @@ export const sanityApi = {
   },
 
   // Category API
+  getAllProductCategories: async () => {
+    return fetchSanityData(sanityQueries.getAllProductCategories())
+  },
+
+  getProductCategoriesByType: async (categoryType: string) => {
+    return fetchSanityData(sanityQueries.getProductCategoriesByType(categoryType))
+  },
+
+  getAllBlogCategories: async () => {
+    return fetchSanityData(sanityQueries.getAllBlogCategories())
+  },
+
+  // Legacy support
   getAllCategories: async () => {
     return fetchSanityData(sanityQueries.getAllCategories())
   },
@@ -240,6 +462,10 @@ export const sanityApi = {
   // Testimonial API
   getTestimonials: async () => {
     return fetchSanityData(sanityQueries.getTestimonials())
+  },
+
+  getTestimonialsByType: async (testimonialType: string) => {
+    return fetchSanityData(sanityQueries.getTestimonialsByType(testimonialType))
   },
 
   getFeaturedTestimonials: async () => {
