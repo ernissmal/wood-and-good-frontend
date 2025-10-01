@@ -267,6 +267,90 @@ export function useCategoryBlogPosts(categorySlug?: string) {
   };
 }
 
+// Hook for table legs with shape-specific filtering
+export function useTableLegsManager() {
+  const [allTableLegs, setAllTableLegs] = useState<any[]>([]);
+  const [filteredLegs, setFilteredLegs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [legShape, setLegShape] = useState<'all' | 'x-shape' | 'rectangular' | 'custom'>('all');
+  
+  const [sortOptions, setSortOptions] = useState<SortOptions>(PRODUCT_SORT_OPTIONS[0]);
+  const [additionalFilters, setAdditionalFilters] = useState<Omit<ProductFilters, 'categoryType'>>({});
+
+  // Fetch all table legs
+  const fetchTableLegs = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await sanityApi.getProductsByCategoryType('table-legs');
+      if (result && Array.isArray(result)) {
+        setAllTableLegs(result);
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch table legs';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Apply shape filtering, additional filters, and sorting
+  const processedLegs = useMemo(() => {
+    let processed = allTableLegs;
+    
+    // Filter by leg shape
+    if (legShape !== 'all') {
+      processed = processed.filter(leg => {
+        const productLegShape = leg.specifications?.legShape || 
+                               (leg.productCategory?.title?.toLowerCase().includes('x') ? 'x-shape' : 
+                                leg.productCategory?.title?.toLowerCase().includes('rectangular') ? 'rectangular' : 'custom');
+        return productLegShape === legShape;
+      });
+    }
+    
+    // Apply additional filters
+    processed = filterProducts(processed, additionalFilters);
+    
+    // Apply sorting
+    processed = sortProducts(processed, sortOptions);
+    
+    return processed;
+  }, [allTableLegs, legShape, additionalFilters, sortOptions]);
+
+  // Update filtered legs when processing changes
+  useEffect(() => {
+    setFilteredLegs(processedLegs);
+  }, [processedLegs]);
+
+  // Initial load
+  useEffect(() => {
+    fetchTableLegs();
+  }, [fetchTableLegs]);
+
+  return {
+    tableLegs: filteredLegs,
+    allTableLegs,
+    loading,
+    error,
+    legShape,
+    setLegShape,
+    sortOptions,
+    filters: additionalFilters,
+    setSortOptions,
+    setFilters: (newFilters: Partial<Omit<ProductFilters, 'categoryType'>>) => {
+      setAdditionalFilters(prev => ({ ...prev, ...newFilters }));
+    },
+    clearFilters: () => {
+      setAdditionalFilters({});
+      setLegShape('all');
+    },
+    refetch: fetchTableLegs,
+    totalCount: allTableLegs.length,
+    filteredCount: filteredLegs.length
+  };
+}
+
 // Hook for testimonial management (internal B2C/B2B filtering)
 export function useTestimonialManager() {
   const [testimonials, setTestimonials] = useState<any[]>([]);
