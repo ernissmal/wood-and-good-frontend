@@ -177,8 +177,13 @@ export default {
 
 1. **Product Categories:**
    - Tables → Dining Tables, Coffee Tables, Side Tables, etc.
-   - Table Legs → Traditional, Modern, Farmhouse, Industrial
+   - Table Legs → X Shape Legs, Rectangular Shape Legs, Custom Legs
    - Other → Chairs, Benches, Storage, Accessories
+
+   **Specific Table Leg Categories to Create:**
+   - Category: "X Shape Legs" (slug: "x-shape-legs", categoryType: "table-legs")
+   - Category: "Rectangular Shape Legs" (slug: "rectangular-shape-legs", categoryType: "table-legs")  
+   - Category: "Custom Legs" (slug: "custom-legs", categoryType: "table-legs")
 
 2. **Blog Categories:**
    - Wood Care
