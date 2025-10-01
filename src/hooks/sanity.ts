@@ -27,7 +27,64 @@ export function useSanityLoading() {
   return { loading, error, execute };
 }
 
-// Hook for fetching categories from Sanity
+// Hook for fetching product categories from Sanity
+export function useSanityProductCategories() {
+  const [categories, setCategories] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchCategories = useCallback(async () => {
+    const result = await execute(() => sanityApi.getAllProductCategories());
+    if (result && Array.isArray(result)) {
+      setCategories(result);
+    }
+  }, [execute]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  return { categories, loading, error, refetch: fetchCategories };
+}
+
+// Hook for fetching product categories by type (tables, table-legs, other)
+export function useSanityProductCategoriesByType(categoryType: string) {
+  const [categories, setCategories] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchCategories = useCallback(async () => {
+    const result = await execute(() => sanityApi.getProductCategoriesByType(categoryType));
+    if (result && Array.isArray(result)) {
+      setCategories(result);
+    }
+  }, [execute, categoryType]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  return { categories, loading, error, refetch: fetchCategories };
+}
+
+// Hook for fetching blog categories from Sanity
+export function useSanityBlogCategories() {
+  const [categories, setCategories] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchCategories = useCallback(async () => {
+    const result = await execute(() => sanityApi.getAllBlogCategories());
+    if (result && Array.isArray(result)) {
+      setCategories(result);
+    }
+  }, [execute]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  return { categories, loading, error, refetch: fetchCategories };
+}
+
+// Legacy hook for backward compatibility
 export function useSanityCategories() {
   const [categories, setCategories] = useState<any[]>([]);
   const { loading, error, execute } = useSanityLoading();
@@ -47,18 +104,37 @@ export function useSanityCategories() {
 }
 
 // Hook for fetching all products from Sanity
-export function useSanityProducts(category?: string) {
+export function useSanityProducts(categorySlug?: string) {
   const [products, setProducts] = useState<any[]>([]);
   const { loading, error, execute } = useSanityLoading();
 
   const fetchProducts = useCallback(async () => {
     const result = await execute(() => 
-      category ? sanityApi.getProductsByCategory(category) : sanityApi.getAllProducts()
+      categorySlug ? sanityApi.getProductsByCategory(categorySlug) : sanityApi.getAllProducts()
     );
     if (result && Array.isArray(result)) {
       setProducts(result);
     }
-  }, [execute, category]);
+  }, [execute, categorySlug]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  return { products, loading, error, refetch: fetchProducts };
+}
+
+// Hook for fetching products by category type (tables, table-legs, other)
+export function useSanityProductsByCategoryType(categoryType: string) {
+  const [products, setProducts] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchProducts = useCallback(async () => {
+    const result = await execute(() => sanityApi.getProductsByCategoryType(categoryType));
+    if (result && Array.isArray(result)) {
+      setProducts(result);
+    }
+  }, [execute, categoryType]);
 
   useEffect(() => {
     fetchProducts();
@@ -127,6 +203,44 @@ export function useSanityBlogPosts() {
   return { posts, loading, error, refetch: fetchPosts };
 }
 
+// Hook for fetching blog posts by category
+export function useSanityBlogPostsByCategory(categorySlug: string) {
+  const [posts, setPosts] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchPosts = useCallback(async () => {
+    const result = await execute(() => sanityApi.getBlogPostsByCategory(categorySlug));
+    if (result && Array.isArray(result)) {
+      setPosts(result);
+    }
+  }, [execute, categorySlug]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  return { posts, loading, error, refetch: fetchPosts };
+}
+
+// Hook for fetching blog posts by category type (for internal categorization)
+export function useSanityBlogPostsByCategoryType(categoryType: string) {
+  const [posts, setPosts] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchPosts = useCallback(async () => {
+    const result = await execute(() => sanityApi.getBlogPostsByCategoryType(categoryType));
+    if (result && Array.isArray(result)) {
+      setPosts(result);
+    }
+  }, [execute, categoryType]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  return { posts, loading, error, refetch: fetchPosts };
+}
+
 // Hook for fetching featured blog posts from Sanity
 export function useSanityFeaturedBlogPosts() {
   const [posts, setPosts] = useState<any[]>([]);
@@ -180,6 +294,25 @@ export function useSanityTestimonials() {
       setTestimonials(result);
     }
   }, [execute]);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, [fetchTestimonials]);
+
+  return { testimonials, loading, error, refetch: fetchTestimonials };
+}
+
+// Hook for fetching testimonials by type (B2C or B2B - for internal use only)
+export function useSanityTestimonialsByType(testimonialType: 'B2C' | 'B2B') {
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const { loading, error, execute } = useSanityLoading();
+
+  const fetchTestimonials = useCallback(async () => {
+    const result = await execute(() => sanityApi.getTestimonialsByType(testimonialType));
+    if (result && Array.isArray(result)) {
+      setTestimonials(result);
+    }
+  }, [execute, testimonialType]);
 
   useEffect(() => {
     fetchTestimonials();
