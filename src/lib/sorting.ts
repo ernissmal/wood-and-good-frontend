@@ -233,6 +233,13 @@ export const PRODUCT_CATEGORY_TYPES = {
   OTHER: 'other'
 } as const
 
+// Table leg shape mappings
+export const TABLE_LEG_SHAPES = {
+  X_SHAPE: 'x-shape',
+  RECTANGULAR: 'rectangular', 
+  CUSTOM: 'custom'
+} as const
+
 export const BLOG_CATEGORY_SLUGS = {
   WOOD_CARE: 'wood-care',
   DESIGN_TIPS: 'design-tips',
@@ -275,6 +282,19 @@ export const getBlogCategoryLabel = (categorySlug: string): string => {
   }
 }
 
+export const getLegShapeLabel = (legShape: string): string => {
+  switch (legShape) {
+    case 'x-shape':
+      return 'X Shape Legs'
+    case 'rectangular':
+      return 'Rectangular Shape Legs'
+    case 'custom':
+      return 'Custom Legs'
+    default:
+      return legShape.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())
+  }
+}
+
 // Helper function to group products by category type
 export const groupProductsByCategoryType = (products: any[]) => {
   return products.reduce((acc, product) => {
@@ -283,6 +303,23 @@ export const groupProductsByCategoryType = (products: any[]) => {
       acc[categoryType] = []
     }
     acc[categoryType].push(product)
+    return acc
+  }, {} as Record<string, any[]>)
+}
+
+// Helper function to group table legs by shape
+export const groupTableLegsByShape = (products: any[]) => {
+  const tableLegs = products.filter(p => p.productCategory?.categoryType === 'table-legs')
+  return tableLegs.reduce((acc, product) => {
+    // Use legShape from specifications or product category title
+    const legShape = product.specifications?.legShape || 
+                    (product.productCategory?.title?.toLowerCase().includes('x') ? 'x-shape' : 
+                     product.productCategory?.title?.toLowerCase().includes('rectangular') ? 'rectangular' : 'custom')
+    
+    if (!acc[legShape]) {
+      acc[legShape] = []
+    }
+    acc[legShape].push(product)
     return acc
   }, {} as Record<string, any[]>)
 }
