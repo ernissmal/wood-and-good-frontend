@@ -21,7 +21,10 @@
     "sanity:migration": "sanity migration run",
     "cms:deploy": "node scripts/deploy-cms.mjs",
     "cms:check": "node scripts/check-deployment.mjs",
-    "table-config:init": "node scripts/initialize-table-config.mjs"
+    "sanity:token-setup": "node scripts/setup-write-token.mjs",
+    "table-config:init": "node scripts/initialize-table-config.mjs",
+    "pricing:update": "node scripts/update-pricing-algorithm.mjs",
+    "pricing:real": "node scripts/implement-real-pricing.mjs"
   },
   "repository": {
     "type": "git",
@@ -57,6 +60,7 @@
     "react-dom": "^18.2.0",
     "sanity": "^4.10.1",
     "stripe": "^18.5.0",
+    "styled-components": "^6.1.19",
     "wrangler": "^4.40.1"
   },
   "devDependencies": {
