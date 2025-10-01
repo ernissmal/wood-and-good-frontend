@@ -311,7 +311,7 @@ export function useTableConfigurations(filters?: {
     configurationsByMaterial,
     loading,
     error,
-    refetch: () => fetchConfigurations(),
+    refetch: fetchConfigurations,
   };
 }
 
