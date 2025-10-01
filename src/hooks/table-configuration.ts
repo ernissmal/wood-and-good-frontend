@@ -117,20 +117,20 @@ export function useTableQualities() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchQualities = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getTableQualities();
-        setQualities(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch table qualities');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchQualities = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getTableQualities();
+      setQualities(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch table qualities');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchQualities();
   }, []);
 
@@ -149,7 +149,7 @@ export function useTableQualities() {
     qualitiesByGrade, 
     loading, 
     error, 
-    refetch: () => fetchQualities() 
+    refetch: fetchQualities
   };
 }
 
@@ -269,20 +269,20 @@ export function useTableConfigurations(filters?: {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchConfigurations = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getTableConfigurations(filters);
-        setConfigurations(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch table configurations');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchConfigurations = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getTableConfigurations(filters);
+      setConfigurations(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch table configurations');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchConfigurations();
   }, [filters]);
 
