@@ -38,6 +38,60 @@ export interface Product {
   updated_at: string
 }
 
+// Sanity Product type
+export interface SanityProduct {
+  _id: string
+  id: string
+  name: string
+  productCategory?: SanityProductCategory
+  productType?: {
+    _id: string
+    title: string
+    slug: {
+      current: string
+    }
+  }
+  tableShape?: string
+  price: number
+  detailedDescription: string
+  careInstructions?: string
+  specifications?: {
+    weight?: string
+    color?: string
+    finish?: string
+    legShape?: string
+    dimensions?: string
+  }
+  additionalImages?: Array<{
+    asset: {
+      url: string
+    }
+    alt?: string
+  }>
+  relatedProducts?: string[]
+  featured: boolean
+  inStock: boolean
+}
+
+// Sanity Testimonial type
+export interface SanityTestimonial {
+  _id: string
+  customerName: string
+  customerLocation?: string
+  rating: number
+  testimonialText: string
+  productPurchased?: string
+  testimonialType: 'B2C' | 'B2B'
+  featured: boolean
+  published: boolean
+  customerImage?: {
+    asset: {
+      url: string
+    }
+    alt?: string
+  }
+}
+
 export interface Category {
   id: number
   name: string
@@ -49,6 +103,47 @@ export interface Category {
   image_url?: string
   created_at: string
   updated_at: string
+}
+
+// Sanity-specific types for the new schema
+export interface SanityProductCategory {
+  _id: string
+  title: string
+  slug: {
+    current: string
+  }
+  description?: string
+  categoryType: 'tables' | 'table-legs' | 'other'
+  parentCategory?: string
+  displayOrder?: number
+  image?: {
+    asset: {
+      url: string
+    }
+    alt?: string
+  }
+}
+
+export interface SanityBlogCategory {
+  _id: string
+  title: string
+  slug: {
+    current: string
+  }
+  description?: string
+  categoryType: 'content' // All blog categories are content type
+  displayOrder?: number
+  image?: {
+    asset: {
+      url: string
+    }
+    alt?: string
+  }
+}
+
+export interface SanityTestimonialType {
+  B2C: 'B2C'
+  B2B: 'B2B'
 }
 
 export interface BlogPost {
@@ -64,6 +159,28 @@ export interface BlogPost {
   published: boolean
   created_at: string
   updated_at: string
+}
+
+// Sanity Blog Post type
+export interface SanityBlogPost {
+  _id: string
+  title: string
+  slug: {
+    current: string
+  }
+  excerpt?: string
+  content: any[] // Portable text
+  publishedAt: string
+  author: string
+  mainImage?: {
+    asset: {
+      url: string
+    }
+    alt?: string
+  }
+  category?: SanityBlogCategory
+  featured: boolean
+  tags?: string[]
 }
 
 export interface CartItem {
