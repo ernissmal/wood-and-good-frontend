@@ -97,6 +97,20 @@ export default defineType({
       initialValue: true,
     }),
     defineField({
+      name: 'hasRealData',
+      title: 'Has Real Pricing Data',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Whether this material has actual manufacturer pricing data',
+    }),
+    defineField({
+      name: 'estimatedMultiplier',
+      title: 'Is Estimated Multiplier',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Whether the price multiplier is estimated or based on real data',
+    }),
+    defineField({
       name: 'sortOrder',
       title: 'Sort Order',
       type: 'number',
