@@ -326,20 +326,20 @@ export function useCustomerQuotes(filters?: {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchQuotes = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getCustomerQuotes(filters);
-        setQuotes(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch customer quotes');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchQuotes = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getCustomerQuotes(filters);
+      setQuotes(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch customer quotes');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchQuotes();
   }, [filters]);
 
@@ -375,7 +375,7 @@ export function useCustomerQuotes(filters?: {
     quoteSummary,
     loading,
     error,
-    refetch: () => fetchQuotes(),
+    refetch: fetchQuotes,
   };
 }
 
