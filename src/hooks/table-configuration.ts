@@ -34,20 +34,20 @@ export function useTableMaterials() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchMaterials = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getTableMaterials();
-        setMaterials(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch table materials');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchMaterials = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getTableMaterials();
+      setMaterials(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch table materials');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchMaterials();
   }, []);
 
@@ -65,7 +65,7 @@ export function useTableMaterials() {
     materials: sortedMaterials, 
     loading, 
     error, 
-    refetch: () => fetchMaterials() 
+    refetch: fetchMaterials
   };
 }
 
