@@ -75,20 +75,20 @@ export function useTableSizes(shapeId?: string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchSizes = async () => {
-      try {
-        setLoading(true);
-        const data = await tableConfigAPI.getTableSizes(shapeId);
-        setSizes(data);
-        setError(null);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch table sizes');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchSizes = async () => {
+    try {
+      setLoading(true);
+      const data = await tableConfigAPI.getTableSizes(shapeId);
+      setSizes(data);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch table sizes');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchSizes();
   }, [shapeId]);
 
@@ -107,7 +107,7 @@ export function useTableSizes(shapeId?: string) {
     customSizes, 
     loading, 
     error, 
-    refetch: () => fetchSizes() 
+    refetch: fetchSizes
   };
 }
 
