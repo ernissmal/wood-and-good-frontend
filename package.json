@@ -13,7 +13,14 @@
     "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true npm run build",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "sanity:dev": "sanity dev",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy",
+    "sanity:schema": "sanity schema extract",
+    "sanity:migration": "sanity migration run",
+    "cms:deploy": "node scripts/deploy-cms.mjs",
+    "cms:check": "node scripts/check-deployment.mjs"
   },
   "repository": {
     "type": "git",
@@ -41,6 +48,7 @@
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.10.1",
     "@types/stripe": "^8.0.416",
+    "dotenv": "^17.2.3",
     "hono": "^4.9.8",
     "next": "^15.5.4",
     "next-sanity": "^11.4.2",
@@ -48,6 +56,7 @@
     "react-dom": "^18.2.0",
     "sanity": "^4.10.1",
     "stripe": "^18.5.0",
+    "styled-components": "^6.1.19",
     "wrangler": "^4.40.1"
   },
   "devDependencies": {
